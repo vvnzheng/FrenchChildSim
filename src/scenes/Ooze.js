@@ -39,11 +39,11 @@ class Ooze extends Phaser.Scene {
                 'name': 'Well thee bettr figure t out, r else you’re fired! anon receiveth to t',
                 'text' : 'Well thee bettr figure t out, r else you’re fired! anon receiveth to t',
                 'events': {
-                    'exit shop' : 'exit'
+                    'exit shop' : 'exit opening scene'
                 }
             },
             {
-                'name' : 'exit',
+                'name' : 'exit opening scene',
                 'text' : 'The boss gaveth me a listeth of ingredients, let’s taketh a behold',
                 'events': {
                     'close ingredient list' : 'Close ingredients'
@@ -51,20 +51,55 @@ class Ooze extends Phaser.Scene {
             },
             {
                 'name': 'Close ingredients',
+                'text' : 'Good now, well i guesseth i shouldst taketh a behold at the newspapr\n and seeth what all the stres hast on sale the present day',
                 'events': {
-                    'Good now, well i guesseth i shouldst taketh a behold at the newspapr\n and seeth what all the stres hast on sale the present day' : 'Open newspaper'
+                    'open newspaper' : 'Open newspaper'
                 }
             },
             {
                 'name': 'Open newspaper',
+                'text' : '',
                 'events': {
                     'close newspaper' : 'Close newspaper'
                 }
             },
             {
                 'name': 'Close newspaper',
+                'text' : 'Alloweths wend to “brazen bazaar” first, \nthe mistress thre is at each moment nice, \nhaply i can receiveth a valorous dealeth out of hr!',
                 'events' : {
-                    'Alloweths wend to “brazen bazaar” first, \nthe mistress thre is at each moment nice, \nhaply i can receiveth a valorous dealeth out of hr!' : 'move to Brazen Bazaar'
+                    'move on map' : 'move to Brazen Bazaar'
+                }
+            },
+            {
+                'name': 'move to Brazen Bazaar',
+                'text' : 'Holla lief customr! how may i holp thee the present day?',
+                'events' : {
+                    'Valorous mrning! i wouldst liketh to buyeth some marjram from thee the present day, \ndoth thee hast any in stock?' : 'positive1',
+                    'Ho, i’m in a sweaty haste.  \nYa bethink i couldst grabeth some marjram from thee?' : 'negative1'
+                }
+            },
+            {
+                'name': 'positive1',
+                'text' : 'Oh of course mine own lief! \ni wouldst beest fain to assisteth thee, yond wouldst beest 1 shilling',
+                'events' : {
+                    'Most wondrous, thanketh thee ma’am!' : 'gain marjoram',
+                    'What a ripoff!' : 'negative2',
+                    'I’m srry maam, t seemeth liketh i don’t hast enow. \nDoth thee bethink thee couldst baser the price?' : 'haggle'
+                }
+            },
+            {
+                'name': 'gain marjoram',
+                'text' : 'Pleasure doing business with thee leman. \nHast a wondrful day',
+                'events' : {
+                    'Exit the shop' : 'exit'
+                }
+            },
+            {
+                'name' : 'negative1',
+                'text' : 'Well lief me! if t be true you’re in a sweaty haste, \ni can container this up fr thee fr 15 dollars',
+                'events' : {
+                    'Colours me? the price wast 1 shilling in today’s newspapr!' : 'negative11',
+                    'I’m srry maam, t seemeth liketh i don’t hast enow. \nDoth thee bethink thee couldst baser the price?' : 'haggle'
                 }
             }
         ];
@@ -156,7 +191,7 @@ class Ooze extends Phaser.Scene {
 
     syncDisplayInfo() {
         this.ooze.setTexture(this.ooze.oozeFSM.currentState.image);
-        let options = Object.keys(this.ooze.oozeFSM.currentState.events).map((k,i) => `(${i+1}) ${k}`);
+        let options = Object.keys(this.ooze.oozeFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`);
         this.transitionText.text = `${options.join(' ')}`;
         this.statusText.text = `${this.ooze.oozeFSM.currentState.text}`;
     }
