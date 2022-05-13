@@ -28,23 +28,23 @@ class Ooze extends Phaser.Scene {
         this.oozeStates = [
 			{
                 'name': 'Start',
-                'text': 'Ho peat, i’m running base on prfume ingredients. \nI needeth thee to runneth out and receiveth me some by the endeth of the day r else you’re fird.  \nHre’s 2 shillings.  Anon hie befre i starteth to loseth some customrs!',
+                'text': 'Hey kid, I’m running low on perfume ingredients. \nI need you to run out and get me some by the end of the day. \nHere’s 2 shillings. Now hurry before I start to lose some customers!',
                 'image' : 'shillings',
                 'initial': 	true,
 				'events': {
-                    'But boss, 2 shillings is mrely 24 pence!\n how couldst thee possibly expecteth me to purchaseth aught with this?': 'Well thee bettr figure t out, r else you’re fired! anon receiveth to t'
+                    'But boss, 2 shillings is merely 24 pence! \nHow could you possibly expect me to purchase anything with this?': 'Well you better figure it out, or else you’re fired! Now get to it.'
 				}
 			},
             {
-                'name': 'Well thee bettr figure t out, r else you’re fired! anon receiveth to t',
-                'text' : 'Well thee bettr figure t out, r else you’re fired! anon receiveth to t',
+                'name': 'Well you better figure it out, or else you’re fired! Now get to it.',
+                'text' : 'Well you better figure it out, or else you’re fired! Now get to it.',
                 'events': {
                     'exit shop' : 'exit opening scene'
                 }
             },
             {
                 'name' : 'exit opening scene',
-                'text' : 'The boss gaveth me a listeth of ingredients, let’s taketh a behold',
+                'text' : 'The boss gave me a list of ingredients, let’s take a look.',
                 'events': {
                     'close ingredient list' : 'Close ingredients'
                 }
@@ -65,41 +65,16 @@ class Ooze extends Phaser.Scene {
             },
             {
                 'name': 'Close newspaper',
-                'text' : 'Alloweths wend to “brazen bazaar” first, \nthe mistress thre is at each moment nice, \nhaply i can receiveth a valorous dealeth out of hr!',
+                'text' : 'Alright, well I guess I should take a look at the newspaper and see what all the stores have on sale today.',
                 'events' : {
                     'move on map' : 'move to Brazen Bazaar'
                 }
             },
             {
                 'name': 'move to Brazen Bazaar',
-                'text' : 'Holla lief customr! how may i holp thee the present day?',
+                'text' : '',
                 'events' : {
-                    'Valorous mrning! i wouldst liketh to buyeth some marjram from thee the present day, \ndoth thee hast any in stock?' : 'positive1',
-                    'Ho, i’m in a sweaty haste.  \nYa bethink i couldst grabeth some marjram from thee?' : 'negative1'
-                }
-            },
-            {
-                'name': 'positive1',
-                'text' : 'Oh of course mine own lief! \ni wouldst beest fain to assisteth thee, yond wouldst beest 1 shilling',
-                'events' : {
-                    'Most wondrous, thanketh thee ma’am!' : 'gain marjoram',
-                    'What a ripoff!' : 'negative2',
-                    'I’m srry maam, t seemeth liketh i don’t hast enow. \nDoth thee bethink thee couldst baser the price?' : 'haggle'
-                }
-            },
-            {
-                'name': 'gain marjoram',
-                'text' : 'Pleasure doing business with thee leman. \nHast a wondrful day',
-                'events' : {
-                    'Exit the shop' : 'exit'
-                }
-            },
-            {
-                'name' : 'negative1',
-                'text' : 'Well lief me! if t be true you’re in a sweaty haste, \ni can container this up fr thee fr 15 dollars',
-                'events' : {
-                    'Colours me? the price wast 1 shilling in today’s newspapr!' : 'negative11',
-                    'I’m srry maam, t seemeth liketh i don’t hast enow. \nDoth thee bethink thee couldst baser the price?' : 'haggle'
+                    
                 }
             }
         ];
@@ -190,6 +165,9 @@ class Ooze extends Phaser.Scene {
     }
 
     syncDisplayInfo() {
+        if(this.ooze.oozeFSM.currentState.name == 'move to Brazen Bazaar'){
+            this.scene.start('overworldScene');
+        }
         this.ooze.setTexture(this.ooze.oozeFSM.currentState.image);
         let options = Object.keys(this.ooze.oozeFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`);
         this.transitionText.text = `${options.join(' ')}`;

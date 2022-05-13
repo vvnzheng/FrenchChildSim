@@ -10,7 +10,10 @@ const config = {
     type: Phaser.AUTO,     
     width: 640 ,
     height: 480,
-    scene: [ Ooze ]
+    //Ooze -> opening scene
+    //Overworld -> map scene
+    //BrazenBazaar -> dialogue scene
+    scene: [ Ooze, Overworld, BrazenBazaar]
 };
 
 // define game
