@@ -13,7 +13,7 @@ const config = {
     //Ooze -> opening scene
     //Overworld -> map scene
     //BrazenBazaar -> dialogue scene
-    scene: [ Ooze, Overworld, BrazenBazaar]
+    scene: [Menu, Ooze, Overworld, BrazenBazaar]
 };
 
 // define game
