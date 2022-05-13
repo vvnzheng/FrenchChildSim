@@ -5,13 +5,9 @@ class BrazenBazaar extends Phaser.Scene {
 
     preload() {
         // load assets
-        this.load.path = './assets/';
-        this.load.image('solid', 'solid.png');
-        this.load.image('liquid', 'liquid.png');
-        this.load.image('gas', 'gas.png');
-        this.load.image('yoshi', 'dino.png');
-        this.load.image('egg', 'yegg.png');
-        this.load.image('shregg', 'shregg.png');
+        this.load.path = './assets/images/';
+        this.load.image('bg', 'temp_shopbg.png');
+        this.load.image('dbox', 'dialoguebox.png');
         this.load.image('star', 'star.png');
         this.load.image('shillings', 'shillings.png');
     }
@@ -19,6 +15,13 @@ class BrazenBazaar extends Phaser.Scene {
     create() {
         // change bg color
         this.cameras.main.setBackgroundColor('#222');
+
+        this.background = this.add.image(game.config.width/2, game.config.height/2, 'bg');
+
+        //add dialogue box
+        this.dbox = this.add.image(game.config.width/2, game.config.height/2, 'dbox');
+        //add player icon
+        this.icon = this.add.image(game.config.width/5, game.config.height/1.2, 'player');
 
         // add liquid ooze
         this.ooze = this.add.sprite(game.config.width/2, game.config.height/2, 'liquid');
@@ -147,13 +150,13 @@ class BrazenBazaar extends Phaser.Scene {
         
         // set a timer while we transition
         this.transitioning = true;
-        this.transitionText.text = `Enacting: ${selectedEvent}...`;
-        this.time.delayedCall(this.transitionTime, () => {
+        //this.transitionText.text = `Enacting: ${selectedEvent}...`;
+        //this.time.delayedCall(this.transitionTime, () => {
             this.transitioning = false;
             this.ooze.oozeFSM.consumeEvent(selectedEvent);
             this.syncDisplayInfo();
-        });
-
+        //});
+        /*
         // wooze them in the meantime
         this.tweens.add({
             targets: [this.throbber1, this.throbber2],
@@ -161,12 +164,12 @@ class BrazenBazaar extends Phaser.Scene {
             duration: this.transitionTime,
             ease: 'Sine.easeInOut',
             yoyo: true
-        })
+        })*/
     }
 
     syncDisplayInfo() {
         if(this.ooze.oozeFSM.currentState.name == 'move to Brazen Bazaar'){
-            this.scene.start('overworldScene');
+            this.scene.start('menu');
         }
         this.ooze.setTexture(this.ooze.oozeFSM.currentState.image);
         let options = Object.keys(this.ooze.oozeFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`);

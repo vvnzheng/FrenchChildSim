@@ -2,14 +2,14 @@
 // Perfume game
 // Updated: 5/11/2022
 
-// Big Brain Debugging
+// Debugging
 'use strict';
 
 const config = {
-    parent: 'phaser-game',  // for info text
+    parent: 'phaser-game',
     type: Phaser.AUTO,     
-    width: 640 ,
-    height: 480,
+    width: 1280,
+    height: 720,
     //Ooze -> opening scene
     //Overworld -> map scene
     //BrazenBazaar -> dialogue scene
