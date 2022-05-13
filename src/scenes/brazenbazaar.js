@@ -7,6 +7,8 @@ class BrazenBazaar extends Phaser.Scene {
         // load assets
         this.load.path = './assets/images/';
         this.load.image('bg', 'temp_shopbg.png');
+        this.load.spritesheet('shopkeep', 'shopkeep1t.png',{frameWidth: 225, frameHeight: 300, startFrame:0, endFrame: 18});
+        this.load.image('player', 'icon.png');
         this.load.image('dbox', 'dialoguebox.png');
         this.load.image('star', 'star.png');
         this.load.image('shillings', 'shillings.png');
@@ -15,8 +17,16 @@ class BrazenBazaar extends Phaser.Scene {
     create() {
         // change bg color
         this.cameras.main.setBackgroundColor('#222');
-
+        //add background
         this.background = this.add.image(game.config.width/2, game.config.height/2, 'bg');
+
+        //add shopkeep
+        this.keeper = this.add.sprite(game.config.width/2.5, game.config.height/4.75, 'shopkeep').setOrigin(0);
+        this.anims.create({
+            key: 'shopkeeper',
+            frames:this.anims.generateFrameNumbers('shopkeep',{start: 0, end: 18, first: 0}),
+            frameRate: 5
+        })
 
         //add dialogue box
         this.dbox = this.add.image(game.config.width/2, game.config.height/2, 'dbox');
@@ -32,7 +42,6 @@ class BrazenBazaar extends Phaser.Scene {
 			{
                 'name': 'Start',
                 'text': 'Hey kid, I’m running low on perfume ingredients. \nI need you to run out and get me some by the end of the day. \nHere’s 2 shillings. Now hurry before I start to lose some customers!',
-                'image' : 'shillings',
                 'initial': 	true,
 				'events': {
                     'But boss, 2 shillings is merely 24 pence! \nHow could you possibly expect me to purchase anything with this?': 'Well you better figure it out, or else you’re fired! Now get to it.'
@@ -124,6 +133,9 @@ class BrazenBazaar extends Phaser.Scene {
 
         // ask for keydown events as they happen
         this.input.keyboard.on('keydown', this.keydown, this);
+    }
+    update(){
+        this.keeper.anims.play('shopkeeper', true);
     }
 
     keydown(event) {

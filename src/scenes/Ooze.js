@@ -16,7 +16,6 @@ class Ooze extends Phaser.Scene {
         // change bg color
         this.cameras.main.setBackgroundColor('#222');
 
-
         //add dialogue box
         this.dbox = this.add.image(game.config.width/2, game.config.height/2, 'dbox');
         //add player icon
@@ -53,7 +52,7 @@ class Ooze extends Phaser.Scene {
             },
             {
                 'name': 'Close ingredients',
-                'text' : 'Good now, well i guesseth i shouldst taketh a behold at the newspapr\n and seeth what all the stres hast on sale the present day',
+                'text' : 'Alright, well I guess I should take a look at the newspaper and see what all the stores have on sale today.',
                 'events': {
                     'open newspaper' : 'Open newspaper'
                 }
