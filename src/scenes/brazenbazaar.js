@@ -33,75 +33,108 @@ class BrazenBazaar extends Phaser.Scene {
         //add player icon
         this.icon = this.add.image(game.config.width/5, game.config.height/1.2, 'player');
 
-        // add liquid ooze
-        this.ooze = this.add.sprite(game.config.width/2, game.config.height/2, 'liquid');
+        // add temp
+        this.temp = this.add.sprite(game.config.width/2, game.config.height/2, 'liquid');
 
         // create ooze states (as a JSON object)
         // solid | liquid | gas & accompanying transitions
-        this.oozeStates = [
+        this.tempStates = [
 			{
                 'name': 'Start',
-                'text': 'Hey kid, I’m running low on perfume ingredients. \nI need you to run out and get me some by the end of the day. \nHere’s 2 shillings. Now hurry before I start to lose some customers!',
+                'text': 'Hello dear customer! How may I help you today?',
                 'initial': 	true,
 				'events': {
-                    'But boss, 2 shillings is merely 24 pence! \nHow could you possibly expect me to purchase anything with this?': 'Well you better figure it out, or else you’re fired! Now get to it.'
+                    'Good morning! I would like to buy some marjoram from you today, do you have any in stock?': 'positive1',
+                    'Hey, I’m in a rush. Ya think I could grab some marjoram from you?':'negative1'
 				}
 			},
             {
-                'name': 'Well you better figure it out, or else you’re fired! Now get to it.',
-                'text' : 'Well you better figure it out, or else you’re fired! Now get to it.',
+                'name': 'positive1',
+                'text' : 'Oh of course my dear! I would be glad to assist you, that would be 1 shilling.',
                 'events': {
-                    'exit shop' : 'exit opening scene'
+                    'Great, thank you ma’am!' : 'exit',
+                    'What a ripoff!' : 'negative2',
+                    'I’m sorry maam, it seems like I don’t have enough. Do you think you could lower the price?':'positive2'
                 }
             },
             {
-                'name' : 'exit opening scene',
-                'text' : 'The boss gave me a list of ingredients, let’s take a look.',
+                'name' : 'negative2',
+                'text' : 'Well, have I never! If you are so upset feel free to shop elsewhere. \nYou are officially banned from this establishment! Get out of my shop!',
                 'events': {
-                    'close ingredient list' : 'Close ingredients'
+                    'I should leave' : 'exit'
                 }
             },
             {
-                'name': 'Close ingredients',
-                'text' : 'Good now, well i guesseth i shouldst taketh a behold at the newspapr\n and seeth what all the stres hast on sale the present day',
+                'name': 'banned',
+                'text' : 'Guess that did not go too well...',
                 'events': {
-                    'open newspaper' : 'Open newspaper'
+                    'leave' : 'exit'
                 }
             },
             {
-                'name': 'Open newspaper',
+                'name': 'exit',
                 'text' : '',
+                'events': {}
+            },
+            {
+                'name': 'positive2',
+                'text' : ' Poor sweet child! Is there a reason why you are unable to afford such pleasures?',
+                'events' : {
+                    'Because you’re a scammer, that’s why!' : 'negative2',
+                    'My allowance is only so little and my chore list is so long. If you could spare some change for me, that would be great.' : 'positive3'
+                }
+            },
+            {
+                'name': 'positive3',
+                'text' : 'Well, you seem like an honest person… I guess I shall allow it for 6 pence this time. \nBut be sure not to spend your money all in one place! Money is hard to come by.',
+                'events' : {
+                    'Thank you maam!':'exit'
+                }
+            },
+            {
+                'name': 'negative1',
+                'text': 'Well dear me! If you’re in a rush, I can bag this up for you for 1 shilling and 6 pence.',
+                'events' : {
+                    'Excuse me? The price was 1 shilling in today’s newspaper!' : 'negative3',
+                    'I’m sorry maam, it seems like I don’t have enough. Do you think you could lower the price?' : 'positive4'
+                }
+            },
+            {
+                'name': 'negative3',
+                'text': 'Well, the price has just gone up to a shilling and 6 pence. \nIf you have an issue with that, you may shop elsewhere.',
                 'events': {
-                    'close newspaper' : 'Close newspaper'
+                    'Fine, here you go':'exit',
+                    'I refuse, I will head elsewhere thank you very much!': 'exit'
                 }
             },
             {
-                'name': 'Close newspaper',
-                'text' : 'Alright, well I guess I should take a look at the newspaper and see what all the stores have on sale today.',
+                'name': 'positive4',
+                'text' : 'Well? What is wrong child? Spit it out!',
                 'events' : {
-                    'move on map' : 'move to Brazen Bazaar'
+                    'You’re a scammer, that’s what is wrong!' : 'negative2',
+                    'My allowance is only so little and my chore list is so long. If you could spare some change for me, that would be great.' : 'positive5'
                 }
             },
             {
-                'name': 'move to Brazen Bazaar',
-                'text' : '',
+                'name': 'positive5',
+                'text' : 'I guess I shall allow it for 1 shilling this time. \nBut you better learn some manners next time you come around.',
                 'events' : {
-                    
+                    'Thank you maam!':'exit'
                 }
-            }
+            },
         ];
 
         // define transition time (ms)
         this.transitionTime = 750; 
 
         // create state machine on ooze object, passing JSON states object & target object
-        this.ooze.oozeFSM = new StateMachine(this.oozeStates, this.ooze);
+        this.temp.tempFSM = new StateMachine(this.tempStates, this.temp);
 
         // initialize our transitioning flag
         this.transitioning = false;
 
         // display info text
-        this.statusText = this.add.text(game.config.width/2, game.config.height/6, `${this.ooze.oozeFSM.getState().text}`, { font: '15px Futura', fill: '#FFFFFF' }).setOrigin(0.5);
+        this.statusText = this.add.text(game.config.width/2, game.config.height/7, `${this.temp.tempFSM.getState().text}`, { font: '30px Futura', fill: '#FFFFFF' }).setOrigin(0.5);
         this.transitionText = this.add.text(game.config.width/2, game.config.height/6*5, ``, { font: '15px Futura', fill: '#FFFFFF' }).setOrigin(0.5);
         this.syncDisplayInfo();
         
@@ -135,6 +168,7 @@ class BrazenBazaar extends Phaser.Scene {
         this.input.keyboard.on('keydown', this.keydown, this);
     }
     update(){
+        //play animation
         this.keeper.anims.play('shopkeeper', true);
     }
 
@@ -152,7 +186,7 @@ class BrazenBazaar extends Phaser.Scene {
 
         // which event are they trying to enact?
         let index = Number.parseInt(event.key) - 1; // start at 1
-        let availableEvents = Object.keys(this.ooze.oozeFSM.currentState.events);
+        let availableEvents = Object.keys(this.temp.tempFSM.currentState.events);
         
         // we only have a few of them
         if(index >= availableEvents.length) {
@@ -162,30 +196,19 @@ class BrazenBazaar extends Phaser.Scene {
         
         // set a timer while we transition
         this.transitioning = true;
-        //this.transitionText.text = `Enacting: ${selectedEvent}...`;
-        //this.time.delayedCall(this.transitionTime, () => {
             this.transitioning = false;
-            this.ooze.oozeFSM.consumeEvent(selectedEvent);
+            this.temp.tempFSM.consumeEvent(selectedEvent);
             this.syncDisplayInfo();
-        //});
-        /*
-        // wooze them in the meantime
-        this.tweens.add({
-            targets: [this.throbber1, this.throbber2],
-            alpha: {from: 0, to: 1},
-            duration: this.transitionTime,
-            ease: 'Sine.easeInOut',
-            yoyo: true
-        })*/
     }
 
     syncDisplayInfo() {
-        if(this.ooze.oozeFSM.currentState.name == 'move to Brazen Bazaar'){
+        console.log(this.temp.tempFSM.currentState.name);
+        if(this.temp.tempFSM.currentState.name == 'exit'){
             this.scene.start('menu');
         }
-        this.ooze.setTexture(this.ooze.oozeFSM.currentState.image);
-        let options = Object.keys(this.ooze.oozeFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`);
+        this.temp.setTexture(this.temp.tempFSM.currentState.image);
+        let options = Object.keys(this.temp.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`);
         this.transitionText.text = `${options.join(' ')}`;
-        this.statusText.text = `${this.ooze.oozeFSM.currentState.text}`;
+        this.statusText.text = `${this.temp.tempFSM.currentState.text}`;
     }
 }

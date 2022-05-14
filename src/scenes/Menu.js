@@ -7,7 +7,7 @@ class Menu extends Phaser.Scene {
         //load audio
         this.load.audio('titleScreenMusic', './assets/audio/title_screen_music.wav');
         //menu screen
-        this.load.image('titleScreen', 'assets/images/title_screen.png');
+        this.load.image('titleScreen', 'assets/images/title_screen2.png');
     }
 
     create() {
@@ -18,7 +18,7 @@ class Menu extends Phaser.Scene {
 
 
         //title screen
-        this.titleScreen = this.add.sprite(0 , 0, 'titleScreen').setOrigin(0,0).setScale(.92);
+        this.titleScreen = this.add.sprite(0, -150, 'titleScreen').setOrigin(0,0).setScale(.92);
 
         this.cameras.main.fadeIn(4000);
 
@@ -29,7 +29,7 @@ class Menu extends Phaser.Scene {
     update() {
         if(cursors.space.isDown){
             //this.sound.play('insertFXhere');
-            this.scene.start('oozeScene');
+            this.scene.start('openingScene');
             //this.sound.play('menuSelect'); 
             this.game.sound.stopAll();
         }

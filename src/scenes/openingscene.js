@@ -1,6 +1,6 @@
-class Ooze extends Phaser.Scene {
+class OpeningScene extends Phaser.Scene {
     constructor() {
-        super('oozeScene');
+        super('openingScene');
     }
 
     preload() {
@@ -21,12 +21,12 @@ class Ooze extends Phaser.Scene {
         //add player icon
         this.icon = this.add.image(game.config.width/5, game.config.height/1.2, 'player');
 
-        // add liquid ooze
-        this.ooze = this.add.sprite(game.config.width/2, game.config.height/2, 'liquid');
+        // add temp
+        this.temp = this.add.sprite(game.config.width/2, game.config.height/2, 'liquid');
 
         // create ooze states (as a JSON object)
         // solid | liquid | gas & accompanying transitions
-        this.oozeStates = [
+        this.tempStates = [
 			{
                 'name': 'Start',
                 'text': 'Hey kid, I’m running low on perfume ingredients. \nI need you to run out and get me some by the end of the day. \nHere’s 2 shillings. Now hurry before I start to lose some customers!',
@@ -74,9 +74,7 @@ class Ooze extends Phaser.Scene {
             {
                 'name': 'move to Brazen Bazaar',
                 'text' : '',
-                'events' : {
-
-                }
+                'events' : {}
             }
         ];
 
@@ -84,14 +82,14 @@ class Ooze extends Phaser.Scene {
         this.transitionTime = 750; 
 
         // create state machine on ooze object, passing JSON states object & target object
-        this.ooze.oozeFSM = new StateMachine(this.oozeStates, this.ooze);
+        this.temp.tempFSM = new StateMachine(this.tempStates, this.temp);
 
         // initialize our transitioning flag
         this.transitioning = false;
 
         // display info text
-        this.statusText = this.add.text(game.config.width/2, game.config.height/6, `${this.ooze.oozeFSM.getState().text}`, { font: '15px Futura', fill: '#FFFFFF' }).setOrigin(0.5);
-        this.transitionText = this.add.text(game.config.width/2, game.config.height/6*5, ``, { font: '15px Futura', fill: '#FFFFFF' }).setOrigin(0.5);
+        this.statusText = this.add.text(game.config.width/2, game.config.height/7, `${this.temp.tempFSM.getState().text}`, { font: '30px Futura', fill: '#FFFFFF', align: 'left' }).setOrigin(0.5);
+        this.transitionText = this.add.text(game.config.width/2, game.config.height/6*5, ``, { font: '15px Futura', fill: '#FFFFFF', align: 'left' }).setOrigin(0.5);
         this.syncDisplayInfo();
         
         // throbber objects will obscure the asset swap during transitions
@@ -138,7 +136,7 @@ class Ooze extends Phaser.Scene {
 
         // which event are they trying to enact?
         let index = Number.parseInt(event.key) - 1; // start at 1
-        let availableEvents = Object.keys(this.ooze.oozeFSM.currentState.events);
+        let availableEvents = Object.keys(this.temp.tempFSM.currentState.events);
         
         // we only have a few of them
         if(index >= availableEvents.length) {
@@ -148,31 +146,19 @@ class Ooze extends Phaser.Scene {
         
         // set a timer while we transition
         this.transitioning = true;
-        //this.transitionText.text = `Enacting: ${selectedEvent}...`;
-        //this.time.delayedCall(this.transitionTime, () => {
             this.transitioning = false;
-            this.ooze.oozeFSM.consumeEvent(selectedEvent);
+            this.temp.tempFSM.consumeEvent(selectedEvent);
             this.syncDisplayInfo();
-        //});
-        /*
-        // wooze them in the meantime
-        this.tweens.add({
-            targets: [this.throbber1, this.throbber2],
-            alpha: {from: 0, to: 1},
-            duration: this.transitionTime,
-            ease: 'Sine.easeInOut',
-            yoyo: true
-        })*/
     }
 
     syncDisplayInfo() {
-        console.log(this.ooze.oozeFSM.currentState.name);
-        if(this.ooze.oozeFSM.currentState.name == 'move to Brazen Bazaar'){
+        console.log(this.temp.tempFSM.currentState.name);
+        if(this.temp.tempFSM.currentState.name == 'move to Brazen Bazaar'){
             this.scene.start('overworldScene');
         }
-        this.ooze.setTexture(this.ooze.oozeFSM.currentState.image);
-        let options = Object.keys(this.ooze.oozeFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`);
+        this.temp.setTexture(this.temp.tempFSM.currentState.image);
+        let options = Object.keys(this.temp.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`);
         this.transitionText.text = `${options.join(' ')}`;
-        this.statusText.text = `${this.ooze.oozeFSM.currentState.text}`;
+        this.statusText.text = `${this.temp.tempFSM.currentState.text}`;
     }
 }
