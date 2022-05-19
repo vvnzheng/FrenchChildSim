@@ -6,7 +6,7 @@ class OpeningScene extends Phaser.Scene {
     preload() {
         // load assets
         this.load.path = './assets/images/';
-        this.load.image('player', 'icon.png');
+        this.load.image('player_icon', 'icon.png');
         this.load.image('dbox', 'dialoguebox.png');
         this.load.image('star', 'star.png');
         this.load.image('shillings', 'shillings.png');
@@ -19,7 +19,7 @@ class OpeningScene extends Phaser.Scene {
         //add dialogue box
         this.dbox = this.add.image(game.config.width/2, game.config.height/2, 'dbox');
         //add player icon
-        this.icon = this.add.image(game.config.width/5, game.config.height/1.2, 'player');
+        this.icon = this.add.image(game.config.width/5, game.config.height/1.2, 'player_icon');
 
         // add temp
         this.temp = this.add.sprite(game.config.width/2, game.config.height/2, 'liquid');
