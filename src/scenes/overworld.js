@@ -4,10 +4,10 @@ class Overworld extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("tiles", "/assets/images/overworld_tileset.png");
-        this.load.tilemapTiledJSON("map", "/assets/overworld.json");
+        this.load.image("tiles", "./assets/images/overworld_tileset.png");
+        this.load.tilemapTiledJSON("map", "./assets/overworld.json");
         //this.load.tilemapCSV("map", "../assets/catastrophi_level2.csv");
-        this.load.spritesheet("player", "/assets/images/grenouille.png", {frameWidth: 24, frameHeight: 32, startFrame:0, endFrame: 7});
+        this.load.spritesheet("player", "./assets/images/grenouille.png", {frameWidth: 24, frameHeight: 32, startFrame:0, endFrame: 7});
       }
 
     create(){
