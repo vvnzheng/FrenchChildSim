@@ -7,23 +7,20 @@ class Overworld extends Phaser.Scene {
         this.load.image("tiles", "./assets/images/overworld_tileset.png");
         this.load.tilemapTiledJSON("map", "./assets/overworld.json");
         //this.load.tilemapCSV("map", "../assets/catastrophi_level2.csv");
-        this.load.spritesheet("player", "./assets/images/grenouille.png", {frameWidth: 24, frameHeight: 32, startFrame:0, endFrame: 7});
+        this.load.atlas("player", "./assets/images/grenouille_walk_anim.png", "./assets/images/grenouille_walk_anim.json");
       }
 
     create(){
         //this.scene.start('brazenBazaarScene');
 
+        //sound
         this.game.sound.stopAll();
         this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: false, volume: .3});
         this.overworld_soundtrack.play();
 
-
         //tilemap stuff
         const map = this.make.tilemap({ key: "map"});
         const tileset = map.addTilesetImage("tileset", "tiles");
-
-        
-
 
         //TILED layers
         const belowLayer = map.createLayer("Below Bot Layer", tileset, 0, 0);
@@ -38,13 +35,14 @@ class Overworld extends Phaser.Scene {
         worldLayer2.setCollisionByProperty({ collides: true });
         worldLayer3.setCollisionByProperty({ collides: true });
 
-        //puts layer on above player
+        //puts certain layers above player
         aboveLayer.setDepth(10);
 
         //Spawnpoints
         const spawnPointNPC1 = map.findObject("SpawnPoints", obj => obj.name === "NPC1");
         const spawnPointNPC2 = map.findObject("SpawnPoints", obj => obj.name === "NPC2");
 
+        //add playyer sprite
         player = this.physics.add.sprite(spawnPointNPC1.x, spawnPointNPC1.y, "player");
 
         //enables collision with player
@@ -53,10 +51,24 @@ class Overworld extends Phaser.Scene {
         this.physics.add.collider(player, worldLayer3);
 
         //player animations create
-        this.anims.create({
-            key: 'walk_Vertical',
-            frames: this.anims.generateFrameNumbers('player', {start: 0, end: 7, first: 0}),
-            frameRate: 15
+        const anims = this.anims;
+        anims.create({
+            key: "player_walk_down",
+            frames: anims.generateFrameNames("player", { prefix: "grenouille_walk_down-", start: 0, end: 7}),
+            frameRate: 10,
+            repeat: -1
+        });
+            anims.create({
+            key: "player_walk_up",
+            frames: anims.generateFrameNames("player", { prefix: "grenouille_walk_up-", start: 0, end: 6}),
+            frameRate: 10,
+            repeat: -1
+        });
+            anims.create({
+            key: "player_walk_side",
+            frames: anims.generateFrameNames("player", { prefix: "grenouille_walk_side-", start: 0, end: 9}),
+            frameRate: 10,
+            repeat: -1
         });
 
         //game camera
@@ -87,33 +99,49 @@ class Overworld extends Phaser.Scene {
         faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
         });
         */
-
     }
 
     update(){
+        const prevVelocity = player.body.velocity.clone();
+
         // Stop any previous movement from the last frame
         player.body.setVelocity(0);
-        const prevVelocity = player.body.velocity.clone();
 
         // Horizontal movement
         if (cursors.left.isDown) {
-            player.body.setVelocityX(-100);
-            player.anims.play('walk_Vertical', true);
+            player.body.setVelocityX(-speed);
         } else if (cursors.right.isDown) {
-            player.body.setVelocityX(100);
-            player.anims.play('walk_Vertical', true);
+            player.body.setVelocityX(speed);
         }
 
         // Vertical movement
         if (cursors.up.isDown) {
-            player.body.setVelocityY(-100);
-            player.anims.play('walk_Vertical', true);
+            player.body.setVelocityY(-speed);
         } else if (cursors.down.isDown) {
-            player.body.setVelocityY(100);
-            player.anims.play('walk_Vertical', true);
+            player.body.setVelocityY(speed);
         }
 
         // Normalize and scale the velocity so that player can't move faster along a diagonal
         player.body.velocity.normalize().scale(speed);
+
+        // Update the animation last and give left/right animations precedence over up/down animations
+        if (cursors.left.isDown) {
+            player.setFlip(true, false);
+            player.anims.play("player_walk_side", true);
+        } else if (cursors.right.isDown) {
+            player.resetFlip();
+            player.anims.play("player_walk_side", true);
+        } else if (cursors.up.isDown) {
+            player.anims.play("player_walk_up", true);
+        } else if (cursors.down.isDown) {
+            player.anims.play("player_walk_down", true);
+        } else {
+            if(player.anims.stop());
+            // If we were moving, pick and idle frame to use
+            if (prevVelocity.x < 0) player.setTexture("player", "grenouille_walk_side-3");
+            else if (prevVelocity.x > 0) player.setTexture("player", "grenouille_walk_side-3");
+            else if (prevVelocity.y < 0) player.setTexture("player", "grenouille_walk_up-0");
+            else if (prevVelocity.y > 0) player.setTexture("player", "grenouille_walk_down-0");
+        }
     }
 }
