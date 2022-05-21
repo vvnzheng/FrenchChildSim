@@ -6,6 +6,8 @@ class Menu extends Phaser.Scene {
     preload() {
         //load audio
         this.load.audio('titleScreenMusic', './assets/audio/title_screen_music.wav');
+        this.load.audio('npcMusic', './assets/audio/npc_music.mp3')
+        this.load.audio('overworldMusic', './assets/audio/overworld_music.mp3')
         //menu screen
         this.load.image('titleScreen', 'assets/images/title_screen2.png');
     }

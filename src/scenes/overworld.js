@@ -13,6 +13,11 @@ class Overworld extends Phaser.Scene {
     create(){
         //this.scene.start('brazenBazaarScene');
 
+        this.game.sound.stopAll();
+        this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: false, volume: .3});
+        this.overworld_soundtrack.play();
+
+
         //tilemap stuff
         const map = this.make.tilemap({ key: "map"});
         const tileset = map.addTilesetImage("tileset", "tiles");

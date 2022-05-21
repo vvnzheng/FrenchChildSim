@@ -13,6 +13,9 @@ class OpeningScene extends Phaser.Scene {
     }
 
     create() {
+        this.NPC_soundtrack = this.sound.add('npcMusic', {loop: true, volume: .5});
+        this.NPC_soundtrack.play();
+
         // change bg color
         this.cameras.main.setBackgroundColor('#222');
 
