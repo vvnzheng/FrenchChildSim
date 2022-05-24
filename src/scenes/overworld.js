@@ -3,20 +3,14 @@ class Overworld extends Phaser.Scene {
         super('overworldScene');
     }
 
-    preload() {
-        this.load.image("tiles", "./assets/images/overworld_tileset.png");
-        this.load.tilemapTiledJSON("map", "./assets/overworld.json");
-        //this.load.tilemapCSV("map", "../assets/catastrophi_level2.csv");
-        this.load.atlas("player", "./assets/images/grenouille_walk_anim.png", "./assets/images/grenouille_walk_anim.json");
-      }
-
     create(){
         //this.scene.start('brazenBazaarScene');
 
         //sound
         this.game.sound.stopAll();
-        this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: false, volume: .3});
-        this.overworld_soundtrack.play();
+        this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: true, volume: .3});
+        this.overworld_soundtrack.play();  
+        this.runningFX = this.sound.add('runningFX',{loop: false, volume: .3});
 
         //tilemap stuff
         const map = this.make.tilemap({ key: "map"});
@@ -55,24 +49,25 @@ class Overworld extends Phaser.Scene {
         anims.create({
             key: "player_walk_down",
             frames: anims.generateFrameNames("player", { prefix: "grenouille_walk_down-", start: 0, end: 7}),
-            frameRate: 10,
+            frameRate: 20,
             repeat: -1
         });
             anims.create({
             key: "player_walk_up",
             frames: anims.generateFrameNames("player", { prefix: "grenouille_walk_up-", start: 0, end: 6}),
-            frameRate: 10,
+            frameRate: 20,
             repeat: -1
         });
             anims.create({
             key: "player_walk_side",
             frames: anims.generateFrameNames("player", { prefix: "grenouille_walk_side-", start: 0, end: 9}),
-            frameRate: 10,
+            frameRate: 20,
             repeat: -1
         });
 
         //game camera
         const camera = this.cameras.main;
+        this.cameras.main.fadeIn(2000);
         camera.startFollow(player).setZoom(2);//adjust here to zoom camera in or out
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
@@ -128,15 +123,19 @@ class Overworld extends Phaser.Scene {
         if (cursors.left.isDown) {
             player.setFlip(true, false);
             player.anims.play("player_walk_side", true);
+            if (!this.runningFX.isPlaying) this.runningFX.play();
         } else if (cursors.right.isDown) {
             player.resetFlip();
             player.anims.play("player_walk_side", true);
+            if (!this.runningFX.isPlaying) this.runningFX.play();
         } else if (cursors.up.isDown) {
             player.anims.play("player_walk_up", true);
+            if (!this.runningFX.isPlaying) this.runningFX.play();
         } else if (cursors.down.isDown) {
             player.anims.play("player_walk_down", true);
+            if (!this.runningFX.isPlaying) this.runningFX.play();
         } else {
-            if(player.anims.stop());
+            if(player.anims.stop()) this.runningFX.pause();
             // If we were moving, pick and idle frame to use
             if (prevVelocity.x < 0) player.setTexture("player", "grenouille_walk_side-3");
             else if (prevVelocity.x > 0) player.setTexture("player", "grenouille_walk_side-3");
