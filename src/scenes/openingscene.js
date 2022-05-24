@@ -10,6 +10,7 @@ class OpeningScene extends Phaser.Scene {
         this.load.image('dbox', 'dialoguebox.png');
         this.load.image('star', 'star.png');
         this.load.image('shillings', 'shillings.png');
+        this.load.spritesheet('boss', 'boss.png',{frameWidth: 225, frameHeight: 225, startFrame:0, endFrame: 11});
     }
 
     create() {
@@ -18,7 +19,13 @@ class OpeningScene extends Phaser.Scene {
 
         // change bg color
         this.cameras.main.setBackgroundColor('#222');
-
+        //add boss
+        this.bossman = this.add.sprite(game.config.width/2.5, game.config.height/4.75, 'shopkeep').setOrigin(0);
+        this.anims.create({
+            key: 'owner',
+            frames:this.anims.generateFrameNumbers('boss',{start: 0, end: 11, first: 0}),
+            frameRate: 10
+        });
         //add dialogue box
         this.dbox = this.add.image(game.config.width/2, game.config.height/2, 'dbox');
         //add player icon
@@ -123,6 +130,10 @@ class OpeningScene extends Phaser.Scene {
 
         // ask for keydown events as they happen
         this.input.keyboard.on('keydown', this.keydown, this);
+    }
+    update(){
+        //play animation
+        this.bossman.anims.play('owner', true);
     }
 
     keydown(event) {

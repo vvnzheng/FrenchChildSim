@@ -26,7 +26,7 @@ class BrazenBazaar extends Phaser.Scene {
             key: 'shopkeeper',
             frames:this.anims.generateFrameNumbers('shopkeep',{start: 0, end: 18, first: 0}),
             frameRate: 5
-        })
+        });
 
         //add dialogue box
         this.dbox = this.add.image(game.config.width/2, game.config.height/2, 'dbox');
