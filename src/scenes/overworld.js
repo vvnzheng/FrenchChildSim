@@ -24,6 +24,13 @@ class Overworld extends Phaser.Scene {
         const worldLayer3 = map.createLayer("World Top Layer", tileset, 0, 0);
         const aboveLayer = map.createLayer("Above Top Layer", tileset, 0, 0);
 
+        //DOOR layers
+        const doorToNPC1 = map.createLayer("Door To NPC 1", tileset, 0, 0);
+        const doorToNPC2 = map.createLayer("Door To NPC 2", tileset, 0, 0);
+        const doorToNPC3 = map.createLayer("Door To NPC 3", tileset, 0, 0);
+        const doorToNPC4 = map.createLayer("Door To NPC 4", tileset, 0, 0);
+        const doorToNPC5 = map.createLayer("Door To NPC 5", tileset, 0, 0);
+
         //setup collision with structures and objects created from TILED
         worldLayer.setCollisionByProperty({ collides: true });
         worldLayer2.setCollisionByProperty({ collides: true });
