@@ -7,14 +7,15 @@ class TraderNPC extends Phaser.Scene {
         this.DBOX_Y = 502;			    // dialog box y-position
         this.DBOX_FONT = 'font';	// dialog box font key
 
-        this.TEXT_X = game.config.width/5.3 +50;			// text w/in dialog box x-position
+        this.TEXT_X = game.config.width/4.5;			// text w/in dialog box x-position
         this.TEXT_Y = 547;			// text w/in dialog box y-position
         this.TEXT_SIZE = 24;		// text font size (in pixels)
         this.TEXT_MAX_WIDTH = 715;	// max width of text within box
 
         this.NEXT_TEXT = '[SPACE]';	// text to display for next prompt
-        this.NEXT_X = game.config.width/5.3 + 775;			// next text prompt x-position
+        this.NEXT_X = 1000;			// next text prompt x-position
         this.NEXT_Y = 690;			// next text prompt y-position
+        this.INTERACT_EXIT = '';
 
         this.LETTER_TIMER = 10;		// # ms each letter takes to "type" onscreen
 
@@ -26,6 +27,9 @@ class TraderNPC extends Phaser.Scene {
         this.dialogTyping = false;		// flag to lock player input while text is "typing"
         this.dialogText = null;			// the actual dialog text
         this.nextText = null;			// player prompt text to continue typing
+        this.dialogOver = false;
+        this.exitText = null;
+        this.choice = 0;
 
         // character variables
         this.icon = null;
@@ -39,6 +43,7 @@ class TraderNPC extends Phaser.Scene {
     }
 
     create() {
+        this.game.sound.stopAll();
         // parse dialog from JSON file
         this.dialog = this.cache.json.get('traderNPC_dialog');
         //console.log(this.dialog);
@@ -92,6 +97,8 @@ class TraderNPC extends Phaser.Scene {
         this.typeText();  
         
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);   
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);      
     }
 
     update() {
@@ -101,10 +108,23 @@ class TraderNPC extends Phaser.Scene {
             this.typeText();
         }
 
-        if(this.dialogConvo >= this.dialog.length && Phaser.Input.Keyboard.JustDown(keyF)) {
-            this.scene.start('overworldScene');
+        if(this.dialogOver == true) {
+            this.exitText = this.add.bitmapText(this.NEXT_X, this.NEXT_Y, this.DBOX_FONT, '[F] TO EXIT', this.TEXT_SIZE).setOrigin(1);
+            if(Phaser.Input.Keyboard.JustDown(keyF))
+                this.scene.start('overworldScene');
         }
 
+        if(Phaser.Input.Keyboard.JustDown(keyQ)) {
+            this.choice = 1;
+        } else if(Phaser.Input.Keyboard.JustDown(keyW)) {
+            this.choice = 2;
+        }
+
+        console.log(this.choice);
+
+
+
+        //animations
         this.shopbg.anims.play('shopbg', true);
         this.NPC_trader.play('shopkeep1', true);
     }
@@ -138,6 +158,7 @@ class TraderNPC extends Phaser.Scene {
             // here I'm simply "exiting" the last speaker and removing the dialog box,
             // but you could build other logic to change game states here
             console.log('End of Conversations');
+            this.dialogOver = true;
             // tween out prior speaker's image
             /*
             if(this.dialogLastSpeaker) {
@@ -150,7 +171,7 @@ class TraderNPC extends Phaser.Scene {
             }
             // make text box invisible
             */
-            this.dialogbox.visible = false;
+            //this.dialogbox.visible = false;
 
         } else {
             // if not, set current speaker
@@ -219,9 +240,5 @@ class TraderNPC extends Phaser.Scene {
                 if(this.dialogTyping === false) this.dialogFX.pause();
             }*/
         }
-    }
-
-    exitNPC(){
-    this.add.text(0, 0, 'Hello World', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif' });
     }
 }

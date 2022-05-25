@@ -14,16 +14,20 @@ class Menu extends Phaser.Scene {
 
         this.cameras.main.fadeIn(2000);
 
-        cursors = this.input.keyboard.createCursorKeys();
+        //camera fade in and out to next scene
+        this.input.keyboard.once('keydown-SPACE', () => {
+        this.cameras.main.fadeOut(2000);
+        this.tweens.add({
+            targets:  this.soundtrack,
+            volume:   0,
+            duration: 2000
+        });
+        })
 
-    }
-
-    update() {
-        if(cursors.space.isDown){
-            //this.sound.play('insertFXhere');
-            this.scene.start('openingScene');
-            //this.sound.play('menuSelect'); 
-            this.game.sound.stopAll();
-        }
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+            this.time.delayedCall(1000, () => {
+            this.scene.start('openingScene')
+            })
+        })
     }
 }
