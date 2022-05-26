@@ -3,16 +3,6 @@ class OpeningScene extends Phaser.Scene {
         super('openingScene');
     }
 
-    preload() {
-        // load assets
-        this.load.path = './assets/images/';
-        this.load.image('player_icon', 'icon.png');
-        this.load.image('dbox', 'dialoguebox.png');
-        this.load.image('star', 'star.png');
-        this.load.image('shillings', 'shillings.png');
-        this.load.spritesheet('boss', 'boss.png',{frameWidth: 225, frameHeight: 225, startFrame:0, endFrame: 11});
-    }
-
     create() {
         this.NPC_soundtrack = this.sound.add('npcMusic', {loop: true, volume: .5});
         this.NPC_soundtrack.play();
