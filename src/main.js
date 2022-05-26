@@ -32,4 +32,6 @@ let cursors;
 let player;
 let speed = 150;
 let keyF; //interact button
+let keyQ;
+let keyW;
 let lastSpawn;
