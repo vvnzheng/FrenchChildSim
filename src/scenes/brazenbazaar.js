@@ -204,7 +204,7 @@ class BrazenBazaar extends Phaser.Scene {
     syncDisplayInfo() {
         console.log(this.temp.tempFSM.currentState.name);
         if(this.temp.tempFSM.currentState.name == 'exit'){
-            this.scene.start('menu');
+            this.scene.start('overworldScene');
         }
         this.temp.setTexture(this.temp.tempFSM.currentState.image);
         let options = Object.keys(this.temp.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`);

@@ -20,6 +20,7 @@ class Load extends Phaser.Scene {
         this.load.image("tiles", "images/overworld_tileset.png");
         this.load.tilemapTiledJSON("map", "overworld.json");
         this.load.atlas("player", "images/grenouille_walk_anim.png", "images/grenouille_walk_anim.json");
+        this.load.spritesheet('enter', "images/enterAnimation.png", {frameWidth: 32, frameHeight: 24, startFrame:0, endFrame: 5});
 
         //NPC scenes
         //dialog box and font

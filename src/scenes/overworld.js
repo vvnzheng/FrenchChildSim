@@ -35,6 +35,11 @@ class Overworld extends Phaser.Scene {
         worldLayer.setCollisionByProperty({ collides: true });
         worldLayer2.setCollisionByProperty({ collides: true });
         worldLayer3.setCollisionByProperty({ collides: true });
+        doorToNPC1.setCollisionByProperty({collides: true}, true, true);
+        doorToNPC2.setCollisionByProperty({collides: true});
+        doorToNPC3.setCollisionByProperty({collides: true});
+        doorToNPC4.setCollisionByProperty({collides: true});
+        doorToNPC5.setCollisionByProperty({collides: true});
 
         //puts certain layers above player
         aboveLayer.setDepth(10);
@@ -46,10 +51,16 @@ class Overworld extends Phaser.Scene {
         //add playyer sprite
         player = this.physics.add.sprite(spawnPointNPC1.x, spawnPointNPC1.y, "player");
 
+        //variables for door interaction
         //enables collision with player
         this.physics.add.collider(player, worldLayer);
         this.physics.add.collider(player, worldLayer2);
         this.physics.add.collider(player, worldLayer3);
+        this.physics.add.collider(player, this.doorToNPC1);
+        this.physics.add.collider(player, doorToNPC2);
+        this.physics.add.collider(player, doorToNPC3);
+        this.physics.add.collider(player, doorToNPC4);
+        this.physics.add.collider(player, doorToNPC5);
 
         //player animations create
         const anims = this.anims;
@@ -72,6 +83,14 @@ class Overworld extends Phaser.Scene {
             repeat: -1
         });
 
+        //add door animation
+        anims.create({
+            key: 'enterAnim',
+            frames: anims.generateFrameNumbers('enter', {start: 0, end: 5, first: 0}),
+            frameRate: 5
+        });
+
+
         //game camera
         const camera = this.cameras.main;
         this.cameras.main.fadeIn(2000);
@@ -80,11 +99,10 @@ class Overworld extends Phaser.Scene {
 
         //keyboard inputs
         cursors = this.input.keyboard.createCursorKeys();
-        keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
         //collision visualizer
-        /*
-        const debugGraphics = this.add.graphics().setAlpha(0.75);
+        
+        /*const debugGraphics = this.add.graphics().setAlpha(0.75);
         worldLayer.renderDebug(debugGraphics, {
         tileColor: null, // Color of non-colliding tiles
         collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
@@ -100,10 +118,51 @@ class Overworld extends Phaser.Scene {
         collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
         faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
         });
-        */
+        this.doorToNPC1.renderDebug(debugGraphics, {
+        tileColor: null, // Color of non-colliding tiles
+        collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+        faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+        });*/
     }
 
     update(){
+        //original shop
+        if((player.x >= 450 && player.x <= 475) && player.y == 304){
+            //player.anims.play('enterAnim');
+            //player.on('animationcomplete', () => {
+                this.scene.start('openingScene');
+            //});
+        }
+        //brazen bazaar
+        if((player.x >= 867 && player.x <= 890) && player.y == 784){
+            //player.anims.play('enterAnim');
+            //player.on('animationcomplete', () => {
+                this.scene.start('brazenBazaarScene');
+            //});
+        }
+        //shop3
+        if((player.x >= 1300 && player.x <= 1330) && player.y == 896){
+            //player.anims.play('enterAnim');
+            //player.on('animationcomplete', () => {
+                this.scene.start('traderNPC');
+            //});
+        }
+        //shop4
+        if((player.x >= 1475 && player.x <= 1505) && player.y == 528){
+            //player.anims.play('enterAnim');
+            //player.on('animationcomplete', () => {
+                //this.scene.start('traderNPC');
+            //});
+        }
+        //shop5
+        if((player.x >= 1760 && player.x <= 1790) && player.y == 528){
+            //player.anims.play('enterAnim');
+            //player.on('animationcomplete', () => {
+                //this.scene.start('traderNPC');
+            //});
+        }
+
+
         const prevVelocity = player.body.velocity.clone();
 
         // Stop any previous movement from the last frame
