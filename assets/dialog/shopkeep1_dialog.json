@@ -1,6 +1,6 @@
 [
 	{
-		"name": "JEAN",
+		"name": "intro",
 		"cName" : "Jean",
 		"text": "Bonjour Monsieur. What can I do for you today? Bonjour Monsieur. What can I do for you today? ",
 		"initial": 	true,
@@ -15,7 +15,7 @@
 		"cName" : "Jean",
 		"text" : "It's J E A N.",
 		"events": {
-			"Look John, I am wondering if you have any of these items available?" : "n2",
+			"Look John! I am wondering if you have any of these items available?" : "n2",
 			"Sorry. Jean, do you have any of these items on hand?" : "exit"
 		}
 	},

@@ -20,7 +20,7 @@ const config = {
     //Ooze -> opening scene
     //Overworld -> map scene
     //BrazenBazaar -> dialogue scene
-    scene: [Load, Menu, OpeningScene, Overworld, BrazenBazaar, TraderNPC]
+    scene: [Load, Menu, OpeningScene, Overworld, Boss, Shop1, Shop2, Shop3, Shop4]
     //scene:[Load, Menu, TraderNPC, Overworld] //uncomment to playtest certain scenes
 };
 
@@ -34,4 +34,4 @@ let speed = 150;
 let keyF; //interact button
 let keyQ;
 let keyW;
-let lastSpawn;
+let lastShopVisited;

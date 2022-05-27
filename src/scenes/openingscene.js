@@ -158,6 +158,7 @@ class OpeningScene extends Phaser.Scene {
     syncDisplayInfo() {
         console.log(this.temp.tempFSM.currentState.name);
         if(this.temp.tempFSM.currentState.name == 'move to Brazen Bazaar'){
+            lastShopVisited = 'BOSS';
             this.scene.start('overworldScene');
         }
         this.temp.setTexture(this.temp.tempFSM.currentState.image);

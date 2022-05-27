@@ -1,0 +1,36 @@
+[
+	{
+		"name": "intro",
+		"cName" : "Pierre",
+		"text": "npc dialog here npc dialog here ",
+		"initial": 	true,
+		"events": {
+			"Bonjourno": "n1",
+			"Digiorno" : "exit",
+			"Bonjour":"exit"
+		}
+	},
+	{
+		"name": "n1",
+		"cName" : "Pierre",
+		"text" : "npc dialog here npc dialog here npc dialog here npc dialog here npc dialog here ",
+		"events": {
+			"Insert Response" : "n2",
+			"Exit" : "exit"
+		}
+	},
+	{
+		"name": "n2",
+		"cName" : "Pierre",
+		"text" : "npc dialog here npc dialog here npc dialog here",
+		"events": {
+			"Insert Response" : "n2",
+			"Exit" : "exit"
+		}
+	},
+	{
+		"name": "exit",
+		"text" : "",
+		"events": {}
+	}
+]

@@ -1,0 +1,36 @@
+[
+	{
+		"name": "intro",
+		"cName" : "Phillippe",
+		"text": "Meow Meow Meow Meow Meow",
+		"initial": 	true,
+		"events": {
+			"You're a cat": "n1",
+			"Bonjour" : "exit",
+			"Au revoir":"exit"
+		}
+	},
+	{
+		"name": "n1",
+		"cName" : "Phillippe",
+		"text" : "Meoooooow? ",
+		"events": {
+			"Look Mr. Cat, I am wondering if you have any of these items available?" : "n2",
+			"Au revoir":"exit"
+		}
+	},
+	{
+		"name": "n2",
+		"cName" : "Phillippe",
+		"text" : "Meoooooow Meow Meoooooow Meow Meoooooow Meow",
+		"events": {
+			"MeoOOow?" : "n2",
+			"Au revoir":"exit"
+		}
+	},
+	{
+		"name": "exit",
+		"text" : "",
+		"events": {}
+	}
+]

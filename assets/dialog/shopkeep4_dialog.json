@@ -1,0 +1,95 @@
+[
+	{
+		"name": "Start",
+		"cName": "Marie",
+		"text": "Hello dear customer! How may I help you today?",
+		"initial": 	true,
+		"events": {
+			"Good morning! I would like to buy some marjoram from you today, do you have any in stock?": "positive1",
+			"Hey, I'm in a rush. Ya think I could grab some marjoram from you?":"negative1"
+		}
+	},
+	{
+		"name": "positive1",
+		"cName": "Marie",
+		"text" : "Oh of course my dear! I would be glad to assist you, that would be 1 shilling.",
+		"events": {
+			"Great, thank you ma'am!" : "exit",
+			"What a ripoff!" : "negative2",
+			"I'm sorry maam, it seems like I don't have enough. Do you think you could lower the price?":"positive2"
+		}
+	},
+	{
+		"name" : "negative2",
+		"cName": "Marie",
+		"text" : "Well, have I never! If you are so upset feel free to shop elsewhere. You are officially banned from this establishment! Get out of my shop!",
+		"events": {
+			"I should leave" : "exit"
+		}
+	},
+	{
+		"name": "banned",
+		"cName": "Marie",
+		"text" : "Guess that did not go too well...",
+		"events": {
+			"leave" : "exit"
+		}
+	},
+	{
+		"name": "exit",
+		"text" : "",
+		"events": {}
+	},
+	{
+		"name": "positive2",
+		"cName": "Marie",
+		"text" : "Poor sweet child! Is there a reason why you are unable to afford such pleasures?",
+		"events" : {
+			"Because you're a scammer, that's why!" : "negative2",
+			"My allowance is only so little and my chore list is so long. If you could spare some change for me, that would be great." : "positive3"
+		}
+	},
+	{
+		"name": "positive3",
+		"cName": "Marie",
+		"text" : "Well, you seem like an honest person… I guess I shall allow it for 6 pence this time. But be sure not to spend your money all in one place! Money is hard to come by.",
+		"events" : {
+			"Thank you maam!":"exit"
+		}
+	},
+	{
+		"name": "negative1",
+		"cName": "Marie",
+		"text": "Well dear me! If you're in a rush, I can bag this up for you for 1 shilling and 6 pence.",
+		"events" : {
+			"Excuse me? The price was 1 shilling in today's newspaper!" : "negative3",
+			"I'm sorry maam, it seems like I don't have enough. Do you think you could lower the price?" : "positive4"
+		}
+	},
+	{
+		"name": "negative3",
+		"cName": "Marie",
+		"text": "Well, the price has just gone up to a shilling and 6 pence. If you have an issue with that, you may shop elsewhere.",
+		"events": {
+			"Fine, here you go":"exit",
+			"I refuse, I will head elsewhere thank you very much!": "exit"
+		}
+	},
+	{
+		"name": "positive4",
+		"cName": "Marie",
+		"text" : "Well? What is wrong child? Spit it out!",
+		"events" : {
+			"You're a scammer, that's what is wrong!" : "negative2",
+			"My allowance is only so little and my chore list is so long. If you could spare some change for me, that would be great." : "positive5"
+		}
+	},
+	{
+		"name": "positive5",
+		"cName": "Marie",
+		"text" : "I guess I shall allow it for 1 shilling this time. But you better learn some manners next time you come around.",
+		"events" : {
+			"Thank you maam!":"exit"
+		}
+	}
+]

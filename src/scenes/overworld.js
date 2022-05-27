@@ -4,8 +4,6 @@ class Overworld extends Phaser.Scene {
     }
 
     create(){
-        //this.scene.start('brazenBazaarScene');
-
         //sound
         this.game.sound.stopAll();
         this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: true, volume: .3});
@@ -45,11 +43,21 @@ class Overworld extends Phaser.Scene {
         aboveLayer.setDepth(10);
 
         //Spawnpoints
-        const spawnPointNPC1 = map.findObject("SpawnPoints", obj => obj.name === "NPC1");
-        const spawnPointNPC2 = map.findObject("SpawnPoints", obj => obj.name === "NPC2");
+        var spawnPoint = null;
+        if(lastShopVisited == 'BOSS') {
+            spawnPoint = map.findObject("SpawnPoints", obj => obj.name === "BOSS");
+        } else if (lastShopVisited == 'SHOP1'){
+            spawnPoint = map.findObject("SpawnPoints", obj => obj.name === "SHOP1");
+        } else if (lastShopVisited == 'SHOP2'){
+            spawnPoint = map.findObject("SpawnPoints", obj => obj.name === "SHOP2");
+        } else if (lastShopVisited == 'SHOP3'){
+            spawnPoint = map.findObject("SpawnPoints", obj => obj.name === "SHOP3");
+        } else if (lastShopVisited == 'SHOP4'){
+            spawnPoint = map.findObject("SpawnPoints", obj => obj.name === "SHOP4");
+        }
 
         //add playyer sprite
-        player = this.physics.add.sprite(spawnPointNPC1.x, spawnPointNPC1.y, "player");
+        player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
 
         //variables for door interaction
         //enables collision with player
@@ -126,39 +134,39 @@ class Overworld extends Phaser.Scene {
     }
 
     update(){
-        //original shop
+        //BOSS starting point
         if((player.x >= 450 && player.x <= 475) && player.y == 304){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
                 this.scene.start('openingScene');
             //});
         }
-        //brazen bazaar
+        //shop4 brazenbazaar
         if((player.x >= 867 && player.x <= 890) && player.y == 784){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
-                this.scene.start('brazenBazaarScene');
+                this.scene.start('shop4');
             //});
         }
-        //shop3
+        //shop1
         if((player.x >= 1300 && player.x <= 1330) && player.y == 896){
             //player.anims.play('enterAnim');
-            //player.on('animationcomplete', () => {
-                this.scene.start('traderNPC');
+            //player.on('animationcomplete', () => {              
+                this.scene.start('shop1');
             //});
         }
-        //shop4
+        //shop2
         if((player.x >= 1475 && player.x <= 1505) && player.y == 528){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
-                //this.scene.start('traderNPC');
+                this.scene.start('shop2');
             //});
         }
-        //shop5
+        //shop3
         if((player.x >= 1760 && player.x <= 1790) && player.y == 528){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
-                //this.scene.start('traderNPC');
+                this.scene.start('shop3');
             //});
         }
 

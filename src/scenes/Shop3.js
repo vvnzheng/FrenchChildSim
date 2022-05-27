@@ -1,6 +1,6 @@
-class TraderNPC extends Phaser.Scene {
+class Shop3 extends Phaser.Scene {
     constructor() {
-        super("traderNPC");
+        super("shop3");
         this.DBOX_X = 169;	        // dialog box x-position
         this.DBOX_Y = 460;
         this.TEXT_X = 380;	        // text w/in dialog box x-position
@@ -34,11 +34,8 @@ class TraderNPC extends Phaser.Scene {
         this.cameras.main.fadeIn(2000);
         this.cameras.main.setBackgroundColor(0x222034);
 
-        //find way to delete
-        //this.temp = this.add.sprite(game.config.width/2, game.config.height/2, 'liquid');
-
         //animations and sprite load
-        this.shopbg = this.add.sprite(game.config.width/8, 0,'shopbg').setOrigin(0).setScale(1.2);
+        this.shopbg = this.add.sprite(game.config.width/8, 0,'shopbg').setOrigin(0).setScale(1.2).setFlip(true);
         this.anims.create({
             key: 'shopbg',
             frames:this.anims.generateFrameNumbers('shopbg',{start: 0, end: 4, first: 0}),
@@ -46,15 +43,17 @@ class TraderNPC extends Phaser.Scene {
             loop: -1
         });
 
-        this.NPC_trader = this.add.sprite(game.config.width/2.5, 66,'shopkeep1').setOrigin(0).setScale(3);
+        this.shopkeeper3 = this.add.sprite(game.config.width/2.5, 200,'shopkeep3').setOrigin(0).setScale(1);
         this.anims.create({
-            key: 'shopkeep1',
-            frames:this.anims.generateFrameNumbers('shopkeep1',{start: 0, end: 18, first: 0}),
+            key: 'shopkeep3',
+            frames:this.anims.generateFrameNumbers('shopkeep3',{start: 0, end: 41, first: 0}),
             frameRate: 10,
             loop: -1
         });
 
-        //
+        this.prop = this.add.sprite(game.config.width/2, game.config.height/2, 'propsetup');
+
+        //dbox
         this.dialogbox = this.add.sprite(this.DBOX_X, this.DBOX_Y, 'dbox2').setOrigin(0).setScale(1.2);
 
         //player icon and anims
@@ -79,7 +78,7 @@ class TraderNPC extends Phaser.Scene {
         this.nextText = this.add.bitmapText(this.NEXT_X, this.NEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
 
         //init json file
-        this.dialog = this.cache.json.get('traderNPC_dialog');
+        this.dialog = this.cache.json.get('shopkeep3_dialog');
      
         this.textDisplay();
     }
@@ -87,7 +86,7 @@ class TraderNPC extends Phaser.Scene {
     update() {
         //animations
         this.shopbg.anims.play('shopbg', true);
-        this.NPC_trader.play('shopkeep1', true);
+        this.shopkeeper3.play('shopkeep3', true);
         this.player_icon.play('icon_idle', true);
 
         //this.player_icon.play('icon_talk', true);
@@ -102,14 +101,14 @@ class TraderNPC extends Phaser.Scene {
 
     textDisplay() {
         // create state machine on ooze object, passing JSON states object & target object
-        this.tempFSM = new StateMachine(this.dialog);
+        this.prop.tempFSM = new StateMachine(this.dialog);
 
         // initialize our transitioning flag
         this.transitioning = false;
 
         // display info text
         //this.statusText = this.add.bitmapText(this.TEXT_X-100, this.TEXT_Y-100, this.DBOX_FONT,`${this.temp.tempFSM.getState().text}`,this.TEXT_SIZE);
-        this.transitionText = this.add.bitmapText(this.TEXT_X,  this.TEXT_Y + 125, this.DBOX_FONT, ``, this.TEXT_SIZE - 6);
+        this.transitionText = this.add.bitmapText(this.TEXT_X,  this.TEXT_Y + 110, this.DBOX_FONT, ``, this.TEXT_SIZE - 6);
         this.transitionText.setTint(0xe8c170);
 
         this.syncDisplayInfo();
@@ -131,7 +130,7 @@ class TraderNPC extends Phaser.Scene {
 
             // which event are they trying to enact?
             let index = Number.parseInt(event.key) - 1; // start at 1
-            let availableEvents = Object.keys(this.tempFSM.currentState.events);
+            let availableEvents = Object.keys(this.prop.tempFSM.currentState.events);
             
             // we only have a few of them
             if(index >= availableEvents.length) {
@@ -141,7 +140,7 @@ class TraderNPC extends Phaser.Scene {
             
             // set a timer while we transition
             this.transitioning = true;
-            this.tempFSM.consumeEvent(selectedEvent);
+            this.prop.tempFSM.consumeEvent(selectedEvent);
             
             this.syncDisplayInfo();
             //response tween
@@ -157,12 +156,13 @@ class TraderNPC extends Phaser.Scene {
     }
 
     syncDisplayInfo() {
-        console.log(this.tempFSM.currentState.name);
-        if(this.tempFSM.currentState.name == 'exit'){
+        console.log(this.prop.tempFSM.currentState.name);
+        if(this.prop.tempFSM.currentState.name == 'exit'){
+            lastShopVisited = 'SHOP3';
             this.scene.start('overworldScene');
         }
         
-        let options = Object.keys(this.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`); //`(${i+1}) ${k}\n`);
+        let options = Object.keys(this.prop.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`); //`(${i+1}) ${k}\n`);
         this.typeText(this.transitionText.text = `${options.join('')}`);
     }
 
@@ -175,7 +175,7 @@ class TraderNPC extends Phaser.Scene {
         this.nextText.text = '';
         
         // build dialog (concatenate speaker + line of text)
-        text = this.dialog[this.dialogConvo]['cName'].toUpperCase() + ': ' + `${this.tempFSM.getState().text}`;
+        text = `${this.prop.tempFSM.getState().cName}` + ': ' + `${this.prop.tempFSM.getState().text}`;
 
         // create a timer to iterate through each letter in the dialog text
         
