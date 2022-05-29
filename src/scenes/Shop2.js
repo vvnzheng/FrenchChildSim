@@ -6,7 +6,7 @@ class Shop2 extends Phaser.Scene {
         this.TEXT_X = 380;	        // text w/in dialog box x-position
         this.TEXT_Y = 490;	        // text w/in dialog box y-position
         this.DBOX_FONT = 'font';
-        this.TEXT_SIZE = 24;
+        this.TEXT_SIZE = 20;
         this.TEXT_MAX_WIDTH = 700;
         //delete maybe
         this.NEXT_TEXT = '[SPACE]';	// text to display for next prompt
@@ -31,7 +31,7 @@ class Shop2 extends Phaser.Scene {
 
         cursors = this.input.keyboard.createCursorKeys();
 
-        this.cameras.main.fadeIn(2000);
+        this.cameras.main.fadeIn(cameraFadeTime);
         this.cameras.main.setBackgroundColor(0x222034);
 
         //animations and sprite load
@@ -93,9 +93,9 @@ class Shop2 extends Phaser.Scene {
 
         // hide response until dialog is finished
         if(!this.dialogTyping ) {
-            this.transitionText.alpha = 1;
+            this.transitionText.visible = true;
         } else {
-            this.transitionText.alpha = 0;
+            this.transitionText.visible = false;
         }
     }
 
@@ -108,7 +108,7 @@ class Shop2 extends Phaser.Scene {
 
         // display info text
         //this.statusText = this.add.bitmapText(this.TEXT_X-100, this.TEXT_Y-100, this.DBOX_FONT,`${this.temp.tempFSM.getState().text}`,this.TEXT_SIZE);
-        this.transitionText = this.add.bitmapText(this.TEXT_X,  this.TEXT_Y + 110, this.DBOX_FONT, ``, this.TEXT_SIZE - 6);
+        this.transitionText = this.add.bitmapText(this.TEXT_X,  this.TEXT_Y + 110, this.DBOX_FONT, ``, this.TEXT_SIZE - 4);
         this.transitionText.setTint(0xe8c170);
 
         this.syncDisplayInfo();
@@ -159,7 +159,12 @@ class Shop2 extends Phaser.Scene {
         console.log(this.prop.tempFSM.currentState.name);
         if(this.prop.tempFSM.currentState.name == 'exit'){
             lastShopVisited = 'SHOP2';
-            this.scene.start('overworldScene');
+            this.cameras.main.fadeOut(cameraFadeTime);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+                this.time.delayedCall(500, () => {
+                this.scene.start('overworldScene');
+                })
+            })
         }
         
         let options = Object.keys(this.prop.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`); //`(${i+1}) ${k}\n`);
@@ -175,7 +180,13 @@ class Shop2 extends Phaser.Scene {
         this.nextText.text = '';
         
         // build dialog (concatenate speaker + line of text)
+        if(`${this.prop.tempFSM.getState().cName}` == 'undefined') {
+            this.dialogbox.visible = false;
+            this.player_icon.visible = false;
+            text = ' ';
+        } else {
         text = `${this.prop.tempFSM.getState().cName}` + ': ' + `${this.prop.tempFSM.getState().text}`;
+        }
 
         // create a timer to iterate through each letter in the dialog text
         

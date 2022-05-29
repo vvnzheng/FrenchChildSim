@@ -138,7 +138,7 @@ class Overworld extends Phaser.Scene {
         if((player.x >= 450 && player.x <= 475) && player.y == 304){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
-                this.scene.start('openingScene');
+                this.scene.start('boss');
             //});
         }
         //shop4 brazenbazaar

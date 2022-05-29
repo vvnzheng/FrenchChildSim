@@ -63,9 +63,8 @@
     },
 	{
 		"name": "exit",
-        "cName": " ",
-		"text" : " ",
-        "image": "alonebg",
-		"events": {}
+		"text" : "EXITING",
+		"events": {
+        }
 	}
 ]

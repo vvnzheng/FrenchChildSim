@@ -13,15 +13,17 @@ const config = {
         }
     },
     parent: 'phaser-game',
-    type: Phaser.AUTO,     
-    width: 1280, //1280
-    height: 720, //720
+    type: Phaser.AUTO, 
+    scale: {
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 1280, //1280
+        height: 720, //720
+    },    
     pixelArt: true, //makes pixel art cooler
     //Ooze -> opening scene
     //Overworld -> map scene
     //BrazenBazaar -> dialogue scene
     scene: [Load, Menu, OpeningScene, Overworld, Boss, Shop1, Shop2, Shop3, Shop4]
-    //scene:[Load, Menu, TraderNPC, Overworld] //uncomment to playtest certain scenes
 };
 
 // define game
@@ -35,3 +37,4 @@ let keyF; //interact button
 let keyQ;
 let keyW;
 let lastShopVisited;
+let cameraFadeTime = 1000;

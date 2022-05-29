@@ -4,23 +4,76 @@ class Load extends Phaser.Scene {
     }
 
     preload() {
+        //LOADING BAR: https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/?a=13
+        var progressBar = this.add.graphics();
+        var progressBox = this.add.graphics();
+        progressBox.fillStyle(0x172038, 0.8);
+        progressBox.fillRect(478, 285, 320, 50);
+        
+        var width = this.cameras.main.width;
+        var height = this.cameras.main.height;
+        var loadingText = this.make.text({
+            x: width / 2,
+            y: height / 2 - 50,
+            text: 'Loading...',
+            style: {
+                font: '20px Helvetica',
+                fill: '#ffffff'
+            }
+        });
+
+        loadingText.setOrigin(0.5, 0.5);
+        
+        var percentText = this.make.text({
+            x: width / 2,
+            y: height / 2 - 5,
+            text: '0%',
+            style: {
+                font: '18px Helvetica',
+                fill: '#ffffff'
+            }
+        });
+        percentText.setOrigin(0.5, 0.5);
+        
+        this.load.on('progress', function (value) {
+            percentText.setText(parseInt(value * 100) + '%');
+            progressBar.clear();
+            progressBar.fillStyle(0x73bed3, 1);
+            progressBar.fillRect(488, 295, 300 * value, 30);
+        });
+        
+        this.load.on('complete', function () {
+            progressBar.destroy();
+            progressBox.destroy();
+            loadingText.destroy();
+            percentText.destroy();
+        });
+
         //load path
         this.load.path = './assets/';
         //audio
-        this.load.audio('titleScreenMusic', 'audio/title_screen_music.wav');
+        this.load.audio('titleScreenMusic', 'audio/title_screen_music.mp3');
+        this.load.audio('windSFX', 'audio/wind.mp3'); //https://freesound.org/people/le_abbaye_Noirlac/sounds/129428/
         this.load.audio('npcMusic', 'audio/npc_music.mp3');
         this.load.audio('overworldMusic', 'audio/overworld_music.mp3');
         this.load.audio('runningFX', 'audio/running.mp3');
         this.load.audio('dialogFX', 'audio/dialogFX.mp3');
         
         //menu screen
-        this.load.image('titleScreen', 'images/title_screen2.png');
+        //this.load.image('titleScreen', 'images/title_screen2.png'); //old
+        this.load.spritesheet('menuscreen', "images/menuscreen.png", {frameWidth: 1024, frameHeight: 576, startFrame:0, endFrame: 14}); //new
+        this.load.spritesheet('smokeFX', "images/smokeFX.png", {frameWidth: 80, frameHeight: 114, startFrame:0, endFrame: 4});
+        this.load.image('menuscreen_title', 'images/menuscreen_title.png');
+        this.load.image('menuscreen_press', 'images/menuscreen_press.png');
         
         //overworld
         this.load.image("tiles", "images/overworld_tileset.png");
         this.load.tilemapTiledJSON("map", "overworld.json");
         this.load.atlas("player", "images/grenouille_walk_anim.png", "images/grenouille_walk_anim.json");
         this.load.spritesheet('enter', "images/enterAnimation.png", {frameWidth: 32, frameHeight: 24, startFrame:0, endFrame: 5});
+
+        //tutorial
+        this.load.spritesheet('tutorial_WASD', "images/tutorial_WASD.png", {frameWidth: 160, frameHeight: 99, startFrame:0, endFrame: 4});
 
         //NPC ******* NPC ****** ******* NPC ******  ******* NPC ******  ******* NPC ******  
         //dialog box and font

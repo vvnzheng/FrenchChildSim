@@ -2,35 +2,221 @@
 	{
 		"name": "intro",
 		"cName" : "Phillippe",
-		"text": "Meow Meow Meow Meow Meow",
+		"text": "Psst… kid, listen to me and listen to me closely.",
 		"initial": 	true,
 		"events": {
-			"You're a cat": "n1",
-			"Bonjour" : "exit",
-			"Au revoir":"exit"
+			"Why is this cat talking to me.": "1"
 		}
 	},
 	{
-		"name": "n1",
+		"name": "1",
 		"cName" : "Phillippe",
-		"text" : "Meoooooow? ",
+		"text" : "It's ruthless out their kid, everyone wants to make a quick buck.",
 		"events": {
-			"Look Mr. Cat, I am wondering if you have any of these items available?" : "n2",
-			"Au revoir":"exit"
+			"Cats should not be able to talk." : "2",
+			"Au revoir (leave shop)":"exit"
 		}
 	},
 	{
-		"name": "n2",
+		"name": "2",
 		"cName" : "Phillippe",
-		"text" : "Meoooooow Meow Meoooooow Meow Meoooooow Meow",
+		"text" : "See that flask up their on the counter? I know you need it, but the price is 10 shillings...",
 		"events": {
-			"MeoOOow?" : "n2",
-			"Au revoir":"exit"
+			"Sounds good to me!" : "3",
+			"10 shillings???":"4"
+		}
+	},
+	{
+		"name": "3",
+		"cName" : "Phillippe",
+		"text" : "FOOOOOOL!!!! Do you not see? You only have 20 shillings! If you blow half of it on this flask, you'll have nothing left to buy your other items!!!",
+		"events": {
+			"!!!" : "3.1"
+		}
+	},
+	{
+		"name": "3.1",
+		"cName" : "Phillippe",
+		"text" : "Now I'll ask again… How does 10 shillings sound?",
+		"events": {
+			"10 shillings? In this economy??? Ridiculous!" : "4"
+		}
+	},
+	{
+		"name": "4",
+		"cName" : "Phillippe",
+		"text" : "Aha! You see your ordeal! You don't have enough money to buy this flask for 10 shillings and get everything else on your shopping list… In this world you gotta haggle to get what you want!",
+		"events": {
+			"Um… Okay… How about 7 Shillings" : "5",
+			"I'll give you 1 Shilling. Final offer!":"6"
+		}
+	},
+	{
+		"name": "5",
+		"cName" : "Phillippe",
+		"text" : "7 Shillings? Kid you're not lowballing enough! 7 is way too pricey for the things you need! I really pity you y'know… It's gonna be tough out there for you… Y'know what I'll give it to you for 6 shillings because I pity you SO much.",
+		"events": {
+			"Purchase Flask for 6 shillings" : "PURCHASE FLASK"
+		}
+	},
+	{
+		"name": "6",
+		"cName" : "Phillippe",
+		"text" : "1 Shilling?!?! I'm not running a charity here kid. Who do you think I am!",
+		"events": {
+			"To be honest I have no idea who you are or why you're a talking cat! Nor do I care! I need that flask now or I'm taking my business elsewhere!" : "7",
+			"Alright you got me, 3 shillings is my final offer." : "8"
+		}
+	},
+	{
+		"name": "7",
+		"cName" : "Phillippe",
+		"text" : "Mon Dieu you're aggressive! Alright… 2 Shillings and it's yours. But heed my words! The other merchants of this village may not take kindly to your rudeness!",
+		"events": {
+			"Purchase Flask for 2 shillings" : "PURCHASE FLASK"
+		}
+	},
+	{
+		"name": "8",
+		"cName" : "Phillippe",
+		"text" : "Now you're being reasonable. 3 shillings it is!",
+		"events": {
+			"Purchase Flask for 3 shillings" : "PURCHASE FLASK"
+		}
+	},
+
+
+
+
+
+
+	{
+		"name": "PART 2",
+		"cName" : "Phillippe",
+		"text" : "Now that that's out of the way, I see you're in need of a cauldron. I have this beautiful one up here. Hand made by the town blacksmith, a truly skilled artisan.",
+		"events": {
+			"Wow! How beautiful!" : "10",
+			"Looks the same as any other cauldron in town." : "12",
+			"Not Interested, Ciao!" : "confirm exit"
+		}
+	},
+	{
+		"name": "10",
+		"cName" : "Phillippe",
+		"text" : "I know right! I've been selling cauldrons for years and let me tell ya, this is one of the nicest I've ever seen. It's on sale right now for 8 Shillings!",
+		"events": {
+			"8 Shillings? What a steal! I'll take it!" : "10.1",
+			"Can you do 5 Shillings perhaps?" : "11",
+			"I gotta go… (Leave Shop)" : "exit"
+		}
+	},
+	{
+		"name": "10.1",
+		"cName" : "Phillippe",
+		"text" : "Sold! Heheheh…",
+		"events": {
+			"Adieu." : "exit"
+		}
+	},
+	{
+		"name": "11",
+		"cName" : "Phillippe",
+		"text" : "Five? You know what? I can do that. But only because I like your style kid!",
+		"events": {
+			"Purchase for 5 Shillings" : "11.1",
+			"Hmmm… Actually I think the best I can do is 3." : "11.2"
+		}
+	},
+	{
+		"name": "11.1",
+		"cName" : "Phillippe",
+		"text" : "Here you go mon ami!",
+		"events": {
+			"Merci Monsieur Chat! (Leave shop)" : "exit"
+		}
+	},
+	{
+		"name": "11.2",
+		"cName" : "Phillippe",
+		"text" : "How dare you insult my kindness and generosity! Just for that the price is back to 8!",
+		"events": {
+			"Purchase for 8 shillings" : "PURCHASE CAULDRON",
+			"Oh shoot! I'm sorry!!" : "11.4",
+			"Alright then, I'm outta here. (Leave shop)" : "exit"
+		}
+	},
+	{
+		"name": "11.4",
+		"cName" : "Phillippe",
+		"text" : "Yeah, sure you are. 8 shillings or leave.",
+		"events": {
+			"Purchase CAULDRON for 8 shillings and leave." : "PURCHASE CAULDRON",
+			"Alright then, I'm outta here." : "exit"
+		}
+	},
+
+	{
+		"name": "12",
+		"cName" : "Phillippe",
+		"text" : "Well I assure you this is one of the finest CAULDRONS in town! Tell you what, I can part with it for 6 shillings.",
+		"events": {
+			"We're in business! (Purchase CAULDRON for 6 shillings)" : "PURCHASE CAULDRON",
+			"Pretty sure I saw that exact CAULDRON at the smith shop two doors down for 5 shillings." : "12.1",
+			"I'm wasting my time here. (Leave shop)" : "exit"
+		}
+	},
+	{
+		"name": "12.1",
+		"cName" : "Phillippe",
+		"text" : "I um… Okay, listen here. I can do 4 shillings for this CAULDRON. That's the lowest I can possibly go.",
+		"events": {
+			"Sold. (Purchase CAULDRON for 4 shillings)" : "PURCHASE CAULDRON",
+			"My price is 3 shillings." : "12.2"
+		}
+	},
+	{
+		"name": "12.2",
+		"cName" : "Phillippe",
+		"text" : "I can't possibly go that low. 4 shillings is my final offer.",
+		"events": {
+			"Sold. (Purchase CAULDRON for 4 shillings)" : "PURCHASE CAULDRON",
+			"No thanks. (Leave shop)" : "12.2"
+		}
+	},
+
+
+
+
+	
+	{
+		"name": "PURCHASE FLASK",
+		"cName" : "Grenouille",
+		"text" : "I've just aquired a FLASK!",
+		"events": {
+			"Now, what was the other thing I needed?" : "PART 2"
+		}
+	},
+	{
+		"name": "PURCHASE CAULDRON",
+		"cName" : "Grenouille",
+		"text" : "I've just aquired a CAULDRON!",
+		"events": {
+			"Leave shop." : "exit"
+		}
+	},
+	{
+		"name": "confirm exit",
+		"cName": "Grenouille",
+		"text" : "Do I really want to leave without the item? I can try and get it somewhere else but I cannot come back once I leave.",
+		"events": {
+			"Yes, I'm leaving." : "exit",
+			"Return to shopkeeper." : "PART 2"
 		}
 	},
 	{
 		"name": "exit",
 		"text" : "",
-		"events": {}
+		"events": {
+        }
 	}
 ]
