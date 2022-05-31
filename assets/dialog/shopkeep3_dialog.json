@@ -11,7 +11,7 @@
 	{
 		"name": "1",
 		"cName" : "Phillippe",
-		"text" : "It's ruthless out their kid, everyone wants to make a quick buck.",
+		"text" : "It's ruthless out there kid, everyone wants to make a quick buck.",
 		"events": {
 			"Cats should not be able to talk." : "2",
 			"Au revoir (leave shop)":"exit"

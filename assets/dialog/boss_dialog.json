@@ -5,16 +5,16 @@
         "text": "Grenouille, I'm running low on perfume ingredients. I need you to run out and get me some by the end of the day.",
         "initial": 	true,
         "events": {
-            "Today?!": "Here's 2 shillings. Now hurry before I start to lose some customers!"
+            "Today?!": "Here's 20 shillings. Now hurry before I start to lose some customers!"
         }
     },
     {
-        "name": "Here's 2 shillings. Now hurry before I start to lose some customers!",
+        "name": "Here's 20 shillings. Now hurry before I start to lose some customers!",
         "cName": "Boss",
-        "text": "Here's 2 shillings. Now hurry before I start to lose some customers!",
+        "text": "Here's 20 shillings. Now hurry before I start to lose some customers!",
         "image" : "shillings",
         "events": {
-            "But boss, 2 shillings is merely 24 pence! How could you possibly expect me to purchase anything with this?": "Well you better figure it out, or else you're fired! Now get to it."
+            "But boss, 20 shillings is merely anything! How could you possibly expect me to purchase anything with this?": "Well you better figure it out, or else you're fired! Now get to it."
         }
     },
     {
@@ -55,7 +55,7 @@
     {
         "name": "Close newspaper",
         "cName": "Grenouille",
-        "text" : "Alright, well I guess I should take a look at the newspaper and see what all the stores have on sale today.",
+        "text" : "Alright, it looks like feline fragances is open, let us go and take a look!",
         "image": "alonebg",
         "events" : {
             "move on map" : "exit"

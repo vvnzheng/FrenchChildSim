@@ -38,3 +38,5 @@ let keyQ;
 let keyW;
 let lastShopVisited;
 let cameraFadeTime = 1000;
+let flaskBought = false;
+let tutorial = false;

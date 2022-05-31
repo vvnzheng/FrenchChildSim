@@ -135,35 +135,35 @@ class Overworld extends Phaser.Scene {
 
     update(){
         //BOSS starting point
-        if((player.x >= 450 && player.x <= 475) && player.y == 304){
+        if((player.x >= 450 && player.x <= 475) && player.y == 304 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
                 this.scene.start('boss');
             //});
         }
         //shop4 brazenbazaar
-        if((player.x >= 867 && player.x <= 890) && player.y == 784){
+        if((player.x >= 867 && player.x <= 890) && player.y == 784 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
                 this.scene.start('shop4');
             //});
         }
         //shop1
-        if((player.x >= 1300 && player.x <= 1330) && player.y == 896){
+        if((player.x >= 1300 && player.x <= 1330) && player.y == 896 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {              
                 this.scene.start('shop1');
             //});
         }
         //shop2
-        if((player.x >= 1475 && player.x <= 1505) && player.y == 528){
+        if((player.x >= 1475 && player.x <= 1505) && player.y == 528 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
                 this.scene.start('shop2');
             //});
         }
         //shop3
-        if((player.x >= 1760 && player.x <= 1790) && player.y == 528){
+        if((player.x >= 1760 && player.x <= 1790) && player.y == 528 && !tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
                 this.scene.start('shop3');

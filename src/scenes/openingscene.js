@@ -29,22 +29,22 @@ class OpeningScene extends Phaser.Scene {
         this.tempStates = [
 			{
                 'name': 'Start',
-                'text': 'Hey kid, I’m running low on perfume ingredients. \nI need you to run out and get me some by the end of the day. \nHere’s 2 shillings. Now hurry before I start to lose some customers!',
+                'text': 'Hey kid, I’m running low on perfume ingredients. \nI need you to run out and get me some by the end of the day. \nHere’s 15 shillings. Now hurry before I start to lose some customers!',
                 'image' : 'shillings',
                 'initial': 	true,
 				'events': {
-                    'But boss, 2 shillings is merely 24 pence! \nHow could you possibly expect me to purchase anything with this?': 'Well you better figure it out, or else you’re fired! Now get to it.'
+                    'But boss, 15 shillings is merely anything! \nHow could you possibly expect me to purchase anything with this?': 'Well you better figure it out, or else you’re fired! Now get to it.'
 				}
 			},
             {
                 'name': 'Well you better figure it out, or else you’re fired! Now get to it.',
                 'text' : 'Well you better figure it out, or else you’re fired! Now get to it.',
                 'events': {
-                    'exit shop' : 'exit opening scene'
+                    'Well I guess I should make a move on' : 'look at ingredients'
                 }
             },
             {
-                'name' : 'exit opening scene',
+                'name' : 'look at ingredients',
                 'text' : 'The boss gave me a list of ingredients, let’s take a look.',
                 'events': {
                     'close ingredient list' : 'Close ingredients'
@@ -66,7 +66,7 @@ class OpeningScene extends Phaser.Scene {
             },
             {
                 'name': 'Close newspaper',
-                'text' : 'Alright, well I guess I should take a look at the newspaper and see what all the stores have on sale today.',
+                'text' : 'Alright, it looks like feline fragances is open, let us go and take a look!',
                 'events' : {
                     'move on map' : 'move to Brazen Bazaar'
                 }

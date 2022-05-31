@@ -92,6 +92,9 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('shopkeep2', 'images/shopkeep2.png',{frameWidth: 100, frameHeight: 75, startFrame:0, endFrame: 18});
         this.load.json('shopkeep2_dialog', 'dialog/shopkeep2_dialog.json');
         //cat
+        this.load.image('catbg', 'images/catbg.png');
+        this.load.image('cauldron', 'images/cauldron.png');
+        this.load.image('flask', 'images/flask.png');
         this.load.spritesheet('shopkeep3', 'images/cat.png',{frameWidth: 117, frameHeight: 186, startFrame:0, endFrame: 41});
         this.load.json('shopkeep3_dialog', 'dialog/shopkeep3_dialog.json');
         //pirate lady
