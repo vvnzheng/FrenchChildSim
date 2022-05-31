@@ -31,6 +31,7 @@ const game = new Phaser.Game(config);
 
 // globals
 let cursors;
+let spacebar;
 let player;
 let speed = 150;
 let keyF; //interact button

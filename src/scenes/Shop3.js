@@ -100,9 +100,6 @@ class Shop3 extends Phaser.Scene {
         } else {
             this.transitionText.visible = false;
         }
-        if(flaskBought){
-            this.flask.visible = false;
-        }
     }
 
     textDisplay() {
@@ -162,7 +159,6 @@ class Shop3 extends Phaser.Scene {
     }
 
     syncDisplayInfo() {
-        console.log(this.prop.tempFSM.currentState.name);
         if(this.prop.tempFSM.currentState.name == 'exit'){
             lastShopVisited = 'SHOP3';
             this.cameras.main.fadeOut(cameraFadeTime);
@@ -173,7 +169,7 @@ class Shop3 extends Phaser.Scene {
                 })
             })
         } else if (this.prop.tempFSM.currentState.name == 'PURCHASE FLASK'){
-            flaskBought = true;
+            this.flask.visible = false;
         } else if (this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON'){
             this.cauldron.visible = false;
         }

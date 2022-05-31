@@ -76,6 +76,8 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('tutorial_WASD', "images/tutorial_WASD.png", {frameWidth: 160, frameHeight: 99, startFrame:0, endFrame: 4});
 
         //NPC ******* NPC ****** ******* NPC ******  ******* NPC ******  ******* NPC ******  
+        //newspaper
+        this.load.image('news', 'images/newspaper.png');
         //dialog box and font
         this.load.image('dbox2', 'images/dialogbox.png');
         this.load.image('player_icon', 'images/icon.png');

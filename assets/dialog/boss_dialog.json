@@ -47,7 +47,7 @@
         "name": "Open newspaper",
         "cName": "Grenouille",
         "text" : "",
-        "image": "alonebg",
+        "image": "news",
         "events": {
             "close newspaper" : "Close newspaper"
         }
