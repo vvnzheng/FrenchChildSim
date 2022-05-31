@@ -31,6 +31,7 @@ const game = new Phaser.Game(config);
 
 // globals
 let cursors;
+let spacebar;
 let player;
 let speed = 150;
 let keyF; //interact button
@@ -44,5 +45,9 @@ let shop2_visited = false;
 let shop3_visited = false;
 let shop4_visited = false;
 let boss_visited = true;
-let cameraFadeTime = 1000;
 let LETTER_TIMER = 20;	// # ms each letter takes to "type" onscreen
+let keyQ;
+let keyW;
+let cameraFadeTime = 1000;
+let flaskBought = false;
+let tutorial = false;

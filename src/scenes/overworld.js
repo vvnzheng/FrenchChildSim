@@ -20,6 +20,11 @@ class Overworld extends Phaser.Scene {
     }
 
     create(){
+        this.TEXT_X = 380;	        // text w/in dialog box x-position
+        this.TEXT_Y = 490;	        // text w/in dialog box y-position
+        this.DBOX_FONT = 'font';
+        this.TEXT_SIZE = 20;
+        this.TEXT_MAX_WIDTH = 700;
         //sound
         this.game.sound.stopAll();
         this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: true, volume: .3});
@@ -124,6 +129,10 @@ class Overworld extends Phaser.Scene {
         this.dialogbox_Visible = false;
         this.dialogText.visible = true;
         this.nextText.visible = true;
+        //dbox 
+        this.dialogbox = this.add.sprite(player.x, player.y, 'dbox2').setScale(0.75);
+        this.dialogbox.visible = false;
+
 
         //game camera
         const camera = this.cameras.main;
@@ -183,6 +192,11 @@ class Overworld extends Phaser.Scene {
         //keyboard inputs
         cursors = this.input.keyboard.createCursorKeys();
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        //spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+        this.text = this.add.bitmapText(this.dialogbox.x - 275,  this.dialogbox.y, this.DBOX_FONT, `Don't come back until you got everything!`, this.TEXT_SIZE - 4);
+        this.text.visible = false;
+        this.text.setTint(0xe8c170);
 
         //collision visualizer
         /*
@@ -215,22 +229,50 @@ class Overworld extends Phaser.Scene {
         console.log(this.dialogText.x, this.dialogText.y);      
         //BOSS starting point
         if((player.x >= 450 && player.x <= 475) && player.y == 288){
+        this.dialogbox.x = player.x;
+        this.dialogbox.y = player.y + 100;
+        }
+        //BOSS starting point
+        if((player.x >= 450 && player.x <= 475) && player.y == 304 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
             if(endGame == true)
                 this.scene.start('boss'); //prob make another SCENE
             //});
+        } else if((player.x >= 450 && player.x <= 475) && player.y == 304){
+            /*this.dialogbox.visible = true;
+            this.text.visible = true;
+            console.log('here', player.x, player.y);
+            this.time.delayedCall(500, () => {
+                console.log('uhoh');
+                this.dialogbox.visible = false;
+                this.text.visible = false;
+            });
+            
+            // set max width for text so it doesnt go off dialogbox
+            this.text.maxWidth = this.TEXT_MAX_WIDTH;*/
         }
         //shop4 brazenbazaar
-        if((player.x >= 867 && player.x <= 890) && player.y == 784){
+        if((player.x >= 867 && player.x <= 890) && player.y == 784 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
             if(shop4_visited == false)
                 this.scene.start('shop4');
             //});
+        } else if((player.x >= 867 && player.x <= 890) && player.y == 784){
+            this.dialogbox.visible = true;
+            this.text = this.add.bitmapText(this.dialogbox.x - 300,  this.dialogbox.y, this.DBOX_FONT, `Brazen Bazaar is closed! Come again soon~`, this.TEXT_SIZE - 4);
+            this.text.setTint(0xe8c170);
+            
+            // set max width for text so it doesnt go off dialogbox
+            this.text.maxWidth = this.TEXT_MAX_WIDTH;
+            this.time.delayedCall(500, () => {
+                this.dialogbox.visible = false;
+                this.text.destroy();
+            });
         }
         //shop1
-        if((player.x >= 1300 && player.x <= 1330) && player.y == 896){
+        if((player.x >= 1300 && player.x <= 1330) && player.y == 896 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {  
             if(shop1_visited == false)            
@@ -238,7 +280,9 @@ class Overworld extends Phaser.Scene {
             //});
         }
         //shop2 big dude
-        if((player.x >= 1748 && player.x <= 1772) && player.y == 192){
+        //if((player.x >= 1748 && player.x <= 1772) && player.y == 192){ //with new tilemap
+        //shop2
+        if((player.x >= 1475 && player.x <= 1505) && player.y == 528 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
             if(shop2_visited == false)
@@ -246,7 +290,9 @@ class Overworld extends Phaser.Scene {
             //});
         }
         //shop3 cat
-        if((player.x >= 755 && player.x <= 780) && player.y == 288){
+        //if((player.x >= 755 && player.x <= 780) && player.y == 288){ //with new tilemap
+        //shop3
+        if((player.x >= 1760 && player.x <= 1790) && player.y == 528 && !tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
             if(shop3_visited == false)
@@ -323,6 +369,7 @@ class Overworld extends Phaser.Scene {
                 else if (prevVelocity.y > 0) player.setTexture("player", "grenouille_walk_down-0");
             }
         }
+    
     }
 
     typeText(text) {

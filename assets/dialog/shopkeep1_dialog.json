@@ -281,7 +281,7 @@
 		"name": "AMI DISCOUNT2",
 		"cName":"GRENOUILLE",
 		"image" : "alonebg",
-		"image2" : "rosemaryOil_item3",
+		"image2" : "firewood_item5",
 		"sound": true,
 		"text" : "I've just acquired FIREWOOD!",
 		"events": {
@@ -292,7 +292,7 @@
 		"name": "PURCHASE ROSEMARY OIL",
 		"cName":"GRENOUILLE",
 		"image" : "alonebg",
-		"image2" : "firewood",
+		"image2" : "rosemaryOil_item3",
 		"sound": true,
 		"text" : "I've just acquired a bottle of ROSEMARY OIL!",
 		"events": {
@@ -304,7 +304,7 @@
 		"name": "PURCHASE FIREWOOD",
 		"cName":"GRENOUILLE",
 		"image" : "alonebg",
-		"image2" : "firewood",
+		"image2" : "firewood_item5",
 		"sound": true,
 		"text" : "I've just acquired FIREWOOD!",
 		"events": {

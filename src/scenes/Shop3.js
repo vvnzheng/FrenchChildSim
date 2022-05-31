@@ -33,15 +33,18 @@ class Shop3 extends Phaser.Scene {
         this.cameras.main.setBackgroundColor(0x222034);
 
         //animations and sprite load
-        this.shopbg = this.add.sprite(game.config.width/8, 0,'shopbg').setOrigin(0).setScale(1.2).setFlip(true);
-        this.anims.create({
+        //this.shopbg = this.add.sprite(game.config.width/8, 0,'shopbg').setOrigin(0).setScale(1.2).setFlip(true);
+        /*this.anims.create({
             key: 'shopbg',
             frames:this.anims.generateFrameNumbers('shopbg',{start: 0, end: 4, first: 0}),
             frameRate: 10,
             loop: -1
-        });
+        });*/
+        this.shopbg = this.add.sprite(game.config.width/8, 0,'catbg').setOrigin(0).setScale(1.2);
+        this.flask = this.add.sprite(game.config.width-225, game.config.height/5,'flask').setOrigin(0).setScale(1.2);
+        this.cauldron = this.add.sprite(game.config.width - 380, game.config.height/2.75,'cauldron').setOrigin(0).setScale(1.2);
 
-        this.shopkeeper3 = this.add.sprite(game.config.width/2.5, 200,'shopkeep3').setOrigin(0).setScale(1);
+        this.shopkeeper3 = this.add.sprite(game.config.width/2.25, 200,'shopkeep3').setOrigin(0).setScale(1);
         this.anims.create({
             key: 'shopkeep3',
             frames:this.anims.generateFrameNumbers('shopkeep3',{start: 0, end: 41, first: 0}),
@@ -83,7 +86,7 @@ class Shop3 extends Phaser.Scene {
 
     update() {
         //animations
-        this.shopbg.anims.play('shopbg', true);
+        //this.shopbg.anims.play('shopbg', true);
         this.shopkeeper3.play('shopkeep3', true);
         this.player_icon.play('icon_idle', true);
 
@@ -154,7 +157,6 @@ class Shop3 extends Phaser.Scene {
     }
 
     syncDisplayInfo() {
-        console.log(this.prop.tempFSM.currentState.name);
         if(this.prop.tempFSM.currentState.name == 'exit'){
             shop3_visited = true;
             lastShopVisited = 'SHOP3';
@@ -162,10 +164,16 @@ class Shop3 extends Phaser.Scene {
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
+                tutorial = true;
                 this.scene.start('overworldScene');
                 })
             })
+        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE FLASK'){
+            this.flask.visible = false;
+        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON'){
+            this.cauldron.visible = false;
         }
+        this.prop.setTexture(this.prop.tempFSM.currentState.image);
         
         let options = Object.keys(this.prop.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`); //`(${i+1}) ${k}\n`);
         this.typeText(this.transitionText.text = `${options.join('')}`);

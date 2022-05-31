@@ -79,6 +79,8 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('tutorial_WASD', "images/tutorial_WASD.png", {frameWidth: 160, frameHeight: 99, startFrame:0, endFrame: 4});
 
         //NPC ******* NPC ****** ******* NPC ******  ******* NPC ******  ******* NPC ******  
+        //newspaper
+        this.load.image('news', 'images/newspaper.png');
         //dialog box and font
         this.load.image('dbox2', 'images/dialogbox.png');
         this.load.image('player_icon', 'images/icon.png');
@@ -95,6 +97,9 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('shopkeep2', 'images/shopkeep2.png',{frameWidth: 100, frameHeight: 75, startFrame:0, endFrame: 18});
         this.load.json('shopkeep2_dialog', 'dialog/shopkeep2_dialog.json');
         //cat
+        this.load.image('catbg', 'images/catbg.png');
+        this.load.image('cauldron', 'images/cauldron.png');
+        this.load.image('flask', 'images/flask.png');
         this.load.spritesheet('shopkeep3', 'images/cat.png',{frameWidth: 117, frameHeight: 186, startFrame:0, endFrame: 41});
         this.load.json('shopkeep3_dialog', 'dialog/shopkeep3_dialog.json');
         //pirate lady
@@ -107,6 +112,8 @@ class Load extends Phaser.Scene {
         this.load.image('cauldron_item1', 'images/cauldron.png');
         this.load.image('jasmineOil_item2', 'images/jasmine_oil.png');
         this.load.image('rosemaryOil_item3', 'images/rosemary_oil.png');
+        this.load.image('flask2_item4', 'images/flask2.png');
+        this.load.image('firewood_item5', 'images/firewood.png');
 
         //etc TEMP?
         this.load.image('dbox', 'images/dialoguebox.png');
