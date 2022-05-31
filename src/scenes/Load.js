@@ -58,6 +58,7 @@ class Load extends Phaser.Scene {
         this.load.audio('overworldMusic', 'audio/overworld_music.mp3');
         this.load.audio('runningFX', 'audio/running.mp3');
         this.load.audio('dialogFX', 'audio/dialogFX.mp3');
+        this.load.audio('itemAquiredSFX', 'audio/itemAquiredSFX.mp3');
         
         //menu screen
         //this.load.image('titleScreen', 'images/title_screen2.png'); //old
@@ -67,8 +68,10 @@ class Load extends Phaser.Scene {
         this.load.image('menuscreen_press', 'images/menuscreen_press.png');
         
         //overworld
-        this.load.image("tiles", "images/overworld_tileset.png");
-        this.load.tilemapTiledJSON("map", "overworld.json");
+        this.load.image("tiles", "images/overworld_tileset.png"); //temp
+        this.load.image("tiles2", "images/overworld_tileset2.png"); //new
+        this.load.tilemapTiledJSON("map", "overworld.json"); //temp
+        this.load.tilemapTiledJSON("map2", "overworld2.json"); //new
         this.load.atlas("player", "images/grenouille_walk_anim.png", "images/grenouille_walk_anim.json");
         this.load.spritesheet('enter', "images/enterAnimation.png", {frameWidth: 32, frameHeight: 24, startFrame:0, endFrame: 5});
 

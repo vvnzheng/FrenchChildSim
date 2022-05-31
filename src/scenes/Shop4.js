@@ -13,8 +13,6 @@ class Shop4 extends Phaser.Scene {
         this.NEXT_X = 1000;			// next text prompt x-position
         this.NEXT_Y = 650;			// next text prompt y-position
 
-        this.LETTER_TIMER = 20;		// # ms each letter takes to "type" onscreen
-
         // dialog variables
         this.dialogConvo = 0;			// current "conversation"
         this.dialogTyping = false;		// flag to lock player input while text is "typing"
@@ -159,6 +157,8 @@ class Shop4 extends Phaser.Scene {
         console.log(this.prop.tempFSM.currentState.name);
         if(this.prop.tempFSM.currentState.name == 'exit'){
             lastShopVisited = 'SHOP4';
+            shop4_visited = true;
+            numOfShopsVisited -= 1;
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
@@ -192,7 +192,7 @@ class Shop4 extends Phaser.Scene {
         
         let currentChar = 0; 
         this.textTimer = this.time.addEvent({
-            delay: this.LETTER_TIMER,
+            delay: LETTER_TIMER,
             repeat: text.length - 1,
             callback: () => { 
                 // concatenate next letter from dialogLines

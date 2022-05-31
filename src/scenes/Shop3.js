@@ -13,8 +13,6 @@ class Shop3 extends Phaser.Scene {
         this.NEXT_X = 1000;			// next text prompt x-position
         this.NEXT_Y = 650;			// next text prompt y-position
 
-        this.LETTER_TIMER = 20;		// # ms each letter takes to "type" onscreen
-
         // dialog variables
         this.dialogConvo = 0;			// current "conversation"
         this.dialogTyping = false;		// flag to lock player input while text is "typing"
@@ -110,7 +108,7 @@ class Shop3 extends Phaser.Scene {
         //this.statusText = this.add.bitmapText(this.TEXT_X-100, this.TEXT_Y-100, this.DBOX_FONT,`${this.temp.tempFSM.getState().text}`,this.TEXT_SIZE);
         this.transitionText = this.add.bitmapText(this.TEXT_X,  this.TEXT_Y + 110, this.DBOX_FONT, ``, this.TEXT_SIZE - 4);
         this.transitionText.setTint(0xe8c170);
-
+    
         this.syncDisplayInfo();
         
         // set max width for text so it doesnt go off dialogbox
@@ -158,7 +156,9 @@ class Shop3 extends Phaser.Scene {
     syncDisplayInfo() {
         console.log(this.prop.tempFSM.currentState.name);
         if(this.prop.tempFSM.currentState.name == 'exit'){
+            shop3_visited = true;
             lastShopVisited = 'SHOP3';
+            numOfShopsVisited -= 1;
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
@@ -192,7 +192,7 @@ class Shop3 extends Phaser.Scene {
         
         let currentChar = 0; 
         this.textTimer = this.time.addEvent({
-            delay: this.LETTER_TIMER,
+            delay: LETTER_TIMER,
             repeat: text.length - 1,
             callback: () => { 
                 // concatenate next letter from dialogLines

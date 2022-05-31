@@ -13,8 +13,6 @@ class Shop1 extends Phaser.Scene {
         this.NEXT_X = 1000;			// next text prompt x-position
         this.NEXT_Y = 650;			// next text prompt y-position
 
-        this.LETTER_TIMER = 20;		// # ms each letter takes to "type" onscreen
-
         // dialog variables
         this.dialogConvo = 0;			// current "conversation"
         this.dialogTyping = false;		// flag to lock player input while text is "typing"
@@ -24,12 +22,13 @@ class Shop1 extends Phaser.Scene {
     }
 
     create() {
+        //audio
         this.game.sound.stopAll();
-
         this.NPC_soundtrack = this.sound.add('npcMusic', {loop: true, volume: .2});
+        this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
         this.NPC_soundtrack.play();
 
-        cursors = this.input.keyboard.createCursorKeys();
+        //cursors = this.input.keyboard.createCursorKeys();
 
         this.cameras.main.fadeIn(cameraFadeTime);
         this.cameras.main.setBackgroundColor(0x222034);
@@ -51,7 +50,9 @@ class Shop1 extends Phaser.Scene {
             loop: -1
         });
 
+        //one prop is for items the other can be used for a backdrop(alonebg) or another item
         this.prop = this.add.sprite(game.config.width/2, game.config.height/2, 'propsetup');
+        this.prop2 = this.add.sprite(game.config.width/2, game.config.height/3, 'propsetup');
 
         //dbox
         this.dialogbox = this.add.sprite(this.DBOX_X, this.DBOX_Y, 'dbox2').setOrigin(0).setScale(1.2);
@@ -146,12 +147,22 @@ class Shop1 extends Phaser.Scene {
             //response tween
             this.tweens.add({
                 targets: [this.transitionText],
-                scale: {from: 1.2, to: 1},
-                duration: 750,
-                yoyo: false,
-                ease: 'Sine.easeOut',
-                repeat: 0,
+                scale: {from: 1, to: 1.1},
+                duration: 200,
+                yoyo: true,
+                ease: 'Sine.easeIn',
+                repeat: 1,
                 });
+            //item tween
+            this.tweens.add({
+                targets: [this.prop2],
+                scale: {from: 4.9, to: 5},
+                duration: 500,
+                yoyo: true,
+                ease: 'Sine.easeInOut',
+                repeat: -1,
+                });
+            
         }
     }
 
@@ -159,6 +170,8 @@ class Shop1 extends Phaser.Scene {
         console.log(this.prop.tempFSM.currentState.name);
         if(this.prop.tempFSM.currentState.name == 'exit'){
             lastShopVisited = 'SHOP1';
+            shop1_visited = true;
+            numOfShopsVisited -= 1;
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
@@ -166,7 +179,9 @@ class Shop1 extends Phaser.Scene {
                 })
             })   
         }
-        
+        this.soundFX();
+        this.prop.setTexture(this.prop.tempFSM.currentState.image);
+        this.prop2.setTexture(this.prop.tempFSM.currentState.image2);
         let options = Object.keys(this.prop.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`); //`(${i+1}) ${k}\n`);
         this.typeText(this.transitionText.text = `${options.join('')}`);
     }
@@ -185,14 +200,17 @@ class Shop1 extends Phaser.Scene {
             this.player_icon.visible = false;
             text = ' ';
         } else {
-        text = `${this.prop.tempFSM.getState().cName}` + ': ' + `${this.prop.tempFSM.getState().text}`;
+            this.dialogbox.visible = true;
+            this.player_icon.visible = true;
+            text = this.prop.tempFSM.currentState.cName + ': ' + this.prop.tempFSM.currentState.text; //new
+            //text = `${this.prop.tempFSM.getState().cName}` + ': ' + `${this.prop.tempFSM.getState().text}`; //old
         }
 
         // create a timer to iterate through each letter in the dialog text
         
         let currentChar = 0; 
         this.textTimer = this.time.addEvent({
-            delay: this.LETTER_TIMER,
+            delay: LETTER_TIMER,
             repeat: text.length - 1,
             callback: () => { 
                 // concatenate next letter from dialogLines
@@ -220,6 +238,18 @@ class Shop1 extends Phaser.Scene {
         //play typewriter sound FX
         if(this.dialogTyping == true){
             if (!this.dialogFX.isPlaying) this.dialogFX.play();
+        }
+    }
+
+    //plays sound when acquiring item
+    soundFX() {
+        if(this.prop.tempFSM.currentState.sound == true) {
+            if(!this.itemAquiredSFX.play()){
+                this.itemAquiredSFX.play();
+            }
+        }
+        else {
+            this.itemAquiredSFX.stop();
         }
     }
 }

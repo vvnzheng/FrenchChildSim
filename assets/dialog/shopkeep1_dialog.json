@@ -1,40 +1,321 @@
 [
 	{
 		"name": "intro",
-		"cName" : "Jean",
-		"text": "Bonjour Monsieur. What can I do for you today? Bonjour Monsieur. What can I do for you today? ",
+		"cName" : "JEAN",
+		"text": "Bonjour Monsieur. What can I do for you today?",
 		"initial": 	true,
 		"events": {
-			"Bonjour John": "n1",
-			"Bonjour" : "exit",
-			"Bonjour Jean":"exit"
+			"Bonjour John, I'm GRENOUILLE.": "a1",
+			"Bonjour Jean, I'm GRENOUILLE." : "a2"
 		}
 	},
 	{
-		"name": "n1",
-		"cName" : "Jean",
-		"text" : "It's J E A N.",
+		"name": "a1",
+		"cName" : "JEAN",
+		"text" : "It's J E A N. A common mistake.",
 		"events": {
-			"Look John! I am wondering if you have any of these items available?" : "n2",
-			"Sorry. Jean, do you have any of these items on hand?" : "exit"
+			"Sorry. JEAN, do you have any of these items on hand?" : "a2"
 		}
 	},
 	{
-		"name": "n2",
-		"cName" : "Jean",
-		"text" : "It's J E A N.",
+		"name": "a2",
+		"cName" : "JEAN",
+		"text" : "What do you need little garcon?",
 		"events": {
-			"Look John, I am wondering if you have any of these items available?" : "n2",
-			"Sorry. Jean, do you have any of these items on hand?" : "exit"
+			"Show him your list." : "a3"
 		}
-			
-		
 	},
+	{
+		"name": "a3",
+		"cName" : "JEAN",
+		"text" : "Hmmm... Oh oui oui. You just happen to be in luck. I do carry FIREWOOD and ROSEMARY OIL.",
+		"events": {
+			"MERCI!" : "a4"
+		}	
+	},
+	{
+		"name": "a4",
+		"cName" : "JEAN",
+		"text" : "The FIREWOOD would cost you 6 shillings and hmmm, the ROSEMARY OIL would be 8 shillings.",
+		"events": {
+			"Can I take a look at the ROSEMARY OIL." : "a5",
+			"(ROSEMARY OIL is pretty expensive here, I could probably get it somewhere else cheaper). I would only like to purchase FIREWOOD." : "b1"
+		}	
+	},
+	{
+		"name": "a5",
+		"cName": "JEAN",
+		"text" : "Ahh yes, this ROSEMARY OIL is the finest of all in France. I got these during my trip to Marseille. Beautiful place, beautiful people.",
+		"events": {
+			"I've never been." : "a6",
+			"Purchase a bottle of ROSEMARY OIL for 8 shillings." : "PURCHASE ROSEMARY OIL"
+		}	
+	},
+	{
+		"name": "a6",
+		"cName": "JEAN",
+		"text" : "Yes, it's a lovely place. Many beautiful women. So, BEAUT-TI-FUL. MmmmMmmHmm... *chef's kiss* If you ever get the chance you should visit.",
+		"events": {
+			"I too, am a connoisseur of beautiful women." : "a7",
+			"Monsieur, I'm just trying to purchase some ROSEMARY OIL." : "a7.2"
+        }
+	},
+	{
+		"name": "a7.2",
+		"cName": "JEAN",
+		"text" : "Oh oui oui. Sorry Monsieur, just thinking about that place. So many good memories. The ROSEMARY OIL, that will cost you 6 shillings.",
+		"events": {
+			"I thought it was 8 shillings?" : "a7.3",
+			"Purchase the ROSEMARY OIL for 6 shillings." : "PURCHASE ROSEMARY OIL"
+        }
+	},
+	{
+		"name": "a7.3",
+		"cName": "JEAN",
+		"text" : "Did I say 6 shillings. I mean 8 shillings.",
+		"events": {
+			"(ZUT!) Purchase the ROSEMARY OIL for 8 shillings." : "PURCHASE ROSEMARY OIL"
+        }
+	},
+	{
+		"name": "a7",
+		"cName":"JEAN",
+		"text" : "You and me both garcon. Let me tell you about this gorgeous mademoiselle. Oooo weee... her bosom were magnificent. *more chef's kiss*",
+		"events": {
+			"..." : "a8",
+			"Ummm... about that ROSEMARY OIL." : "a7.2"
+        }
+	},
+	{
+		"name": "a8",
+		"cName":"JEAN",
+		"text" : "She would give Helen of Troy a run for her shillings. It has been many nights since I last saw her. Oh... what I would give just to see her face again.",
+		"events": {
+			"What was her name?" : "a9",
+			"... ... ..." : "a9"
+        }
+	},
+	{
+		"name": "a9",
+		"cName":"JEAN",
+		"text" : "Jean. I miss her dearly.",
+		"events": {
+			"Her name was Jean?" : "a10",
+			"... ... ... ??? ... ??" : "a10"
+        }
+	},
+	{
+		"name": "a10",
+		"cName":"JEAN",
+		"text" : "She had blonde hair, hazel eyes, freckles that could make a grown man weep, her free spirited lifestyle is intoxicating, something I feel in love with instantly... Also a very passionate lover.",
+		"events": {
+			"JEAN and Jean!?!?!?" : "a11",
+			"..............." : "a11",
+			"How passioniate?" : "a11"
+        }
+	},
+	{
+		"name": "a11",
+		"cName":"JEAN",
+		"text" : "In Marseille, we would spend every waking moment together. From sunrise to sunset. It would just be Jean and moi... locked away in her room. Two souls intertwined. Two majestic peacocks, flying across the horizon that knows no end. Our love... knew no bounds.",
+		"events": {
+			"... ... ... ??? ... ??? .?. ?.? ??? ... ????? .?. ?.? ??? ... ???" : "a12",
+			"Two peacocks huh?" : "a12"
+        }
+	},
+	{
+		"name": "a12",
+		"cName":"JEAN",
+		"text" : "We were Romeo and Juliet, y'know but without the whole dramatic death sequence. I could have done without that part. Ah, Jean... When I get enough shillings to move out of this dump I will come back for you my love!",
+		"events": {
+			"Wow, what a beautiful story (sacrasticlly)." : "a13",
+			"Wow, what a beautiful story (sincerly)." : "a13"
+        }
+	},
+	{
+		"name": "a13",
+		"cName":"JEAN",
+		"text" : "Merci... for listening to my story garcon.",
+		"events": {
+			"I loved it. It warms my heart to hear old people can still find love." : "a13.1",
+			"Don't worry Jean. You will be reunited with your love one day. Absence will only make the heart grow fonder." : "a14"
+        }
+	},
+	{
+		"name": "a13.1",
+		"cName":"JEAN",
+		"text" : "...",
+		"events": {
+			"So Romeo and Julilet huh?." : "a13.2"
+        }
+	},
+	{
+		"name": "a13.2",
+		"cName":"JEAN",
+		"text" : "........... That will be 8 shillings for the ROSEMARY OIL.",
+		"events": {
+			"Purchase ROSEMARY OIL for 8 shillings." : "PURCHASE ROSEMARY OIL",
+			"I thought you said it was 6 shillings." : "a12.3"
+        }
+	},
+	{
+		"name": "a12.3",
+		"cName":"JEAN",
+		"text" : "8 shillings for the ROSEMARY OIL or you could look elsewhere!",
+		"events": {
+			"Purchase ROSEMARY OIL for 8 shillings." : "PURCHASE ROSEMARY OIL",
+			"Ask about the firewood instead." : "b1",
+			"(leave shop)" : "exit"
+        }
+	},
+	{
+		"name": "a14",
+		"cName":"JEAN",
+		"text" : "Thank you GRENOUILLE. You have made a friend for life. Next time I'm going to Marseille, I'm bringing you along. Jean has a beautiful friend. Perfect for you. Huge bosom.",
+		"events": {
+			"Hehe. I would love that." : "a14.1",
+			"Umm. That's not neccessary, but I appreicate your offer." : "a14.1"
+        }
+	},
+	{
+		"name": "a14.1",
+		"cName":"JEAN",
+		"text" : "Here, I want to give you an AMI(friend) discount. 4 shillings each, for both the FIREWOOD and ROSEMARY OIL.",
+		"events": {
+			"Oh wow, thank you, AMI." : "AMI DISCOUNT"
+        }
+	},
+
+
+
+
+
+	{
+		"name": "b1",
+		"cName":"JEAN",
+		"text" : "Ah yes, the FIREWOOD. I can offer it to you for 6 shillings.",
+		"events": {
+			"Purchase FIREWOOD for 6 shillings." : "PURCHASE FIREWOOD",
+			"What about 5 shillings." : "b2"
+        }
+	},
+	{
+		"name": "b2",
+		"cName":"JEAN",
+		"text" : "Hmmm. Hmmm. ??? Hmmm. Hmmm. Sure",
+		"events": {
+			"Purchase FIREWOOD for 5 shillings." : "PURCHASE FIREWOOD",
+			"What about 4 shillings." : "b3"
+        }
+	},
+	{
+		"name": "b3",
+		"cName":"JEAN",
+		"text" : "What about 6 shillings?",
+		"events": {
+			"Please Monsieur, I only have a small amount to spend. I can't get everything on my list if you are charging that much." : "b4",
+			"Purchase FIREWOOD for 6 shillings." : "PURCHASE FIREWOOD"
+        }
+	},
+	{
+		"name": "b4",
+		"cName":"JEAN",
+		"text" : "Sorry little garcon, but I have a trip I am saving up for.",
+		"events": {
+			"Purchase FIREWOOD for 6 shillings." : "PURCHASE FIREWOOD",
+			"(lie) Can I pay 5 shillings today and then you an extra 2 shillings tomorrow?" : "b5"
+        }
+	},
+	{
+		"name": "b5",
+		"cName":"JEAN",
+		"text" : "What do you take me for, a fool?.",
+		"events": {
+			"(lie) Please Monsieur. I promise... John please. I need this. I could lose my apprenticeship." : "b6",
+			"(lie) Please Monsieur. I promise... Jean please. I need this. I could lose my apprenticeship." : "b7"
+        }
+	},
+	{
+		"name": "b6",
+		"cName":"JEAN",
+		"text" : "JOHN!!! It's         J            E             A           N!!!!!!!!",
+		"events": {
+			"Jean!!! I'm sorry!" : "b6.1"
+        }
+	},
+	{
+		"name": "b6",
+		"cName":"JEAN",
+		"text" : "8 shillings for the FIREWOOD or looks elsewhere littlel garcon.",
+		"events": {
+			"Leave shop." : "exit",
+			"Purchase FIREWOOD for 8 shillings." : "PURCHASE FIREWOOD"
+        }
+	},
+	{
+		"name": "b7",
+		"cName":"JEAN",
+		"text" : "Hmm. Fine",
+		"events": {
+			"Purchase the FIREWOOD for 5 shillings." : "PURCHASE FIREWOOD"
+        }
+	},
+
+
+
+
+
+
+	{
+		"name": "AMI DISCOUNT",
+		"cName":"GRENOUILLE",
+		"image" : "alonebg",
+		"image2" : "rosemaryOil_item3",
+		"sound": true,
+		"text" : "I've just acquired a bottle of ROSEMARY OIL!",
+		"events": {
+			"I got another item!" : "AMI DISCOUNT2"
+        }
+	},
+	{
+		"name": "AMI DISCOUNT2",
+		"cName":"GRENOUILLE",
+		"image" : "alonebg",
+		"image2" : "rosemaryOil_item3",
+		"sound": true,
+		"text" : "I've just acquired FIREWOOD!",
+		"events": {
+			"I think I have everything I need (leave shop)." : "exit"
+        }
+	},
+	{
+		"name": "PURCHASE ROSEMARY OIL",
+		"cName":"GRENOUILLE",
+		"image" : "alonebg",
+		"image2" : "firewood",
+		"sound": true,
+		"text" : "I've just acquired a bottle of ROSEMARY OIL!",
+		"events": {
+			"I can also get FIREWOOD here..." : "b1",
+			"I think I have everything I need (leave shop)." : "exit"
+        }
+	},
+	{
+		"name": "PURCHASE FIREWOOD",
+		"cName":"GRENOUILLE",
+		"image" : "alonebg",
+		"image2" : "firewood",
+		"sound": true,
+		"text" : "I've just acquired FIREWOOD!",
+		"events": {
+			"I think that's everything (leave shop)." : "exit"
+        }
+	},
+
 	{
 		"name": "exit",
 		"text" : "",
-		"events": {
-        }
+		"events": {}
 	}
 
 ]
