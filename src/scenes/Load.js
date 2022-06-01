@@ -92,19 +92,19 @@ class Load extends Phaser.Scene {
         this.load.image('shopbg2', 'images/shopbg.png');
         //trader NPC
         this.load.spritesheet('shopkeep1', 'images/shopkeep1.png',{frameWidth: 75, frameHeight: 100, startFrame:0, endFrame: 18});
-        this.load.json('shopkeep1_dialog', 'dialog/shopkeep1_dialog.json');
+        this.load.json('BeretBoutique_dialog', 'dialog/BeretBoutique_dialog.json');
         //big dude
         this.load.spritesheet('shopkeep2', 'images/shopkeep2.png',{frameWidth: 100, frameHeight: 75, startFrame:0, endFrame: 18});
-        this.load.json('shopkeep2_dialog', 'dialog/shopkeep2_dialog.json');
+        this.load.json('MuscleMarket_dialog', 'dialog/MuscleMarket_dialog.json');
         //cat
         this.load.image('catbg', 'images/catbg.png');
         this.load.image('cauldron', 'images/cauldron.png');
         this.load.image('flask', 'images/flask.png');
         this.load.spritesheet('shopkeep3', 'images/cat.png',{frameWidth: 117, frameHeight: 186, startFrame:0, endFrame: 41});
-        this.load.json('shopkeep3_dialog', 'dialog/shopkeep3_dialog.json');
+        this.load.json('FelineFragrances_dialog', 'dialog/FelineFragrances_dialog.json');
         //pirate lady
         this.load.spritesheet('shopkeep4', 'images/shopkeep4.png',{frameWidth: 80, frameHeight: 90, startFrame:0, endFrame: 19});
-        this.load.json('shopkeep4_dialog', 'dialog/shopkeep4_dialog.json');
+        this.load.json('Brazen_dialog', 'dialog/Brazen_dialog.json');
         //bossman
         this.load.spritesheet('boss', 'images/boss.png',{frameWidth: 225, frameHeight: 225, startFrame:0, endFrame: 11});
         this.load.json('boss_dialog', 'dialog/boss_dialog.json');

@@ -1,6 +1,6 @@
-class Shop3 extends Phaser.Scene {
+class Shop2 extends Phaser.Scene {
     constructor() {
-        super("shop3");
+        super("shop2");
         this.DBOX_X = 169;	        // dialog box x-position
         this.DBOX_Y = 460;
         this.TEXT_X = 380;	        // text w/in dialog box x-position
@@ -22,7 +22,6 @@ class Shop3 extends Phaser.Scene {
     }
 
     create() {
-        //audio
         this.game.sound.stopAll();
         this.NPC_soundtrack = this.sound.add('npcMusic', {loop: true, volume: .2});
         this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
@@ -34,21 +33,18 @@ class Shop3 extends Phaser.Scene {
         this.cameras.main.setBackgroundColor(0x222034);
 
         //animations and sprite load
-        //this.shopbg = this.add.sprite(game.config.width/8, 0,'shopbg').setOrigin(0).setScale(1.2).setFlip(true);
-        /*this.anims.create({
+        this.shopbg = this.add.sprite(game.config.width/8, 0,'shopbg').setOrigin(0).setScale(1.2);
+        this.anims.create({
             key: 'shopbg',
             frames:this.anims.generateFrameNumbers('shopbg',{start: 0, end: 4, first: 0}),
             frameRate: 10,
             loop: -1
-        });*/
-        this.shopbg = this.add.sprite(game.config.width/8, 0,'catbg').setOrigin(0).setScale(1.2);
-        this.flask = this.add.sprite(game.config.width-225, game.config.height/5,'flask').setOrigin(0).setScale(1.2);
-        this.cauldron = this.add.sprite(game.config.width - 380, game.config.height/2.75,'cauldron').setOrigin(0).setScale(1.2);
+        });
 
-        this.shopkeeper3 = this.add.sprite(game.config.width/2.25, 200,'shopkeep3').setOrigin(0).setScale(1);
+        this.shopkeeper2 = this.add.sprite(game.config.width/2.5, 141,'shopkeep2').setOrigin(0).setScale(3);
         this.anims.create({
-            key: 'shopkeep3',
-            frames:this.anims.generateFrameNumbers('shopkeep3',{start: 0, end: 41, first: 0}),
+            key: 'shopkeep2',
+            frames:this.anims.generateFrameNumbers('shopkeep2',{start: 0, end: 18, first: 0}),
             frameRate: 10,
             loop: -1
         });
@@ -81,15 +77,15 @@ class Shop3 extends Phaser.Scene {
         this.nextText = this.add.bitmapText(this.NEXT_X, this.NEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
 
         //init json file
-        this.dialog = this.cache.json.get('shopkeep3_dialog');
+        this.dialog = this.cache.json.get('MuscleMarket_dialog');
      
         this.textDisplay();
     }
 
     update() {
         //animations
-        //this.shopbg.anims.play('shopbg', true);
-        this.shopkeeper3.play('shopkeep3', true);
+        this.shopbg.anims.play('shopbg', true);
+        this.shopkeeper2.play('shopkeep2', true);
         this.player_icon.play('icon_idle', true);
 
         //this.player_icon.play('icon_talk', true);
@@ -113,7 +109,7 @@ class Shop3 extends Phaser.Scene {
         //this.statusText = this.add.bitmapText(this.TEXT_X-100, this.TEXT_Y-100, this.DBOX_FONT,`${this.temp.tempFSM.getState().text}`,this.TEXT_SIZE);
         this.transitionText = this.add.bitmapText(this.TEXT_X,  this.TEXT_Y + 110, this.DBOX_FONT, ``, this.TEXT_SIZE - 4);
         this.transitionText.setTint(0xe8c170);
-    
+
         this.syncDisplayInfo();
         
         // set max width for text so it doesnt go off dialogbox
@@ -155,17 +151,8 @@ class Shop3 extends Phaser.Scene {
                 ease: 'Sine.easeOut',
                 repeat: 0,
                 });
-            if (this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON') {
+            //item tween
             this.tweens.add({
-                targets: [this.prop2],
-                scale: {from: 2.4, to: 2.5},
-                duration: 500,
-                yoyo: true,
-                ease: 'Sine.easeInOut',
-                repeat: -1,
-                });
-            } else { 
-                this.tweens.add({
                 targets: [this.prop2],
                 scale: {from: 4.9, to: 5},
                 duration: 500,
@@ -173,30 +160,28 @@ class Shop3 extends Phaser.Scene {
                 ease: 'Sine.easeInOut',
                 repeat: -1,
                 });
-
-            }
         }
     }
 
     syncDisplayInfo() {
+        console.log(this.prop.tempFSM.currentState.name);
         if(this.prop.tempFSM.currentState.name == 'exit'){
-            shop3_visited = true;
-            lastShopVisited = 'SHOP3';
+            lastShopVisited = 'SHOP2';
+            shop2_visited = true;
             numOfShopsVisited -= 1;
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
-                tutorial = true;
                 this.scene.start('overworldScene');
                 })
             })
-        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE FLASK'){
-            this.flask.visible = false;
-            flaskBought += 1;
         } else if (this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON'){
-            this.cauldron.visible = false;
+            //this.flask.visible = false;
             cauldronBought += 1;
-        }
+        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE FIREWOOD'){
+            //this.cauldron.visible = false;
+            firewoodBought += 1;
+        } 
         this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
         this.prop2.setTexture(this.prop.tempFSM.currentState.image2);
@@ -256,7 +241,7 @@ class Shop3 extends Phaser.Scene {
         //play typewriter sound FX
         if(this.dialogTyping == true){
             if (!this.dialogFX.isPlaying) this.dialogFX.play();
-        }
+        }   
     }
     
     //plays sound when acquiring item

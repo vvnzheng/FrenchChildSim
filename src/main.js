@@ -56,3 +56,4 @@ let firewoodBought = 0;
 let rosemaryOilBought = 0;
 let jasmineOilBought = 0;
 let tutorial = false;
+let shillings = 20;

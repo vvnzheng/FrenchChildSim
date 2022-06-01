@@ -449,14 +449,15 @@ class Overworld extends Phaser.Scene {
             if (!this.dialogFX.isPlaying) this.dialogFX.play();
             }
         }
-
+        //creates dialogue for player while exploring
         overworld_dialog(obj, text) {
             this.physics.add.overlap(player, obj, (obj1, obj2) => {
                 this.typeText(text);
                 obj2.destroy();
             });
         }
-
+        
+        //checklist for game progression
         item_checklist(playerX, playerY) {
             if(this.item_checklist_Visible == false) {
                 if(Phaser.Input.Keyboard.JustDown(keyR)) {
