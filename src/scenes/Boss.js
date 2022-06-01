@@ -87,6 +87,13 @@ class Boss extends Phaser.Scene {
         this.flask.visible = false;
         this.firewood.visible = false;
 
+        //tutorial
+        this.tutorial_visible = false;
+        this.tutorial_box = this.add.sprite(380, 400, 'dbox2').setScale(.5);
+        this.tutorial_box.visible = false;
+        this.tutorial_text = this.add.bitmapText(200, 393, this.DBOX_FONT, `Press [1], [2], [3] to select dialog`, this.TEXT_SIZE - 4).setTint(0xe8c170);
+        this.tutorial_text.visible = false;
+
         //init json file
         this.dialog = this.cache.json.get('boss_dialog');
      
@@ -107,6 +114,14 @@ class Boss extends Phaser.Scene {
         } else {
             this.transitionText.visible = false;
         }
+
+        if(this.prop.tempFSM.getState().name == 'Start') {
+            this.tutorial_dialog();
+        } else if (this.prop.tempFSM.getState().name == '3') {
+            this.tutorial_box.visible = false;
+            this.tutorial_text.visible = false;
+        }
+
         if(this.prop.tempFSM.getState().name == 'exit opening scene') {
             this.item_checklist(game.config.width/2, game.config.height/3);
         } else if(this.prop.tempFSM.getState().name == 'Close ingredients'){
@@ -296,6 +311,13 @@ class Boss extends Phaser.Scene {
             this.rosemaryOil_text = this.add.bitmapText(playerX + 280, playerY + 150, this.DBOX_FONT, 'ROSEMARY OIL', this.TEXT_SIZE).setDepth(5);
 
             this.item_checklist_Visible = true;
+        }
+    }
+
+    tutorial_dialog() {
+        if(this.tutorial_visible == false) {
+            this.tutorial_box.visible = true;
+            this.tutorial_text.visible = true;
         }
     }
 }

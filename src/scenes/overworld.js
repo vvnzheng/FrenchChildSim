@@ -28,10 +28,10 @@ class Overworld extends Phaser.Scene {
         this.dialogFX = this.sound.add('dialogFX',{loop: true, volume: .3});
 
         //tilemap stuff
-        //const map = this.make.tilemap({ key: "map2"}); //new
-        const map = this.make.tilemap({ key: "map"});
-        //const tileset = map.addTilesetImage("tileset", "tiles2"); //new
-        const tileset = map.addTilesetImage("tileset", "tiles");
+        const map = this.make.tilemap({ key: "map2"}); //new
+        //const map = this.make.tilemap({ key: "map"});
+        const tileset = map.addTilesetImage("tileset", "tiles2"); //new
+        //const tileset = map.addTilesetImage("tileset", "tiles");
 
         //TILED layers
         const belowLayer = map.createLayer("Below Bot Layer", tileset, 0, 0);
@@ -59,7 +59,7 @@ class Overworld extends Phaser.Scene {
         doorToNPC5.setCollisionByProperty({collides: true});
 
         //puts certain layers above player
-        aboveLayer.setDepth(3);
+        aboveLayer.setDepth(1);
 
         //Spawnpoints
         var spawnPoint = null;
@@ -77,7 +77,7 @@ class Overworld extends Phaser.Scene {
 
         //add playyer sprite
         player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
-        //player = this.physics.add.sprite(1000, 300, "player"); //quick overworld testing
+        //player = this.physics.add.sprite(400, 350, "player"); //quick overworld testing
 
         //variables for door interaction
         //enables collision with player
@@ -124,10 +124,10 @@ class Overworld extends Phaser.Scene {
         this.dialogbox_Visible = false;
         this.dialogText.visible = true;
         this.nextText.visible = true;
-        //dbox 
+      //dbox 
         this.dialogbox = this.add.sprite(player.x, player.y, 'dbox2').setScale(0.75);
         this.dialogbox.visible = false;
-
+    
         //item checklist
         this.item_checklist_Visible = false;
         this.overlay = this.add.image(player.x, player.y, "alonebg").setDepth(5).setScale(.75);
@@ -160,6 +160,7 @@ class Overworld extends Phaser.Scene {
 
         //modified from https://github.com/nathanaltice/Mappy
         this.tutorial = map.createFromObjects("Dialog", {name: "tutorial"});
+        this.tutorial3 = map.createFromObjects("Dialog", {name: "tutorial3"});
         this.movement_tutorial = map.createFromObjects("Dialog", {name: "movementinfo"});
         this.shop1_dialog = map.createFromObjects("Dialog", {name: "shop1visited"});
         this.shop2_dialog = map.createFromObjects("Dialog", {name: "shop2visited"});
@@ -168,6 +169,7 @@ class Overworld extends Phaser.Scene {
         this.boss_dialog = map.createFromObjects("Dialog", {name: "bossvisited"});
 
         this.physics.world.enable(this.tutorial, Phaser.Physics.Arcade.STATIC_BODY);
+        this.physics.world.enable(this.tutorial3, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.movement_tutorial, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.shop1_dialog, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.shop2_dialog, Phaser.Physics.Arcade.STATIC_BODY);
@@ -182,6 +184,10 @@ class Overworld extends Phaser.Scene {
         if(tutorial2 == false) {
             this.overworld_dialog(this.movement_tutorial, "Arrow keys to move. Press [F] key to close dialog box.");
             tutorial2 = true;
+        } 
+        if(tutorial3 == false) {
+            this.overworld_dialog(this.tutorial3, "Press [R] to open and close ITEM CHECKLIST.");
+            tutorial3 = true;
         } 
 
         if(numOfShopsVisited > 0) {
@@ -211,12 +217,12 @@ class Overworld extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
-        spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
+        //spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+/*
         this.text = this.add.bitmapText(this.dialogbox.x - 275,  this.dialogbox.y, this.DBOX_FONT, `Don't come back until you got everything!`, this.TEXT_SIZE - 4);
         this.text.visible = false;
         this.text.setTint(0xe8c170);
-
+*/
         //collision visualizer
         /*
         const debugGraphics = this.add.graphics().setAlpha(0.75);
@@ -244,7 +250,7 @@ class Overworld extends Phaser.Scene {
     }
 
     update(){
-        console.log(this.dialogText.x, this.dialogText.y);      
+        //console.log(player.x, player.y);      
         //BOSS starting point
         if((player.x >= 450 && player.x <= 475) && player.y == 288){
         this.dialogbox.x = player.x;
@@ -271,12 +277,13 @@ class Overworld extends Phaser.Scene {
             this.text.maxWidth = this.TEXT_MAX_WIDTH;*/
         }
         //shop4 brazenbazaar
-        if((player.x >= 867 && player.x <= 890) && player.y == 784 && tutorial){
+        if((player.x >= 1750 && player.x <= 1775) && player.y == 240 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
             if(shop4_visited == false)
                 this.scene.start('shop4');
             //});
+            /*
         } else if((player.x >= 867 && player.x <= 890) && player.y == 784){
             this.dialogbox.visible = true;
             this.text = this.add.bitmapText(this.dialogbox.x - 300,  this.dialogbox.y, this.DBOX_FONT, `Brazen Bazaar is closed! Come again soon~`, this.TEXT_SIZE - 4);
@@ -288,6 +295,7 @@ class Overworld extends Phaser.Scene {
                 this.dialogbox.visible = false;
                 this.text.destroy();
             });
+            */
         }
         //shop1
         if((player.x >= 1300 && player.x <= 1330) && player.y == 896 && tutorial){
@@ -299,7 +307,7 @@ class Overworld extends Phaser.Scene {
         }
         //shop2 big dude
         //if((player.x >= 1748 && player.x <= 1772) && player.y == 192){ //with new tilemap
-        if((player.x >= 1475 && player.x <= 1505) && player.y == 528 && tutorial){
+        if((player.x >= 867 && player.x <= 890) && player.y == 784 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
             if(shop2_visited == false)
@@ -308,7 +316,7 @@ class Overworld extends Phaser.Scene {
         }
         //shop3 cat
         //if((player.x >= 755 && player.x <= 780) && player.y == 288){ //with new tilemap
-        if((player.x >= 1760 && player.x <= 1790) && player.y == 528 && !tutorial){
+        if((player.x >= 755 && player.x <= 780) && player.y == 304 && !tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
             if(shop3_visited == false)
@@ -394,14 +402,13 @@ class Overworld extends Phaser.Scene {
         this.dialogText.text = '';
         this.nextText.text = '';
 
-        this.dialogbox = this.add.sprite(player.x, player.y, 'dbox2').setOrigin(.5, 1.5).setScale(0.35);
+        this.dialogbox = this.add.sprite(player.x, player.y, 'dbox2').setOrigin(.5, 1.5).setScale(0.35).setDepth(4);
         this.dialogbox.visible = true;
         this.nextText.visible = true;
         this.dialogText.visible = true;
         this.dialogText.setPosition(this.dialogbox.x - 120, this.dialogbox.y -95);
         this.dialogText.setDepth(5);
         this.nextText.setPosition(player.x, player.y);
-        this.nextText.setDepth(5);
         //player icon and anims
         //this.player_icon = this.add.sprite(this.dialogbox.x, this.dialogbox.y, 'icon_idle').setOrigin(3,-1.45).setScale(.5);
         //this.player_icon.visible = true;
@@ -423,6 +430,7 @@ class Overworld extends Phaser.Scene {
                 // (necessary since Phaser 3 no longer seems to have an onComplete event)
                 if(this.textTimer.getRepeatCount() == 0) {
                     this.nextText = this.add.bitmapText(this.dialogbox.x + 113, this.dialogbox.y - 52, this.DBOX_FONT, this.NEXT_TEXT, this.TEXT_SIZE).setScale(0.5).setTint(0xeadb74);
+                    this.nextText.setDepth(5);
                     // un-lock input
                     this.dialogTyping = false;
                     // destroy timer
@@ -502,7 +510,7 @@ class Overworld extends Phaser.Scene {
 
                     //text
                     this.iventory_title_text = this.add.bitmapText(playerX - 195, playerY - 120, this.DBOX_FONT, 'CHECKLIST', this.TEXT_SIZE + 50).setDepth(6);
-                    this.ui_text = this.add.bitmapText(playerX - 42, playerY + 150, this.DBOX_FONT, '[R] to close', this.TEXT_SIZE).setScale(.5).setDepth(5).setTint(0xe8c170);
+                    this.ui_text = this.add.bitmapText(playerX - 42, playerY + 145, this.DBOX_FONT, '[R] to close', this.TEXT_SIZE).setScale(.5).setDepth(5).setTint(0xe8c170);
                     this.cauldron_text = this.add.bitmapText(playerX - 228, playerY + 100, this.DBOX_FONT, 'CAULDRON', this.TEXT_SIZE).setScale(.5).setDepth(5);
                     this.flask_text = this.add.bitmapText(playerX - 117, playerY + 100, this.DBOX_FONT, 'FLASK', this.TEXT_SIZE).setScale(.5).setDepth(5);
                     this.jasmineOil_text = this.add.bitmapText(playerX - 35, playerY + 100, this.DBOX_FONT, 'JASMINE OIL', this.TEXT_SIZE).setScale(.5).setDepth(5);

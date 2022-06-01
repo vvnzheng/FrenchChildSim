@@ -5,20 +5,20 @@
         "text": "Grenouille, I'm running low on perfume ingredients. I need you to run out and get me some by the end of the day.",
         "initial": 	true,
         "events": {
-            "Today?!": "Here's 20 shillings. Now hurry before I start to lose some customers!"
+            "Today?!": "2"
         }
     },
     {
-        "name": "Here's 20 shillings. Now hurry before I start to lose some customers!",
+        "name": "2",
         "cName": "Boss",
         "text": "Here's 20 shillings. Now hurry before I start to lose some customers!",
         "image" : "shillings",
         "events": {
-            "But boss, 20 shillings is merely anything! How could you possibly expect me to purchase anything with this?": "Well you better figure it out, or else you're fired! Now get to it."
+            "But boss, 20 shillings is merely anything! How could you possibly expect me to purchase anything with this?": "3"
         }
     },
     {
-        "name": "Well you better figure it out, or else you're fired! Now get to it.",
+        "name": "3",
         "cName": "Boss",
         "text" : "Well you better figure it out, or else you're fired! Now get to it.",
         "events": {
