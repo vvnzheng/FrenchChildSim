@@ -162,7 +162,6 @@ class Shop1 extends Phaser.Scene {
                 ease: 'Sine.easeInOut',
                 repeat: -1,
                 });
-            
         }
     }
 
@@ -178,7 +177,13 @@ class Shop1 extends Phaser.Scene {
                 this.scene.start('overworldScene');
                 })
             })   
-        }
+        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE ROSEMARY OIL' || this.prop.tempFSM.currentState.name == 'AMI DISCOUNT'){
+            //this.flask.visible = false;
+            rosemaryOilBought += 1;
+        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE FIREWOOD' || this.prop.tempFSM.currentState.name == 'AMI DISCOUNT2'){
+            //this.cauldron.visible = false;
+            firewoodBought += 1;
+        }      
         this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
         this.prop2.setTexture(this.prop.tempFSM.currentState.image2);

@@ -24,9 +24,6 @@ class Boss extends Phaser.Scene {
     create() {
         this.game.sound.stopAll();
 
-        //this.NPC_soundtrack = this.sound.add('npcMusic', {loop: true, volume: .2});
-        //this.NPC_soundtrack.play();
-
         cursors = this.input.keyboard.createCursorKeys();
 
         this.cameras.main.fadeIn(cameraFadeTime);
@@ -50,6 +47,7 @@ class Boss extends Phaser.Scene {
         });
 
         this.prop = this.add.sprite(game.config.width/2, game.config.height/2, 'propsetup');
+        this.prop2 = this.add.sprite(game.config.width/2, game.config.height/3, 'propsetup').setDepth(1);
 
         //dbox
         this.dialogbox = this.add.sprite(this.DBOX_X, this.DBOX_Y, 'dbox2').setOrigin(0).setScale(1.2);
@@ -75,6 +73,20 @@ class Boss extends Phaser.Scene {
         this.dialogText = this.add.bitmapText(this.TEXT_X, this.TEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
         this.nextText = this.add.bitmapText(this.NEXT_X, this.NEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
 
+        //item checklist
+        this.item_checklist_Visible = false;
+        this.cauldron = this.add.image(0, 0, "cauldron_item1").setDepth(1);
+        this.jasmineOil = this.add.image(0, 0, "jasmineOil_item2").setDepth(1).setScale(2);
+        this.rosemaryOil = this.add.image(0, 0, "rosemaryOil_item3").setDepth(1).setScale(2);
+        this.flask = this.add.image(0, 0, "flask2_item4").setDepth(1).setScale(2);
+        this.firewood = this.add.image(0, 0, "firewood_item5").setDepth(1).setScale(2);
+
+        this.cauldron.visible = false;
+        this.jasmineOil.visible = false;
+        this.rosemaryOil.visible = false;
+        this.flask.visible = false;
+        this.firewood.visible = false;
+
         //init json file
         this.dialog = this.cache.json.get('boss_dialog');
      
@@ -94,6 +106,23 @@ class Boss extends Phaser.Scene {
             this.transitionText.visible = true;
         } else {
             this.transitionText.visible = false;
+        }
+        if(this.prop.tempFSM.getState().name == 'exit opening scene') {
+            this.item_checklist(game.config.width/2, game.config.height/3);
+        } else if(this.prop.tempFSM.getState().name == 'Close ingredients'){
+            this.cauldron_text.destroy();
+            this.jasmineOil_text.destroy();
+            this.rosemaryOil_text.destroy();
+            this.flask_text.destroy();
+            this.firewood_text.destroy();
+            this.iventory_title_text.destroy(); 
+
+            this.cauldron.visible = false;
+            this.jasmineOil.visible = false;
+            this.rosemaryOil.visible = false;
+            this.flask.visible = false;
+            this.firewood.visible = false;
+            this.item_checklist_Visible = false;
         }
     }
 
@@ -149,7 +178,15 @@ class Boss extends Phaser.Scene {
                 yoyo: false,
                 ease: 'Sine.easeOut',
                 repeat: 0,
-                });
+            });
+            this.tweens.add({
+                targets: [this.prop2],
+                scale: {from: 1.2, to: 1},
+                duration: 750,
+                yoyo: false,
+                ease: 'Sine.easeOut',
+                repeat: 0,
+            });
         }
     }
 
@@ -165,6 +202,7 @@ class Boss extends Phaser.Scene {
             })   
         }
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
+        this.prop2.setTexture(this.prop.tempFSM.currentState.image2);
         let options = Object.keys(this.prop.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`); //`(${i+1}) ${k}\n`);
         this.typeText(this.transitionText.text = `${options.join('')}`);
     }
@@ -219,6 +257,45 @@ class Boss extends Phaser.Scene {
         //play typewriter sound FX
         if(this.dialogTyping == true){
             if (!this.dialogFX.isPlaying) this.dialogFX.play();
+        }
+    }
+
+    item_checklist(playerX, playerY) {
+        if(this.item_checklist_Visible == false) {
+            this.tweens.add({
+                targets: [this.jasmineOil, this.rosemaryOil, this.flask, this.firewood],
+                y: { value: playerY + 70, duration: 1500, ease: 'Bounce.easeOut' },
+                repeat: 0,
+                });
+
+            this.tweens.add({
+                targets: [this.cauldron],
+                y: { value: playerY + 60, duration: 1500, ease: 'Bounce.easeOut' },
+                repeat: 0,
+                });
+
+            this.cauldron.visible = true;
+            this.jasmineOil.visible = true;
+            this.rosemaryOil.visible = true;
+            this.flask.visible = true;
+            this.firewood.visible = true;
+            
+            //item start positioning for tween
+            this.cauldron.setPosition(playerX - 325, playerY - 75);
+            this.flask.setPosition(playerX - 150, playerY + 0);
+            this.jasmineOil.setPosition(playerX, playerY - 40);
+            this.firewood.setPosition(playerX + 175, playerY - 100);
+            this.rosemaryOil.setPosition(playerX + 350, playerY - 30);
+
+            //text
+            this.iventory_title_text = this.add.bitmapText(playerX - 195, playerY - 120, this.DBOX_FONT, 'CHECKLIST', this.TEXT_SIZE + 50).setDepth(6);
+            this.cauldron_text = this.add.bitmapText(playerX - 375, playerY + 150, this.DBOX_FONT, 'CAULDRON', this.TEXT_SIZE).setDepth(5);
+            this.flask_text = this.add.bitmapText(playerX - 185, playerY + 150, this.DBOX_FONT, 'FLASK', this.TEXT_SIZE).setDepth(5);
+            this.jasmineOil_text = this.add.bitmapText(playerX - 65, playerY + 150, this.DBOX_FONT, 'JASMINE OIL', this.TEXT_SIZE).setDepth(5);
+            this.firewood_text = this.add.bitmapText(playerX + 125, playerY + 150, this.DBOX_FONT, 'FIREWOOD', this.TEXT_SIZE).setDepth(5);
+            this.rosemaryOil_text = this.add.bitmapText(playerX + 280, playerY + 150, this.DBOX_FONT, 'ROSEMARY OIL', this.TEXT_SIZE).setDepth(5);
+
+            this.item_checklist_Visible = true;
         }
     }
 }

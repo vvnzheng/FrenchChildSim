@@ -12,23 +12,18 @@ class Overworld extends Phaser.Scene {
         this.NEXT_TEXT = '[F]';	// text to display for next prompt
 
         // dialog variables
-        this.dialogConvo = 0;			// current "conversation"
+        //this.dialogConvo = 0;			// current "conversation"
         this.dialogTyping = false;		// flag to lock player input while text is "typing"
         this.dialogText = null;			// the actual dialog text
         this.nextText = null;			// player prompt text to continue typing
-        this.dialogLine = 0;	
+        //this.dialogLine = 0;	
     }
 
     create(){
-        this.TEXT_X = 380;	        // text w/in dialog box x-position
-        this.TEXT_Y = 490;	        // text w/in dialog box y-position
-        this.DBOX_FONT = 'font';
-        this.TEXT_SIZE = 20;
-        this.TEXT_MAX_WIDTH = 700;
         //sound
         this.game.sound.stopAll();
         this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: true, volume: .3});
-        //this.overworld_soundtrack.play();  
+        this.overworld_soundtrack.play();  
         this.runningFX = this.sound.add('runningFX',{loop: false, volume: .2});
         this.dialogFX = this.sound.add('dialogFX',{loop: true, volume: .3});
 
@@ -64,7 +59,7 @@ class Overworld extends Phaser.Scene {
         doorToNPC5.setCollisionByProperty({collides: true});
 
         //puts certain layers above player
-        aboveLayer.setDepth(10);
+        aboveLayer.setDepth(3);
 
         //Spawnpoints
         var spawnPoint = null;
@@ -82,7 +77,7 @@ class Overworld extends Phaser.Scene {
 
         //add playyer sprite
         player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
-        //player = this.physics.add.sprite(450, 300, "player");
+        //player = this.physics.add.sprite(1000, 300, "player"); //quick overworld testing
 
         //variables for door interaction
         //enables collision with player
@@ -133,6 +128,29 @@ class Overworld extends Phaser.Scene {
         this.dialogbox = this.add.sprite(player.x, player.y, 'dbox2').setScale(0.75);
         this.dialogbox.visible = false;
 
+        //item checklist
+        this.item_checklist_Visible = false;
+        this.overlay = this.add.image(player.x, player.y, "alonebg").setDepth(5).setScale(.75);
+        this.cauldron = this.add.image(player.x, player.y, "cauldron_item1").setDepth(6).setScale(.5);
+        this.jasmineOil = this.add.image(player.x, player.y, "jasmineOil_item2").setDepth(6);
+        this.rosemaryOil = this.add.image(player.x, player.y, "rosemaryOil_item3").setDepth(6);
+        this.flask = this.add.image(player.x, player.y, "flask2_item4").setDepth(6);
+        this.firewood = this.add.image(player.x, player.y, "firewood_item5").setDepth(6);
+        this.newspaper = this.add.image(player.x, player.y, "news").setDepth(6).setScale(.45);
+
+        this.cauldron.alpha = 0;
+        this.jasmineOil.alpha = 0;
+        this.rosemaryOil.alpha = 0;
+        this.flask.alpha = 0;
+        this.firewood.alpha = 0;
+
+        this.overlay.visible = false;
+        this.cauldron.visible = false;
+        this.jasmineOil.visible = false;
+        this.rosemaryOil.visible = false;
+        this.flask.visible = false;
+        this.firewood.visible = false;
+        this.newspaper.visible = false;
 
         //game camera
         const camera = this.cameras.main;
@@ -192,7 +210,8 @@ class Overworld extends Phaser.Scene {
         //keyboard inputs
         cursors = this.input.keyboard.createCursorKeys();
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-        //spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.text = this.add.bitmapText(this.dialogbox.x - 275,  this.dialogbox.y, this.DBOX_FONT, `Don't come back until you got everything!`, this.TEXT_SIZE - 4);
         this.text.visible = false;
@@ -225,7 +244,6 @@ class Overworld extends Phaser.Scene {
     }
 
     update(){
-        
         console.log(this.dialogText.x, this.dialogText.y);      
         //BOSS starting point
         if((player.x >= 450 && player.x <= 475) && player.y == 288){
@@ -281,7 +299,6 @@ class Overworld extends Phaser.Scene {
         }
         //shop2 big dude
         //if((player.x >= 1748 && player.x <= 1772) && player.y == 192){ //with new tilemap
-        //shop2
         if((player.x >= 1475 && player.x <= 1505) && player.y == 528 && tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
@@ -291,7 +308,6 @@ class Overworld extends Phaser.Scene {
         }
         //shop3 cat
         //if((player.x >= 755 && player.x <= 780) && player.y == 288){ //with new tilemap
-        //shop3
         if((player.x >= 1760 && player.x <= 1790) && player.y == 528 && !tutorial){
             //player.anims.play('enterAnim');
             //player.on('animationcomplete', () => {
@@ -302,7 +318,6 @@ class Overworld extends Phaser.Scene {
 
         if(this.dialogbox_Visible == true) {
             if(Phaser.Input.Keyboard.JustDown(keyF) && !this.dialogTyping) {
-            
                 if(this.dialogbox.visible == true){
                     this.dialogbox.visible = false;
                     //this.player_icon.visible = false;
@@ -313,16 +328,16 @@ class Overworld extends Phaser.Scene {
             }
         }
 
+        this.item_checklist(player.x, player.y);
+
         //PLAYER MOVEMENT 
-        if(this.dialogbox_Visible == true) {
+        if(this.dialogbox_Visible == true || this.item_checklist_Visible == true) {
             player.body.setVelocityX(0);
             player.body.setVelocityY(0);
             player.setTexture("player", "grenouille_walk_down-0")
             this.runningFX.stop();
         } else if(this.dialogbox_Visible == false) {
-            //player.body.static = true;
             
-
             const prevVelocity = player.body.velocity.clone();
 
             // Stop any previous movement from the last frame
@@ -433,4 +448,97 @@ class Overworld extends Phaser.Scene {
                 obj2.destroy();
             });
         }
+
+        item_checklist(playerX, playerY) {
+            if(this.item_checklist_Visible == false) {
+                if(Phaser.Input.Keyboard.JustDown(keyR)) {
+                    this.tweens.add({
+                        targets: [this.overlay],
+                        alpha: {from: 0, to: 1},
+                        duration: 100,
+                        ease: 'Sine.easeIn',
+                        repeat: 0,
+                        });
+
+                    this.tweens.add({
+                        targets: [this.jasmineOil, this.rosemaryOil, this.flask, this.firewood],
+                        y: { value: playerY + 70, duration: 1500, ease: 'Bounce.easeOut' },
+                        repeat: 0,
+                        });
+
+                    this.tweens.add({
+                        targets: [this.cauldron],
+                        y: { value: playerY + 60, duration: 1500, ease: 'Bounce.easeOut' },
+                        repeat: 0,
+                        });
+
+                    this.overlay.visible = true;
+                    this.cauldron.visible = true;
+                    this.jasmineOil.visible = true;
+                    this.rosemaryOil.visible = true;
+                    this.flask.visible = true;
+                    this.firewood.visible = true;
+                    //this.newspaper.visible = true;
+
+                    if(cauldronBought >= 1) {
+                        this.cauldron.alpha = 1;
+                    } else this.cauldron.alpha = 0.1;
+
+                    if(jasmineOilBought >= 1) {
+                        this.jasmineOil.alpha = 1;
+                    } else this.jasmineOil.alpha = 0.1;
+
+                    if(rosemaryOilBought >= 1) {
+                        this.rosemaryOil.alpha = 1;
+                    } else this.rosemaryOil.alpha = 0.1;
+
+                    if(flaskBought >= 1) {
+                        this.flask.alpha = 1;
+                    } else this.flask.alpha = 0.1;
+
+                    if(firewoodBought >= 1) {
+                        this.firewood.alpha = 1;
+                    } else this.firewood.alpha = 0.1;
+
+                    //text
+                    this.iventory_title_text = this.add.bitmapText(playerX - 195, playerY - 120, this.DBOX_FONT, 'CHECKLIST', this.TEXT_SIZE + 50).setDepth(6);
+                    this.ui_text = this.add.bitmapText(playerX - 42, playerY + 150, this.DBOX_FONT, '[R] to close', this.TEXT_SIZE).setScale(.5).setDepth(5).setTint(0xe8c170);
+                    this.cauldron_text = this.add.bitmapText(playerX - 228, playerY + 100, this.DBOX_FONT, 'CAULDRON', this.TEXT_SIZE).setScale(.5).setDepth(5);
+                    this.flask_text = this.add.bitmapText(playerX - 117, playerY + 100, this.DBOX_FONT, 'FLASK', this.TEXT_SIZE).setScale(.5).setDepth(5);
+                    this.jasmineOil_text = this.add.bitmapText(playerX - 35, playerY + 100, this.DBOX_FONT, 'JASMINE OIL', this.TEXT_SIZE).setScale(.5).setDepth(5);
+                    this.firewood_text = this.add.bitmapText(playerX + 75, playerY + 100, this.DBOX_FONT, 'FIREWOOD', this.TEXT_SIZE).setScale(.5).setDepth(5);
+                    this.rosemaryOil_text = this.add.bitmapText(playerX + 165, playerY + 100, this.DBOX_FONT, 'ROSEMARY OIL', this.TEXT_SIZE).setScale(.5).setDepth(5);
+                    
+                    //item start positioning for tween
+                    this.overlay.setPosition(playerX, playerY);
+                    this.cauldron.setPosition(playerX - 200, playerY - 75);
+                    this.flask.setPosition(playerX - 100, playerY + 0);
+                    this.jasmineOil.setPosition(playerX, playerY - 40);
+                    this.firewood.setPosition(playerX + 100, playerY - 100);
+                    this.rosemaryOil.setPosition(playerX + 200, playerY - 30);
+                    this.newspaper.setPosition(playerX, playerY - 50);
+                    this.item_checklist_Visible = true;
+                }
+            } else if (this.item_checklist_Visible == true) {
+                if(Phaser.Input.Keyboard.JustDown(keyR)) {
+                    this.cauldron_text.destroy();
+                    this.jasmineOil_text.destroy();
+                    this.rosemaryOil_text.destroy();
+                    this.flask_text.destroy();
+                    this.firewood_text.destroy();
+                    this.iventory_title_text.destroy(); 
+                    this.ui_text.destroy();
+
+                    this.overlay.visible = false;
+                    this.cauldron.visible = false;
+                    this.jasmineOil.visible = false;
+                    this.rosemaryOil.visible = false;
+                    this.flask.visible = false;
+                    this.firewood.visible = false;
+                    this.newspaper.visible = false;
+                    this.item_checklist_Visible = false;
+                }
+            }
+        }
+        
 }

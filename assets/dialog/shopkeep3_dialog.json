@@ -191,6 +191,9 @@
 	{
 		"name": "PURCHASE FLASK",
 		"cName" : "Grenouille",
+		"image" : "alonebg",
+		"image2" : "flask2_item4",
+		"sound": true,
 		"text" : "I've just acquired a FLASK!",
 		"events": {
 			"Now, what was the other thing I needed?" : "PART 2"
@@ -199,6 +202,9 @@
 	{
 		"name": "PURCHASE CAULDRON",
 		"cName" : "Grenouille",
+		"image" : "alonebg",
+		"image2" : "cauldron_item1",
+		"sound": true,
 		"text" : "I've just acquired a CAULDRON!",
 		"events": {
 			"Leave shop." : "exit"

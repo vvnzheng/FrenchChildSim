@@ -23,8 +23,8 @@ class Shop2 extends Phaser.Scene {
 
     create() {
         this.game.sound.stopAll();
-
         this.NPC_soundtrack = this.sound.add('npcMusic', {loop: true, volume: .2});
+        this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
         this.NPC_soundtrack.play();
 
         cursors = this.input.keyboard.createCursorKeys();
@@ -50,6 +50,7 @@ class Shop2 extends Phaser.Scene {
         });
 
         this.prop = this.add.sprite(game.config.width/2, game.config.height/2, 'propsetup');
+        this.prop2 = this.add.sprite(game.config.width/2, game.config.height/3, 'propsetup');
 
         //dbox
         this.dialogbox = this.add.sprite(this.DBOX_X, this.DBOX_Y, 'dbox2').setOrigin(0).setScale(1.2);
@@ -150,6 +151,15 @@ class Shop2 extends Phaser.Scene {
                 ease: 'Sine.easeOut',
                 repeat: 0,
                 });
+            //item tween
+            this.tweens.add({
+                targets: [this.prop2],
+                scale: {from: 4.9, to: 5},
+                duration: 500,
+                yoyo: true,
+                ease: 'Sine.easeInOut',
+                repeat: -1,
+                });
         }
     }
 
@@ -165,8 +175,16 @@ class Shop2 extends Phaser.Scene {
                 this.scene.start('overworldScene');
                 })
             })
-        }
-        
+        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON'){
+            //this.flask.visible = false;
+            cauldronBought += 1;
+        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE FIREWOOD'){
+            //this.cauldron.visible = false;
+            firewoodBought += 1;
+        } 
+        this.soundFX();
+        this.prop.setTexture(this.prop.tempFSM.currentState.image);
+        this.prop2.setTexture(this.prop.tempFSM.currentState.image2);
         let options = Object.keys(this.prop.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`); //`(${i+1}) ${k}\n`);
         this.typeText(this.transitionText.text = `${options.join('')}`);
     }
@@ -185,7 +203,10 @@ class Shop2 extends Phaser.Scene {
             this.player_icon.visible = false;
             text = ' ';
         } else {
-        text = `${this.prop.tempFSM.getState().cName}` + ': ' + `${this.prop.tempFSM.getState().text}`;
+            this.dialogbox.visible = true;
+            this.player_icon.visible = true;
+            text = this.prop.tempFSM.currentState.cName + ': ' + this.prop.tempFSM.currentState.text; //new
+            //text = `${this.prop.tempFSM.getState().cName}` + ': ' + `${this.prop.tempFSM.getState().text}`; //old
         }
 
         // create a timer to iterate through each letter in the dialog text
@@ -220,6 +241,18 @@ class Shop2 extends Phaser.Scene {
         //play typewriter sound FX
         if(this.dialogTyping == true){
             if (!this.dialogFX.isPlaying) this.dialogFX.play();
+        }   
+    }
+    
+    //plays sound when acquiring item
+    soundFX() {
+        if(this.prop.tempFSM.currentState.sound == true) {
+            if(!this.itemAquiredSFX.play()){
+                this.itemAquiredSFX.play();
+            }
+        }
+        else {
+            this.itemAquiredSFX.stop();
         }
     }
 }

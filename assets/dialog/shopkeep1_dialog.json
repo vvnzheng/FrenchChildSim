@@ -213,7 +213,7 @@
 		"cName":"JEAN",
 		"text" : "What about 6 shillings?",
 		"events": {
-			"Please Monsieur, I only have a small amount to spend. I can't get everything on my list if you are charging that much." : "b4",
+			"Please Monsieur, I only have a small amount to spend." : "b4",
 			"Purchase FIREWOOD for 6 shillings." : "PURCHASE FIREWOOD"
         }
 	},
@@ -223,7 +223,7 @@
 		"text" : "Sorry little garcon, but I have a trip I am saving up for.",
 		"events": {
 			"Purchase FIREWOOD for 6 shillings." : "PURCHASE FIREWOOD",
-			"(lie) Can I pay 5 shillings today and then you an extra 2 shillings tomorrow?" : "b5"
+			"(lie) Can I pay 5 shillings today and an extra 2 shillings tomorrow?" : "b5"
         }
 	},
 	{
@@ -231,22 +231,22 @@
 		"cName":"JEAN",
 		"text" : "What do you take me for, a fool?.",
 		"events": {
-			"(lie) Please Monsieur. I promise... John please. I need this. I could lose my apprenticeship." : "b6",
-			"(lie) Please Monsieur. I promise... Jean please. I need this. I could lose my apprenticeship." : "b7"
+			"(lie) Please Monsieur. I promise... John please. I need this." : "b6",
+			"(lie) Please Monsieur. I promise... Jean please. I need this." : "b7"
         }
 	},
 	{
 		"name": "b6",
 		"cName":"JEAN",
-		"text" : "JOHN!!! It's         J            E             A           N!!!!!!!!",
+		"text" : "JOHN!? It's     J       E       A       N!!!",
 		"events": {
 			"Jean!!! I'm sorry!" : "b6.1"
         }
 	},
 	{
-		"name": "b6",
+		"name": "b6.1",
 		"cName":"JEAN",
-		"text" : "8 shillings for the FIREWOOD or looks elsewhere littlel garcon.",
+		"text" : "8 shillings for the FIREWOOD or you could look elsewhere little garcon.",
 		"events": {
 			"Leave shop." : "exit",
 			"Purchase FIREWOOD for 8 shillings." : "PURCHASE FIREWOOD"

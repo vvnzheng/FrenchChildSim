@@ -45,9 +45,13 @@ let shop2_visited = false;
 let shop3_visited = false;
 let shop4_visited = false;
 let boss_visited = true;
-let LETTER_TIMER = 20;	// # ms each letter takes to "type" onscreen
-let keyQ;
+let LETTER_TIMER = 20;	// # ms each letter takes to "type" onscreen //default = 20 or 10
+let keyR; // opens item inventory in the overworld
 let keyW;
 let cameraFadeTime = 1000;
-let flaskBought = false;
+let flaskBought = 0;
+let cauldronBought = 0;
+let firewoodBought = 0;
+let rosemaryOilBought = 0;
+let jasmineOilBought = 0;
 let tutorial = false;

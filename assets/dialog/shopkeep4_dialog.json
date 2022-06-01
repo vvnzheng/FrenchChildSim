@@ -5,16 +5,16 @@
 		"text": "Hello dear customer! How may I help you today?",
 		"initial": 	true,
 		"events": {
-			"Good morning! I would like to buy some marjoram from you today, do you have any in stock?": "positive1",
-			"Hey, I'm in a rush. Ya think I could grab some marjoram from you?":"negative1"
+			"Good morning! I would like to buy some JASMINE OIL from you today, do you have any in stock?": "positive1",
+			"Hey, I'm in a rush. Ya think I could grab some JASMINE OIL from you?":"negative1"
 		}
 	},
 	{
 		"name": "positive1",
 		"cName": "Marie",
-		"text" : "Oh of course my dear! I would be glad to assist you, that would be 1 shilling.",
+		"text" : "Oh of course my dear! I would be glad to assist you, that would be 6 shilling.",
 		"events": {
-			"Great, thank you ma'am!" : "exit",
+			"Great, thank you ma'am!" : "PURCHASE JASMINE OIL",
 			"What a ripoff!" : "negative2",
 			"I'm sorry maam, it seems like I don't have enough. Do you think you could lower the price?":"positive2"
 		}
@@ -54,7 +54,7 @@
 		"cName": "Marie",
 		"text" : "Well, you seem like an honest person… I guess I shall allow it for 6 pence this time. But be sure not to spend your money all in one place! Money is hard to come by.",
 		"events" : {
-			"Thank you maam!":"exit"
+			"Thank you maam!":"PURCHASE JASMINE OIL"
 		}
 	},
 	{
@@ -71,7 +71,7 @@
 		"cName": "Marie",
 		"text": "Well, the price has just gone up to a shilling and 6 pence. If you have an issue with that, you may shop elsewhere.",
 		"events": {
-			"Fine, here you go":"exit",
+			"Fine, here you go":"PURCHASE JASMINE OIL",
 			"I refuse, I will head elsewhere thank you very much!": "exit"
 		}
 	},
@@ -89,7 +89,18 @@
 		"cName": "Marie",
 		"text" : "I guess I shall allow it for 1 shilling this time. But you better learn some manners next time you come around.",
 		"events" : {
-			"Thank you maam!":"exit"
+			"Thank you maam!":"PURCHASE JASMINE OIL"
+		}
+	},
+	{
+		"name": "PURCHASE JASMINE OIL",
+		"cName" : "Grenouille",
+		"image" : "alonebg",
+		"image2" : "jasmineOil_item2",
+		"sound" : true,
+		"text" : "I've just acquired a JASMINE OIL!",
+		"events": {
+			"That's everything I need here (leave shop)." : "exit"
 		}
 	}
 ]

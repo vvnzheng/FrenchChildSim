@@ -113,6 +113,7 @@ class Load extends Phaser.Scene {
         this.load.image('jasmineOil_item2', 'images/jasmine_oil.png');
         this.load.image('rosemaryOil_item3', 'images/rosemary_oil.png');
         this.load.image('flask2_item4', 'images/flask2.png');
+        this.load.image('flask_item4', 'images/flask.png');
         this.load.image('firewood_item5', 'images/firewood.png');
 
         //etc TEMP?
