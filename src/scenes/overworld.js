@@ -26,6 +26,10 @@ class Overworld extends Phaser.Scene {
         this.overworld_soundtrack.play();  
         this.runningFX = this.sound.add('runningFX',{loop: false, volume: .2});
         this.dialogFX = this.sound.add('dialogFX',{loop: true, volume: .3});
+        this.checklist_open_SFX = this.sound.add('checklist_open', {loop: false, volume: .7});
+        this.checklist_close_SFX = this.sound.add('checklist_close', {loop: false, volume: .7});
+        //this.NPC_reentry_SFX = this.sound.add('NPC_reentry_SFX', {loop: false, volume: .7});
+        //this.doorSFX = this.sound.add('door_exit_SFX', {loop: false, volume: .7});
 
         //tilemap stuff
         const map = this.make.tilemap({ key: "map2"}); //new
@@ -461,6 +465,9 @@ class Overworld extends Phaser.Scene {
         item_checklist(playerX, playerY) {
             if(this.item_checklist_Visible == false) {
                 if(Phaser.Input.Keyboard.JustDown(keyR)) {
+                    if (!this.checklist_open_SFX.isPlaying) {
+                        this.checklist_open_SFX.play();
+                    }
                     this.tweens.add({
                         targets: [this.overlay],
                         alpha: {from: 0, to: 1},
@@ -530,6 +537,9 @@ class Overworld extends Phaser.Scene {
                 }
             } else if (this.item_checklist_Visible == true) {
                 if(Phaser.Input.Keyboard.JustDown(keyR)) {
+                    if (!this.checklist_close_SFX.isPlaying) {
+                        this.checklist_close_SFX.play();
+                    }
                     this.cauldron_text.destroy();
                     this.jasmineOil_text.destroy();
                     this.rosemaryOil_text.destroy();

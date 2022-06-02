@@ -59,6 +59,10 @@ class Load extends Phaser.Scene {
         this.load.audio('runningFX', 'audio/running.mp3');
         this.load.audio('dialogFX', 'audio/dialogFX.mp3');
         this.load.audio('itemAquiredSFX', 'audio/itemAquiredSFX.mp3');
+        this.load.audio('checklist_close', 'audio/checklist_close.mp3');
+        this.load.audio('checklist_open', 'audio/checklist_open.mp3');
+        //this.load.audio('NPC_reentry_SFX', 'audio/NPC_reentry_SFX.mp3');
+        //this.load.audio('door_exit_SFX', 'audio/door_exit_SFX.mp3');
         
         //menu screen
         //this.load.image('titleScreen', 'images/title_screen2.png'); //old
