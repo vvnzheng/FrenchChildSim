@@ -194,6 +194,7 @@ class Overworld extends Phaser.Scene {
             tutorial2 = true;
         } 
         if(tutorial3 == false) {
+            console.log(tutorial3);
             this.overworld_dialog(this.tutorial3, "Press [R] to open and close ITEM CHECKLIST. Press [Q] to check your WALLET");
             tutorial3 = true;
         }
@@ -401,7 +402,8 @@ class Overworld extends Phaser.Scene {
                 else if (prevVelocity.y > 0) player.setTexture("player", "grenouille_walk_down-0");
             }
         }
-        if(Phaser.Input.Keyboard.JustDown(keyQ)){
+        if(Phaser.Input.Keyboard.JustDown(keyQ) && tutorial3 && !this.item_checklist_Visible){
+            console.log(tutorial3);
             if(this.wallet){
                 this.wallet_title_text.destroy();
                 this.ui2_text.destroy();
@@ -480,7 +482,7 @@ class Overworld extends Phaser.Scene {
         //checklist for game progression
         item_checklist(playerX, playerY) {
             if(this.item_checklist_Visible == false) {
-                if(Phaser.Input.Keyboard.JustDown(keyR)) {
+                if(Phaser.Input.Keyboard.JustDown(keyR) && tutorial3 && !this.wallet) {
                     if (!this.checklist_open_SFX.isPlaying) {
                         this.checklist_open_SFX.play();
                     }
@@ -552,7 +554,7 @@ class Overworld extends Phaser.Scene {
                     this.item_checklist_Visible = true;
                 }
             } else if (this.item_checklist_Visible == true) {
-                if(Phaser.Input.Keyboard.JustDown(keyR)) {
+                if(Phaser.Input.Keyboard.JustDown(keyR) && tutorial3) {
                     if (!this.checklist_close_SFX.isPlaying) {
                         this.checklist_close_SFX.play();
                     }
