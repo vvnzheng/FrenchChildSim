@@ -23,9 +23,14 @@ class Overworld extends Phaser.Scene {
         //sound
         this.game.sound.stopAll();
         this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: true, volume: .3});
-        this.overworld_soundtrack.play();  
+        this.overworld_soundtrack.play();
+        //this.sound.play("windSFX", {loop:true, volume: .2});  
         this.runningFX = this.sound.add('runningFX',{loop: false, volume: .2});
         this.dialogFX = this.sound.add('dialogFX',{loop: true, volume: .3});
+        this.checklist_open_SFX = this.sound.add('checklist_open', {loop: false, volume: .7});
+        this.checklist_close_SFX = this.sound.add('checklist_close', {loop: false, volume: .7});
+        //this.NPC_reentry_SFX = this.sound.add('NPC_reentry_SFX', {loop: false, volume: .7});
+        //this.doorSFX = this.sound.add('door_exit_SFX', {loop: false, volume: .7});
 
         //tilemap stuff
         const map = this.make.tilemap({ key: "map2"}); //new
@@ -445,7 +450,7 @@ class Overworld extends Phaser.Scene {
                 // (necessary since Phaser 3 no longer seems to have an onComplete event)
                 if(this.textTimer.getRepeatCount() == 0) {
                     this.nextText = this.add.bitmapText(this.dialogbox.x + 113, this.dialogbox.y - 52, this.DBOX_FONT, this.NEXT_TEXT, this.TEXT_SIZE).setScale(0.5).setTint(0xeadb74);
-                    this.nextText.setDepth(5);
+                    this.nextText.setDepth(4);
                     // un-lock input
                     this.dialogTyping = false;
                     // destroy timer
@@ -476,6 +481,9 @@ class Overworld extends Phaser.Scene {
         item_checklist(playerX, playerY) {
             if(this.item_checklist_Visible == false) {
                 if(Phaser.Input.Keyboard.JustDown(keyR)) {
+                    if (!this.checklist_open_SFX.isPlaying) {
+                        this.checklist_open_SFX.play();
+                    }
                     this.tweens.add({
                         targets: [this.overlay],
                         alpha: {from: 0, to: 1},
@@ -545,6 +553,9 @@ class Overworld extends Phaser.Scene {
                 }
             } else if (this.item_checklist_Visible == true) {
                 if(Phaser.Input.Keyboard.JustDown(keyR)) {
+                    if (!this.checklist_close_SFX.isPlaying) {
+                        this.checklist_close_SFX.play();
+                    }
                     this.cauldron_text.destroy();
                     this.jasmineOil_text.destroy();
                     this.rosemaryOil_text.destroy();
