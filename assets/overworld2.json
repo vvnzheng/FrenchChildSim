@@ -299,7 +299,7 @@
                  "name":"shop4visited",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":81,
                  "x":1719.5,
                  "y":229

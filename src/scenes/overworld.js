@@ -23,7 +23,8 @@ class Overworld extends Phaser.Scene {
         //sound
         this.game.sound.stopAll();
         this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: true, volume: .3});
-        this.overworld_soundtrack.play();  
+        this.overworld_soundtrack.play();
+        //this.sound.play("windSFX", {loop:true, volume: .2});  
         this.runningFX = this.sound.add('runningFX',{loop: false, volume: .2});
         this.dialogFX = this.sound.add('dialogFX',{loop: true, volume: .3});
         this.checklist_open_SFX = this.sound.add('checklist_open', {loop: false, volume: .7});
