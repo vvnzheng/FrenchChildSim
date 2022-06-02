@@ -2,7 +2,7 @@
 	{
 		"name": "intro",
 		"cName" : "Pierre",
-		"text": "Hey boy, what do you need ?",
+		"text": "Hey boy, what do you need?",
 		"initial": 	true,
 		"events": {
 			"Big guy, Do you have any of those items?": "n1",

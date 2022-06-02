@@ -1,6 +1,6 @@
-class Shop1 extends Phaser.Scene {
+class Shop4 extends Phaser.Scene {
     constructor() {
-        super("shop1");
+        super("shop4");
         this.DBOX_X = 169;	        // dialog box x-position
         this.DBOX_Y = 460;
         this.TEXT_X = 380;	        // text w/in dialog box x-position
@@ -28,13 +28,13 @@ class Shop1 extends Phaser.Scene {
         this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
         this.NPC_soundtrack.play();
 
-        //cursors = this.input.keyboard.createCursorKeys();
+        cursors = this.input.keyboard.createCursorKeys();
 
         this.cameras.main.fadeIn(cameraFadeTime);
         this.cameras.main.setBackgroundColor(0x222034);
 
         //animations and sprite load
-        this.shopbg = this.add.sprite(game.config.width/8, 0,'shopbg').setOrigin(0).setScale(1.2);
+        this.shopbg = this.add.sprite(game.config.width/8, 0,'shopbg').setOrigin(0).setScale(1.2).setFlip(true);
         this.anims.create({
             key: 'shopbg',
             frames:this.anims.generateFrameNumbers('shopbg',{start: 0, end: 4, first: 0}),
@@ -42,15 +42,14 @@ class Shop1 extends Phaser.Scene {
             loop: -1
         });
 
-        this.shopkeeper1 = this.add.sprite(game.config.width/2.5, 66,'shopkeep1').setOrigin(0).setScale(3);
+        this.shopkeeper4 = this.add.sprite(game.config.width/2.5, 96,'shopkeep4').setOrigin(0).setScale(3);
         this.anims.create({
-            key: 'shopkeep1',
-            frames:this.anims.generateFrameNumbers('shopkeep1',{start: 0, end: 18, first: 0}),
+            key: 'shopkeep4',
+            frames:this.anims.generateFrameNumbers('shopkeep4',{start: 0, end: 19, first: 0}),
             frameRate: 10,
             loop: -1
         });
 
-        //one prop is for items the other can be used for a backdrop(alonebg) or another item
         this.prop = this.add.sprite(game.config.width/2, game.config.height/2, 'propsetup');
         this.prop2 = this.add.sprite(game.config.width/2, game.config.height/3, 'propsetup');
 
@@ -79,7 +78,7 @@ class Shop1 extends Phaser.Scene {
         this.nextText = this.add.bitmapText(this.NEXT_X, this.NEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
 
         //init json file
-        this.dialog = this.cache.json.get('shopkeep1_dialog');
+        this.dialog = this.cache.json.get('Brazen_dialog');
      
         this.textDisplay();
     }
@@ -87,7 +86,7 @@ class Shop1 extends Phaser.Scene {
     update() {
         //animations
         this.shopbg.anims.play('shopbg', true);
-        this.shopkeeper1.play('shopkeep1', true);
+        this.shopkeeper4.play('shopkeep4', true);
         this.player_icon.play('icon_idle', true);
 
         //this.player_icon.play('icon_talk', true);
@@ -147,13 +146,12 @@ class Shop1 extends Phaser.Scene {
             //response tween
             this.tweens.add({
                 targets: [this.transitionText],
-                scale: {from: 1, to: 1.1},
-                duration: 200,
-                yoyo: true,
-                ease: 'Sine.easeIn',
-                repeat: 1,
+                scale: {from: 1.2, to: 1},
+                duration: 750,
+                yoyo: false,
+                ease: 'Sine.easeOut',
+                repeat: 0,
                 });
-            //item tween
             this.tweens.add({
                 targets: [this.prop2],
                 scale: {from: 4.9, to: 5},
@@ -168,22 +166,19 @@ class Shop1 extends Phaser.Scene {
     syncDisplayInfo() {
         console.log(this.prop.tempFSM.currentState.name);
         if(this.prop.tempFSM.currentState.name == 'exit'){
-            lastShopVisited = 'SHOP1';
-            shop1_visited = true;
+            lastShopVisited = 'SHOP4';
+            shop4_visited = true;
             numOfShopsVisited -= 1;
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
                 this.scene.start('overworldScene');
                 })
-            })   
-        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE ROSEMARY OIL' || this.prop.tempFSM.currentState.name == 'AMI DISCOUNT'){
-            //this.flask.visible = false;
-            rosemaryOilBought += 1;
-        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE FIREWOOD' || this.prop.tempFSM.currentState.name == 'AMI DISCOUNT2'){
+            })
+        } else if (this.prop.tempFSM.currentState.name == 'PURCHASE JASMINE OIL'){
             //this.cauldron.visible = false;
-            firewoodBought += 1;
-        }      
+            jasmineOilBought += 1;
+        }  
         this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
         this.prop2.setTexture(this.prop.tempFSM.currentState.image2);
@@ -245,7 +240,7 @@ class Shop1 extends Phaser.Scene {
             if (!this.dialogFX.isPlaying) this.dialogFX.play();
         }
     }
-
+    
     //plays sound when acquiring item
     soundFX() {
         if(this.prop.tempFSM.currentState.sound == true) {
