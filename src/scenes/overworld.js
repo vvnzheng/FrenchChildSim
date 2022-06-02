@@ -430,7 +430,7 @@ class Overworld extends Phaser.Scene {
                 // (necessary since Phaser 3 no longer seems to have an onComplete event)
                 if(this.textTimer.getRepeatCount() == 0) {
                     this.nextText = this.add.bitmapText(this.dialogbox.x + 113, this.dialogbox.y - 52, this.DBOX_FONT, this.NEXT_TEXT, this.TEXT_SIZE).setScale(0.5).setTint(0xeadb74);
-                    this.nextText.setDepth(5);
+                    this.nextText.setDepth(4);
                     // un-lock input
                     this.dialogTyping = false;
                     // destroy timer
