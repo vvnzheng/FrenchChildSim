@@ -94,6 +94,11 @@ class Shop3 extends Phaser.Scene {
 
         //this.player_icon.play('icon_talk', true);
 
+        //set price to dialogue
+        if(this.prop.tempFSM.currentState.price > 0){
+            shillings -= this.prop.tempFSM.currentState.price;
+        }
+
         // hide response until dialog is finished
         if(!this.dialogTyping ) {
             this.transitionText.visible = true;

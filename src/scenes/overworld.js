@@ -138,6 +138,9 @@ class Overworld extends Phaser.Scene {
         this.firewood = this.add.image(player.x, player.y, "firewood_item5").setDepth(6);
         this.newspaper = this.add.image(player.x, player.y, "news").setDepth(6).setScale(.45);
 
+        //wallet
+        this.wallet = false;
+
         this.cauldron.alpha = 0;
         this.jasmineOil.alpha = 0;
         this.rosemaryOil.alpha = 0;
@@ -178,7 +181,7 @@ class Overworld extends Phaser.Scene {
         this.physics.world.enable(this.boss_dialog, Phaser.Physics.Arcade.STATIC_BODY);
 
         if(tutorial1 == false) {
-            this.overworld_dialog(this.tutorial, "Someone just moved in next door. I should go say hi.");
+            this.overworld_dialog(this.tutorial, "Looks here like Feline Fragrances is right next door!");
             tutorial1 = true;
         } 
         if(tutorial2 == false) {
@@ -186,9 +189,9 @@ class Overworld extends Phaser.Scene {
             tutorial2 = true;
         } 
         if(tutorial3 == false) {
-            this.overworld_dialog(this.tutorial3, "Press [R] to open and close ITEM CHECKLIST.");
+            this.overworld_dialog(this.tutorial3, "Press [R] to open and close ITEM CHECKLIST. Press [Q] to check your WALLET");
             tutorial3 = true;
-        } 
+        }
 
         if(numOfShopsVisited > 0) {
             if(shop3_visited == true) {
@@ -217,6 +220,7 @@ class Overworld extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         //spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 /*
         this.text = this.add.bitmapText(this.dialogbox.x - 275,  this.dialogbox.y, this.DBOX_FONT, `Don't come back until you got everything!`, this.TEXT_SIZE - 4);
@@ -273,7 +277,7 @@ class Overworld extends Phaser.Scene {
                 this.text.visible = false;
             });
             
-            // set max width for text so it doesnt go off dialogbox
+            //set max width for text so it doesnt go off dialogbox
             this.text.maxWidth = this.TEXT_MAX_WIDTH;*/
         }
         //shop4 brazenbazaar
@@ -390,6 +394,17 @@ class Overworld extends Phaser.Scene {
                 else if (prevVelocity.x > 0) player.setTexture("player", "grenouille_walk_side-3");
                 else if (prevVelocity.y < 0) player.setTexture("player", "grenouille_walk_up-0");
                 else if (prevVelocity.y > 0) player.setTexture("player", "grenouille_walk_down-0");
+            }
+        }
+        if(Phaser.Input.Keyboard.JustDown(keyQ)){
+            if(this.wallet){
+                this.wallet_title_text.destroy();
+                this.ui2_text.destroy();
+                this.wallet = false;
+            } else {
+                this.wallet_title_text = this.add.bitmapText(player.x - 150, player.y + 100, this.DBOX_FONT, 'I still have ' + shillings + " shillings", 20).setDepth(6);
+                this.ui2_text = this.add.bitmapText(player.x - 42, player.y + 145, this.DBOX_FONT, '[Q] to close', this.TEXT_SIZE).setScale(.5).setDepth(5).setTint(0xe8c170);
+                this.wallet = true;
             }
         }
     
