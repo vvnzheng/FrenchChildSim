@@ -82,6 +82,11 @@ class Shop1 extends Phaser.Scene {
         this.dialog = this.cache.json.get('BeretBoutique_dialog');
      
         this.textDisplay();
+
+        //money
+        this.price = 0;
+        this.sixPerhaps = false;
+        this.eightPerhaps = false;
     }
 
     update() {
@@ -174,6 +179,7 @@ class Shop1 extends Phaser.Scene {
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
+                    shillings -= this.price;
                 this.scene.start('overworldScene');
                 })
             })   
@@ -184,6 +190,31 @@ class Shop1 extends Phaser.Scene {
             //this.cauldron.visible = false;
             firewoodBought += 1;
         }      
+
+        //Rosemary oil
+        if(this.prop.tempFSM.currentState.name == 'a5' || this.prop.tempFSM.currentState.name == 'a13.2'){
+            this.sixPerhaps = false;
+            this.eightPerhaps = true;
+        }
+
+        if(this.prop.tempFSM.currentState.name == 'a7.2'){
+            this.sixPerhaps = true;
+            this.eightPerhaps = false;
+        }
+
+        //discount or pay 8 for rosemary oil
+        if(this.prop.tempFSM.currentState.name == 'a14.1' || this.prop.tempFSM.currentState.name == 'a7.3'){
+            this.price += 8;
+        }
+
+        if(this.prop.tempFSM.currentState.name == 'PURCHASE ROSEMARY OIL'){
+            if(this.sixPerhaps){
+                this.price += 6;
+            } else if(this.eightPerhaps){
+                this.price += 8;
+            }
+        }
+
         this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
         this.prop2.setTexture(this.prop.tempFSM.currentState.image2);
