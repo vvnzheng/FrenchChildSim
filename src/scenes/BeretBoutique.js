@@ -176,6 +176,7 @@ class Shop1 extends Phaser.Scene {
             lastShopVisited = 'SHOP1';
             shop1_visited = true;
             numOfShopsVisited -= 1;
+            this.sound.play('door_closeSFX',{loop:false, volume: 1});
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {

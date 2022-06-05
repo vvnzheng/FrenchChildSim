@@ -62,8 +62,9 @@ class Load extends Phaser.Scene {
         this.load.audio('checklist_close', 'audio/checklist_close.mp3');
         this.load.audio('checklist_open', 'audio/checklist_open.mp3');
         this.load.audio('moneySFX', 'audio/moneySFX.mp3');
-        //this.load.audio('NPC_reentry_SFX', 'audio/NPC_reentry_SFX.mp3');
-        //this.load.audio('door_exit_SFX', 'audio/door_exit_SFX.mp3');
+        this.load.audio('NPC_reentry_SFX', 'audio/NPC_reentry_SFX.mp3');
+        this.load.audio('door_closeSFX', 'audio/door_closeSFX.mp3');
+        this.load.audio('door_openSFX', 'audio/door_openSFX.mp3');
         
         //menu screen
         //this.load.image('titleScreen', 'images/title_screen2.png'); //old
@@ -132,6 +133,6 @@ class Load extends Phaser.Scene {
 
     create() {
         // ...and pass to the next Scene
-        this.scene.start('overworldScene');
+        this.scene.start('menu');
     }
 }
