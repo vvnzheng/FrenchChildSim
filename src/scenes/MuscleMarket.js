@@ -32,6 +32,11 @@ class Shop2 extends Phaser.Scene {
         this.cameras.main.fadeIn(cameraFadeTime);
         this.cameras.main.setBackgroundColor(0x222034);
 
+        //money
+        this.price = 0;
+        this.fourPerhaps = false;
+        this.twoPerhaps = false;
+
         //animations and sprite load
         this.shopbg = this.add.sprite(game.config.width/8, 0,'shopbg').setOrigin(0).setScale(1.2);
         this.anims.create({
@@ -173,6 +178,7 @@ class Shop2 extends Phaser.Scene {
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
+                    shillings -= this.price;
                 this.scene.start('overworldScene');
                 })
             })
@@ -182,6 +188,23 @@ class Shop2 extends Phaser.Scene {
         } else if (this.prop.tempFSM.currentState.name == 'PURCHASE FIREWOOD'){
             //this.cauldron.visible = false;
             firewoodBought += 1;
+        } 
+
+        if(this.prop.tempFSM.currentState.name == 'n3'){
+            this.fourPerhaps = true;
+            this.twoPerhaps = false;
+        }
+        if(this.prop.tempFSM.currentState.name == 'p2'){
+            this.fourPerhaps = false;
+            this.twoPerhaps = true;
+        }
+        
+        if (this.prop.tempFSM.currentState.name == 'PURCHASE FIREWOOD'){
+            if(this.fourPerhaps){
+                this.price += 4;
+            } else if(this.twoPerhaps){
+                this.price += 2;
+            }
         } 
         this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
