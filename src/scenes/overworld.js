@@ -31,9 +31,9 @@ class Overworld extends Phaser.Scene {
         this.checklist_close_SFX = this.sound.add('checklist_close', {loop: false, volume: .7});
 
         //tilemap stuff
-        const map = this.make.tilemap({ key: "map2"}); //new
+        const map = this.make.tilemap({ key: "map"}); //new
         //const map = this.make.tilemap({ key: "map"});
-        const tileset = map.addTilesetImage("tileset", "tiles2"); //new
+        const tileset = map.addTilesetImage("tileset", "tiles"); //new
         //const tileset = map.addTilesetImage("tileset", "tiles");
 
         //TILED layers
@@ -79,8 +79,8 @@ class Overworld extends Phaser.Scene {
         }
 
         //add playyer sprite
-        player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
-        //player = this.physics.add.sprite(400, 350, "player"); //quick overworld testing
+        //player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
+        player = this.physics.add.sprite(400, 350, "player"); //quick overworld testing
 
         //variables for door interaction
         //enables collision with player
@@ -160,8 +160,10 @@ class Overworld extends Phaser.Scene {
         const camera = this.cameras.main;
         this.cameras.main.fadeIn(1000);
         camera.startFollow(player).setZoom(2);//adjust here to zoom camera in or out
-        camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        //camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.cameras.main.setBackgroundColor(0x222034);
         this.scene_transition = false;
+        
 
         //modified from https://github.com/nathanaltice/Mappy
         this.tutorial = map.createFromObjects("Dialog", {name: "tutorial"});

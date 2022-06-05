@@ -22,7 +22,7 @@ class Shop2 extends Phaser.Scene {
     }
 
     create() {
-        this.game.sound.stopAll();
+        //this.game.sound.stopAll();
         this.NPC_soundtrack = this.sound.add('npcMusic', {loop: true, volume: .2});
         this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
         this.NPC_soundtrack.play();

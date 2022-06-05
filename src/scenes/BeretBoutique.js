@@ -14,7 +14,6 @@ class Shop1 extends Phaser.Scene {
         this.NEXT_Y = 650;			// next text prompt y-position
 
         // dialog variables
-        this.dialogConvo = 0;			// current "conversation"
         this.dialogTyping = false;		// flag to lock player input while text is "typing"
         this.dialogText = null;			// the actual dialog text
         this.nextText = null;			// player prompt text to continue typing
@@ -23,9 +22,9 @@ class Shop1 extends Phaser.Scene {
 
     create() {
         //audio
-        this.game.sound.stopAll();
+        //this.game.sound.stopAll();
         this.NPC_soundtrack = this.sound.add('npcMusic', {loop: true, volume: .2});
-        this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
+        //this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
         this.NPC_soundtrack.play();
 
         //cursors = this.input.keyboard.createCursorKeys();
@@ -256,7 +255,7 @@ class Shop1 extends Phaser.Scene {
             }
         }
 
-        this.soundFX();
+        this.soundFX('itemAquiredSFX');
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
         this.prop2.setTexture(this.prop.tempFSM.currentState.image2);
         let options = Object.keys(this.prop.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`); //`(${i+1}) ${k}\n`);
@@ -319,14 +318,9 @@ class Shop1 extends Phaser.Scene {
     }
 
     //plays sound when acquiring item
-    soundFX() {
-        if(this.prop.tempFSM.currentState.sound == true) {
-            if(!this.itemAquiredSFX.play()){
-                this.itemAquiredSFX.play();
-            }
-        }
-        else {
-            this.itemAquiredSFX.stop();
+    soundFX(sound_name) {
+        if(this.prop.tempFSM.currentState.sound == sound_name) {
+            this.sound.play(sound_name, {loop: false, volume: 0.3});
         }
     }
 }
