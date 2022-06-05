@@ -208,6 +208,7 @@ class Boss extends Phaser.Scene {
     syncDisplayInfo() {
         console.log(this.prop.tempFSM.currentState.name);
         if(this.prop.tempFSM.currentState.name == 'exit'){
+            this.sound.play('door_closeSFX',{loop:false, volume: 1});
             lastShopVisited = 'BOSS';
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {

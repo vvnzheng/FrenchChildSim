@@ -23,14 +23,12 @@ class Overworld extends Phaser.Scene {
         //sound
         this.game.sound.stopAll();
         this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: true, volume: .3});
-        //this.overworld_soundtrack.play();
-        //this.sound.play("windSFX", {loop:true, volume: .2});  
+        this.overworld_soundtrack.play();
+        this.sound.play("windSFX", {loop:true, volume: .2});  
         this.runningFX = this.sound.add('runningFX',{loop: false, volume: .2});
         this.dialogFX = this.sound.add('dialogFX',{loop: true, volume: .3});
         this.checklist_open_SFX = this.sound.add('checklist_open', {loop: false, volume: .7});
         this.checklist_close_SFX = this.sound.add('checklist_close', {loop: false, volume: .7});
-        //this.NPC_reentry_SFX = this.sound.add('NPC_reentry_SFX', {loop: false, volume: .7});
-        //this.doorSFX = this.sound.add('door_exit_SFX', {loop: false, volume: .7});
 
         //tilemap stuff
         const map = this.make.tilemap({ key: "map2"}); //new
@@ -81,8 +79,8 @@ class Overworld extends Phaser.Scene {
         }
 
         //add playyer sprite
-        // player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
-        player = this.physics.add.sprite(400, 350, "player"); //quick overworld testing
+        player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
+        //player = this.physics.add.sprite(400, 350, "player"); //quick overworld testing
 
         //variables for door interaction
         //enables collision with player
@@ -129,8 +127,7 @@ class Overworld extends Phaser.Scene {
         this.dialogbox_Visible = false;
         this.dialogText.visible = true;
         this.nextText.visible = true;
-      //dbox 
-        this.dialogbox = this.add.sprite(player.x, player.y, 'dbox2').setScale(0.75);
+        this.dialogbox = this.add.sprite(player.x, player.y, 'dbox2').setOrigin(.5, 1.5).setScale(0.35).setDepth(4);
         this.dialogbox.visible = false;
     
         //item checklist
@@ -143,9 +140,6 @@ class Overworld extends Phaser.Scene {
         this.firewood = this.add.image(player.x, player.y, "firewood_item5").setDepth(6);
         this.newspaper = this.add.image(player.x, player.y, "news").setDepth(6).setScale(.4);
         this.wallet = this.add.image(player.x, player.y, "shillings").setDepth(6).setScale(1);
-
-        //wallet
-        //this.wallet = false;
 
         this.cauldron.alpha = 0;
         this.jasmineOil.alpha = 0;
@@ -167,6 +161,7 @@ class Overworld extends Phaser.Scene {
         this.cameras.main.fadeIn(1000);
         camera.startFollow(player).setZoom(2);//adjust here to zoom camera in or out
         camera.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.scene_transition = false;
 
         //modified from https://github.com/nathanaltice/Mappy
         this.tutorial = map.createFromObjects("Dialog", {name: "tutorial"});
@@ -203,27 +198,27 @@ class Overworld extends Phaser.Scene {
 
         if(numOfShopsVisited > 0) {
             if(shop3_visited == true) {
-                this.overworld_dialog(this.shop3_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.");
+                this.overworld_dialog(this.shop3_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.", true, 'NPC_reentry_SFX');
             } else if(shop3_visited == false) {
                 this.scene_change(this.shop3_dialog, 'shop3');
             }
             if(shop1_visited == true) {
-                this.overworld_dialog(this.shop1_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit."); 
+                this.overworld_dialog(this.shop1_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.", true, 'NPC_reentry_SFX'); 
             } else if(shop1_visited == false && tutorial == true) {
                 this.scene_change(this.shop1_dialog, 'shop1');
             }
             if(shop2_visited == true) {
-                this.overworld_dialog(this.shop2_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.");  
+                this.overworld_dialog(this.shop2_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.", true, 'NPC_reentry_SFX');  
             } else if(shop2_visited == false && tutorial == true) {
                 this.scene_change(this.shop2_dialog, 'shop2');
             }      
             if(shop4_visited == true) {
-                this.overworld_dialog(this.shop4_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.");    
+                this.overworld_dialog(this.shop4_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.", true, 'NPC_reentry_SFX');    
             } else if(shop4_visited == false && tutorial == true) {
                 this.scene_change(this.shop4_dialog, 'shop4');
             }  
             if(boss_visited == true) {
-                this.overworld_dialog(this.boss_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.");  
+                this.overworld_dialog(this.boss_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.", true, 'NPC_reentry_SFX');  
             }     
         }
         if(shop1_visited == true && shop2_visited == true && shop3_visited == true && shop4_visited == true) {
@@ -238,13 +233,7 @@ class Overworld extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
-        //keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-        //spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-/*
-        this.text = this.add.bitmapText(this.dialogbox.x - 275,  this.dialogbox.y, this.DBOX_FONT, `Don't come back until you got everything!`, this.TEXT_SIZE - 4);
-        this.text.visible = false;
-        this.text.setTint(0xe8c170);
-*/
+
         //collision visualizer
         /*
         const debugGraphics = this.add.graphics().setAlpha(0.75);
@@ -286,19 +275,23 @@ class Overworld extends Phaser.Scene {
         }
 
         this.item_checklist(player.x, player.y);
-
+        
         //PLAYER MOVEMENT 
-        if(this.dialogbox_Visible == true || this.item_checklist_Visible == true) {
+        const prevVelocity = player.body.velocity.clone();
+        // Stop any previous movement from the last frame
+        player.body.setVelocity(0);
+        
+        if(this.dialogbox_Visible == true || this.item_checklist_Visible == true || this.scene_transition == true) {
             player.body.setVelocityX(0);
             player.body.setVelocityY(0);
-            player.setTexture("player", "grenouille_walk_down-0")
+            if(player.anims.stop()) this.runningFX.pause();
+            if (prevVelocity.x < 0) player.setTexture("player", "grenouille_walk_side-3");
+                else if (prevVelocity.x > 0) player.setTexture("player", "grenouille_walk_side-3");
+                else if (prevVelocity.y < 0) player.setTexture("player", "grenouille_walk_up-0");
+                else if (prevVelocity.y > 0) player.setTexture("player", "grenouille_walk_down-0");
             this.runningFX.stop();
         } else if(this.dialogbox_Visible == false) {
-            
-            const prevVelocity = player.body.velocity.clone();
 
-            // Stop any previous movement from the last frame
-            player.body.setVelocity(0);
 
             // Horizontal movement
             if (cursors.left.isDown) {
@@ -350,13 +343,16 @@ class Overworld extends Phaser.Scene {
         this.dialogText.text = '';
         this.nextText.text = '';
 
-        this.dialogbox = this.add.sprite(player.x, player.y, 'dbox2').setOrigin(.5, 1.5).setScale(0.35).setDepth(4);
+        this.dialogbox.setPosition(player.x, player.y).setOrigin(.5, 1.5);
         this.dialogbox.visible = true;
         this.nextText.visible = true;
         this.dialogText.visible = true;
         this.dialogText.setPosition(this.dialogbox.x - 120, this.dialogbox.y -95);
         this.dialogText.setDepth(5);
         this.nextText.setPosition(player.x, player.y);
+
+        this.tweens.add({targets: [this.dialogbox], scale: {from: 0, to: .35}, alpha: {from: 0, to: 1}, duration: 200, ease: 'Sine.easeOut',});
+        this.tweens.add({targets: [this.dialogText, this.nextText], scale: {from: 0, to: .5}, alpha: {from: 0, to: 1}, duration: 400, ease: 'Sine.easeOut',});
 
         text = 'GRENOUILLE' + ': ' + text; //new
 
@@ -394,15 +390,22 @@ class Overworld extends Phaser.Scene {
             }
         }
         //creates dialogue for player while exploring
-        overworld_dialog(obj, text) {
+        overworld_dialog(obj, text, sfxTF, soundFX) {
             this.physics.add.overlap(player, obj, (obj1, obj2) => {
                 this.typeText(text);
+                if(sfxTF == true){
+                this.sound.play(soundFX, {volume: .7});
+                }
                 obj2.destroy();
             });
         }
 
         scene_change(obj, scene) {
             this.physics.add.overlap(player, obj, (obj1) => {
+                //this.cameras.main.pan(player.x, player.y - 100);
+                this.scene_transition = true;
+                this.sound.play('door_openSFX',{loop:false, volume: 1});
+                this.overworld_soundtrack.stop();
                 this.scene.start(scene);
             });
         }
@@ -414,33 +417,11 @@ class Overworld extends Phaser.Scene {
                     if (!this.checklist_open_SFX.isPlaying) {
                         this.checklist_open_SFX.play();
                     }
-                    this.tweens.add({
-                        targets: [this.overlay],
-                        alpha: {from: 0, to: 1},
-                        duration: 100,
-                        ease: 'Sine.easeIn',
-                        repeat: 0,
-                        });
-                    this.tweens.add({
-                        targets: [this.wallet],
-                        scale: {from: .9, to: 1},
-                        duration: 1000,
-                        ease: 'Sine.ease',
-                        yoyo: true,
-                        repeat: -1,
-                        });
-
-                    this.tweens.add({
-                        targets: [this.jasmineOil, this.rosemaryOil, this.flask, this.firewood],
-                        y: { value: playerY + 70, duration: 1500, ease: 'Bounce.easeOut' },
-                        repeat: 0,
-                        });
-
-                    this.tweens.add({
-                        targets: [this.cauldron],
-                        y: { value: playerY + 60, duration: 1500, ease: 'Bounce.easeOut' },
-                        repeat: 0,
-                        });
+                    this.tweens.add({ targets: [this.overlay], alpha: {from: 0, to: 1}, duration: 100, ease: 'Sine.easeIn',});
+                    this.tweens.add({targets: [this.newspaper], scale: {from: 0, to: .4}, duration: 1000, ease: 'Bounce.easeOut',});
+                    this.tweens.add({ targets: [this.wallet], scale: {from: .9, to: 1}, duration: 1000, ease: 'Sine.ease', yoyo: true, repeat: -1, });
+                    this.tweens.add({ targets: [this.jasmineOil, this.rosemaryOil, this.flask, this.firewood], y: { value: playerY + 70, duration: 1500, ease: 'Bounce.easeOut' }, repeat: 0, });
+                    this.tweens.add({ targets: [this.cauldron], y: { value: playerY + 60, duration: 1500, ease: 'Bounce.easeOut' }, repeat: 0, });
 
                     this.overlay.visible = true;
                     this.cauldron.visible = true;
@@ -518,5 +499,4 @@ class Overworld extends Phaser.Scene {
                 }
             }
         }
-        
 }
