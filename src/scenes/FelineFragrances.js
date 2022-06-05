@@ -44,6 +44,10 @@ class Shop3 extends Phaser.Scene {
         this.shopbg = this.add.sprite(game.config.width/8, 0,'catbg').setOrigin(0).setScale(1.2);
         this.flask = this.add.sprite(game.config.width-225, game.config.height/5,'flask').setOrigin(0).setScale(1.2);
         this.cauldron = this.add.sprite(game.config.width - 380, game.config.height/2.75,'cauldron').setOrigin(0).setScale(1.2);
+        this.price = 0;
+        this.eightPerhaps = false;
+        this.sixPerhaps = false;
+        this.fourPerhaps = false;
 
         this.shopkeeper3 = this.add.sprite(game.config.width/2.25, 200,'shopkeep3').setOrigin(0).setScale(1);
         this.anims.create({
@@ -187,6 +191,11 @@ class Shop3 extends Phaser.Scene {
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
                 tutorial = true;
+
+                //set price to dialogue
+                console.log(shillings, this.price);
+                shillings -= this.price;
+                console.log(shillings);
                 this.scene.start('overworldScene');
                 })
             })
@@ -197,6 +206,53 @@ class Shop3 extends Phaser.Scene {
             this.cauldron.visible = false;
             cauldronBought += 1;
         }
+        //check price of flask
+        if(this.prop.tempFSM.currentState.name == '7'){
+            this.price += 2;
+        } else if(this.prop.tempFSM.currentState.name == '8'){
+            this.price += 3;
+        } else if(this.prop.tempFSM.currentState.name == '5'){
+            this.price += 6;
+        }
+        //check price of cauldron
+        if(this.prop.tempFSM.currentState.name == '10.1'){
+            this.price += 8;
+        } else if(this.prop.tempFSM.currentState.name == '11.1'){
+            this.price += 5;
+        } else if(this.prop.tempFSM.currentState.name == '11.2' || this.prop.tempFSM.currentState.name == '11.4'){
+            this.eightPerhaps = true;
+            this.sixPerhaps = false;
+            this.fourPerhaps = false;
+        } else if(this.prop.tempFSM.currentState.name == '12'){
+            this.sixPerhaps = true;
+            this.eightPerhaps = false;
+            this.fourPerhaps = false;
+        } else if(this.prop.tempFSM.currentState.name == '12.1'){
+            this.fourPerhaps = true;
+            this.sixPerhaps = false;
+            this.eightPerhaps = false;
+        } else if(this.prop.tempFSM.currentState.name == '12.2'){
+            this.fourPerhaps = true;
+            this.sixPerhaps = false;
+            this.eightPerhaps = false;
+        } else if(this.prop.tempFSM.currentState.name == 'exit'){
+            this.fourPerhaps = false;
+            this.sixPerhaps = false;
+            this.eightPerhaps = false;
+        }
+
+        if(this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON' && this.eightPerhaps){
+            this.price += 8;
+        }
+
+        if(this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON' && this.sixPerhaps){
+            this.price += 6;
+        }
+
+        if(this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON' && this.fourPerhaps){
+            this.price += 4;
+        }
+        this.eightPerhaps = false;
         this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
         this.prop2.setTexture(this.prop.tempFSM.currentState.image2);

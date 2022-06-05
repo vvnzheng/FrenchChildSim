@@ -49,6 +49,7 @@ let boss_visited = true;
 let LETTER_TIMER = 15;	// # ms each letter takes to "type" onscreen //default = 20 or 10
 let keyR; // opens item inventory in the overworld
 let keyW;
+let keyQ; //shows how much money you have left
 let cameraFadeTime = 1000;
 let flaskBought = 0;
 let cauldronBought = 0;

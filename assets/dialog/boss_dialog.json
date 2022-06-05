@@ -56,7 +56,7 @@
     {
         "name": "Close newspaper",
         "cName": "Grenouille",
-        "text" : "Alright, it looks like feline fragances is open, let us go and take a look!",
+        "text" : "Alright, it looks like feline fragrances is open, let us go and take a look!",
         "image": "alonebg",
         "events" : {
             "move on map" : "exit"
