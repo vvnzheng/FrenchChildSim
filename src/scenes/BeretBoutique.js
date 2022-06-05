@@ -87,6 +87,7 @@ class Shop1 extends Phaser.Scene {
         this.price = 0;
         this.sixPerhaps = false;
         this.eightPerhaps = false;
+        this.fivePerhaps = false;
     }
 
     update() {
@@ -202,7 +203,7 @@ class Shop1 extends Phaser.Scene {
             this.eightPerhaps = false;
         }
 
-        //discount or pay 8 for rosemary oil
+        //discount rosemary oil & firewood or pay 8 for just rosemary oil
         if(this.prop.tempFSM.currentState.name == 'a14.1' || this.prop.tempFSM.currentState.name == 'a7.3'){
             this.price += 8;
         }
@@ -212,6 +213,45 @@ class Shop1 extends Phaser.Scene {
                 this.price += 6;
             } else if(this.eightPerhaps){
                 this.price += 8;
+            }
+        }
+
+        //Firewood
+        
+        if(this.prop.tempFSM.currentState.name == 'b1'){
+            this.sixPerhaps = true;
+            this.fivePerhaps = false;
+            this.eightPerhaps = false;
+        }
+        if(this.prop.tempFSM.currentState.name == 'b2'){
+            this.sixPerhaps = false;
+            this.fivePerhaps = true;
+            this.eightPerhaps = false;
+        }
+        if(this.prop.tempFSM.currentState.name == 'b3'){
+            this.sixPerhaps = true;
+            this.fivePerhaps = false;
+            this.eightPerhaps = false;
+        }
+        if(this.prop.tempFSM.currentState.name == 'b6.1'){
+            this.sixPerhaps = false;
+            this.fivePerhaps = false;
+            this.eightPerhaps = true;
+        }
+        if(this.prop.tempFSM.currentState.name == 'b7'){
+            this.sixPerhaps = false;
+            this.fivePerhaps = true;
+            this.eightPerhaps = false;
+        }
+
+        
+        if(this.prop.tempFSM.currentState.name == 'PURCHASE FIREWOOD'){
+            if(this.sixPerhaps){
+                this.price += 6;
+            } else if(this.eightPerhaps){
+                this.price += 8;
+            } else if(this.fivePerhaps){
+                this.price += 5;
             }
         }
 
