@@ -2,64 +2,58 @@
     {
         "name": "Start",
         "cName": "Boss",
-        "text": "Grenouille, I'm running low on perfume ingredients. I need you to run out and get me some by the end of the day.",
+        "text": "Grenouille! What took you so long?!",
         "initial": 	true,
         "events": {
-            "Today?!": "2"
+            "Sir, I was running around town all day trying to get your ingredients!": "2"
         }
     },
     {
         "name": "2",
         "cName": "Boss",
-        "text": "Here's 20 shillings. Now hurry before I start to lose some customers!",
-        "image" : "shillings",
+        "text": "Really? Then I suppose you have all of them?",
         "events": {
-            "But boss, 20 shillings is merely anything! How could you possibly expect me to purchase anything with this?": "3"
+            "uh...": "3"
         }
     },
     {
         "name": "3",
         "cName": "Boss",
-        "text" : "Well you better figure it out, or else you're fired! Now get to it.",
+        "text" : "Well?? Hand them over!",
         "events": {
-            "Hmmm..." : "exit opening scene"
+            "But sir!" : "exit opening scene"
         }
     },
     {
         "name" : "exit opening scene",
-        "cName": "Grenouille",
-        "text" : "The boss gave me a list of ingredients, let's take a look.",
-        "image": "alonebg",
+        "cName": "Boss",
+        "text" : "What?? You mean to tell me you spent all that time outside and didn't get anything??",
         "events": {
-            "close ingredient list" : "Close ingredients"
+            "...Yes" : "Close ingredients"
         }
     },
     {
         "name": "Close ingredients",
-        "cName": "Grenouille",
-        "text" : "Alright, well I guess I should take a look at the newspaper and see what all the stores have on sale today.",
-        "image": "alonebg",
+        "cName": "Boss",
+        "text" : "You!! What am I going to do with you?!",
         "events": {
-            "open newspaper" : "Open newspaper"
+            "Sir! Sir calm down!" : "Open newspaper"
         }
     },
     {
         "name": "Open newspaper",
-        "cName": "Grenouille",
-        "text" : "",
-        "image": "alonebg",
-        "image2": "news",
+        "cName": "Boss",
+        "text" : "No! No! I have had quite enough of you and your mess ups! YOU'RE FIRED!!",
         "events": {
-            "close newspaper" : "Close newspaper"
+            "No! Please sir! I have an ill mother to take care of and two younger siblings!" : "Close newspaper"
         }
     },
     {
         "name": "Close newspaper",
-        "cName": "Grenouille",
-        "text" : "Alright, it looks like feline fragrances is open, let us go and take a look!",
-        "image": "alonebg",
+        "cName": "Boss",
+        "text" : "You don't think I have my own family to take care of?? Get out of my sight!",
         "events" : {
-            "move on map" : "exit"
+            "Alright..." : "exit"
         }
     },
 	{

@@ -2,64 +2,50 @@
     {
         "name": "Start",
         "cName": "Boss",
-        "text": "Grenouille, I'm running low on perfume ingredients. I need you to run out and get me some by the end of the day.",
+        "text": "Grenouille! Where have you been all day?! We've been insanely busy!",
         "initial": 	true,
         "events": {
-            "Today?!": "2"
+            "Sir! I've been trying to gather-": "2"
         }
     },
     {
         "name": "2",
         "cName": "Boss",
-        "text": "Here's 20 shillings. Now hurry before I start to lose some customers!",
-        "image" : "shillings",
+        "text": "Gather what? The courage??? Come here! And hurry! Fill all these orders or you don't get pay",
         "events": {
-            "But boss, 20 shillings is merely anything! How could you possibly expect me to purchase anything with this?": "3"
+            "Sir, don't you want the ingredients you sent me for?": "3"
         }
     },
     {
         "name": "3",
         "cName": "Boss",
-        "text" : "Well you better figure it out, or else you're fired! Now get to it.",
+        "text" : "Huh? What are you- ... Oh, yes. Thank you boy. Toss in whatever you got",
         "events": {
-            "Hmmm..." : "exit opening scene"
+            "*Toss*." : "exit opening scene"
         }
     },
     {
         "name" : "exit opening scene",
-        "cName": "Grenouille",
-        "text" : "The boss gave me a list of ingredients, let's take a look.",
-        "image": "alonebg",
+        "cName": "Boss",
+        "text" : "Boy! You idiot! I didn't mean LITERALLY toss them! These are precious materials!",
         "events": {
-            "close ingredient list" : "Close ingredients"
+            "Oh. Sorry boss!" : "Close ingredients"
         }
     },
     {
         "name": "Close ingredients",
-        "cName": "Grenouille",
-        "text" : "Alright, well I guess I should take a look at the newspaper and see what all the stores have on sale today.",
-        "image": "alonebg",
+        "cName": "Boss",
+        "text" : "Wait a minute... You only got a few of the things I sent you for!",
         "events": {
-            "open newspaper" : "Open newspaper"
+            "...uh... I can explain" : "Open newspaper"
         }
     },
     {
         "name": "Open newspaper",
         "cName": "Grenouille",
-        "text" : "",
-        "image": "alonebg",
-        "image2": "news",
+        "text" : "I'm sure you can! You'll be working overtime today until you get all these orders done",
         "events": {
-            "close newspaper" : "Close newspaper"
-        }
-    },
-    {
-        "name": "Close newspaper",
-        "cName": "Grenouille",
-        "text" : "Alright, it looks like feline fragrances is open, let us go and take a look!",
-        "image": "alonebg",
-        "events" : {
-            "move on map" : "exit"
+            "Yes boss..." : "exit"
         }
     },
 	{
