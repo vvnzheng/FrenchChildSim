@@ -132,6 +132,6 @@ class Load extends Phaser.Scene {
 
     create() {
         // ...and pass to the next Scene
-        this.scene.start('menu');
+        this.scene.start('overworldScene');
     }
 }
