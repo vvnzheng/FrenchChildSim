@@ -347,7 +347,40 @@
                  "width":122,
                  "x":510.5,
                  "y":565
-                }],
+                },
+                {
+                     "height":366,
+                     "id":40,
+                     "name":"good",
+                     "rotation":0,
+                     "type":"",
+                     "visible":false,
+                     "width":122,
+                     "x":510.5,
+                     "y":565
+                    },
+                    {
+                     "height":366,
+                     "id":40,
+                     "name":"bad",
+                     "rotation":0,
+                     "type":"",
+                     "visible":false,
+                     "width":122,
+                     "x":510.5,
+                     "y":565
+                    },
+                    {
+                     "height":366,
+                     "id":40,
+                     "name":"meh",
+                     "rotation":0,
+                     "type":"",
+                     "visible":false,
+                     "width":122,
+                     "x":510.5,
+                     "y":565
+                    }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,

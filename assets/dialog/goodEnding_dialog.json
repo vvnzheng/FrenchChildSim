@@ -1,0 +1,71 @@
+[
+    {
+        "name": "Start",
+        "cName": "Boss",
+        "text": "Grenouille, I'm running low on perfume ingredients. I need you to run out and get me some by the end of the day.",
+        "initial": 	true,
+        "events": {
+            "Today?!": "2"
+        }
+    },
+    {
+        "name": "2",
+        "cName": "Boss",
+        "text": "Here's 20 shillings. Now hurry before I start to lose some customers!",
+        "image" : "shillings",
+        "events": {
+            "But boss, 20 shillings is merely anything! How could you possibly expect me to purchase anything with this?": "3"
+        }
+    },
+    {
+        "name": "3",
+        "cName": "Boss",
+        "text" : "Well you better figure it out, or else you're fired! Now get to it.",
+        "events": {
+            "Hmmm..." : "exit opening scene"
+        }
+    },
+    {
+        "name" : "exit opening scene",
+        "cName": "Grenouille",
+        "text" : "The boss gave me a list of ingredients, let's take a look.",
+        "image": "alonebg",
+        "events": {
+            "close ingredient list" : "Close ingredients"
+        }
+    },
+    {
+        "name": "Close ingredients",
+        "cName": "Grenouille",
+        "text" : "Alright, well I guess I should take a look at the newspaper and see what all the stores have on sale today.",
+        "image": "alonebg",
+        "events": {
+            "open newspaper" : "Open newspaper"
+        }
+    },
+    {
+        "name": "Open newspaper",
+        "cName": "Grenouille",
+        "text" : "",
+        "image": "alonebg",
+        "image2": "news",
+        "events": {
+            "close newspaper" : "Close newspaper"
+        }
+    },
+    {
+        "name": "Close newspaper",
+        "cName": "Grenouille",
+        "text" : "Alright, it looks like feline fragrances is open, let us go and take a look!",
+        "image": "alonebg",
+        "events" : {
+            "move on map" : "exit"
+        }
+    },
+	{
+		"name": "exit",
+		"text" : "EXITING",
+		"events": {
+        }
+	}
+]

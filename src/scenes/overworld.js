@@ -87,7 +87,7 @@ class Overworld extends Phaser.Scene {
         this.physics.add.collider(player, worldLayer);
         this.physics.add.collider(player, worldLayer2);
         this.physics.add.collider(player, worldLayer3);
-        this.physics.add.collider(player, this.doorToNPC1);
+        this.physics.add.collider(player, doorToNPC1);
         this.physics.add.collider(player, doorToNPC2);
         this.physics.add.collider(player, doorToNPC3);
         this.physics.add.collider(player, doorToNPC4);
@@ -172,6 +172,9 @@ class Overworld extends Phaser.Scene {
         this.shop3_dialog = map.createFromObjects("Dialog", {name: "shop3visited"});
         this.shop4_dialog = map.createFromObjects("Dialog", {name: "shop4visited"});
         this.boss_dialog = map.createFromObjects("Dialog", {name: "bossvisited"});
+        this.good_dialog = map.createFromObjects("Dialog", {name: "good"});
+        this.bad_dialog = map.createFromObjects("Dialog", {name: "bad"});
+        this.meh_dialog = map.createFromObjects("Dialog", {name: "meh"});
 
         this.physics.world.enable(this.tutorial, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.tutorial3, Phaser.Physics.Arcade.STATIC_BODY);
@@ -181,6 +184,9 @@ class Overworld extends Phaser.Scene {
         this.physics.world.enable(this.shop3_dialog, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.shop4_dialog, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.boss_dialog, Phaser.Physics.Arcade.STATIC_BODY);
+        this.physics.world.enable(this.good_dialog, Phaser.Physics.Arcade.STATIC_BODY);
+        this.physics.world.enable(this.bad_dialog, Phaser.Physics.Arcade.STATIC_BODY);
+        this.physics.world.enable(this.meh_dialog, Phaser.Physics.Arcade.STATIC_BODY);
 
         if(tutorial1 == false) {
             this.overworld_dialog(this.tutorial, "Looks like Feline Fragrances is right next door!");
@@ -223,7 +229,17 @@ class Overworld extends Phaser.Scene {
         }
         if(shop1_visited == true && shop2_visited == true && shop3_visited == true && shop4_visited == true) {
             this.typeText('Okay, I just visited every shop time to head back to the BOSS.');
-            endGame = true;
+            this.total = rosemaryOilBought + jasmineOilBought + firewoodBought + flaskBought + cauldronBought;
+            console.log(this.total);
+            if(!this.dialogTyping){
+                if(this.total == 5){
+                    this.scene_change(this.good_dialog, 'endingGood');
+                } else if(this.total < 5 && this.total >= 3 ){
+                    this.scene_change(this.meh_dialog, 'endingMeh');
+                } else if(this.total < 3) {
+                    this.scene_change(this.bad_dialog, 'endingBad');
+                }
+            }
         }
 
         

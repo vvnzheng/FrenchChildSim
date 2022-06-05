@@ -61,7 +61,7 @@
 		"cName" : "Pierre",
 		"text" : "2 shilling",
 		"events": {
-			"Oh my, it's even lower than the market price that I saw on newspaper this morning!" : "p4",
+			"Oh my, it's even lower than the market price that I saw on newspaper this morning!" : "p3",
 			"Nah, that's still too expensive for me(leave shop)" : "exit"
 		}
 	},
@@ -84,10 +84,9 @@
 	{
 		"name": "PURCHASE FIREWOOD",
 		"cName" : "Pierre",
-		"image" : "shopkeep2",
-		"image2" : "firewood",
+		"image" : "firewood",
 		"sound" : true,
-		"text" : "I've just acquired a FIREWOOD!",
+		"text" : "I've just acquired FIREWOOD!",
 		"events": {
 			"That's everything I need here (leave shop)." : "exit"
 		}
