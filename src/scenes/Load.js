@@ -74,10 +74,8 @@ class Load extends Phaser.Scene {
         this.load.image('menuscreen_press', 'images/menuscreen_press.png');
         
         //overworld
-        //this.load.image("tiles", "images/overworld_tileset.png"); //temp
-        this.load.image("tiles2", "images/overworld_tileset2.png"); //new
-        //this.load.tilemapTiledJSON("map", "overworld.json"); //temp
-        this.load.tilemapTiledJSON("map2", "overworld2.json"); //new
+        this.load.image("tiles", "images/overworld_tileset.png");
+        this.load.tilemapTiledJSON("map", "overworld.json"); 
         this.load.atlas("player", "images/grenouille_walk_anim.png", "images/grenouille_walk_anim.json");
         this.load.spritesheet('enter', "images/enterAnimation.png", {frameWidth: 32, frameHeight: 24, startFrame:0, endFrame: 5});
 
