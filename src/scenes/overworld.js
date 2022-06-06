@@ -96,6 +96,9 @@ class Overworld extends Phaser.Scene {
         //player = this.physics.add.sprite(400, 750, "player"); //quick overworld testing
         player.body.setSize(20,22).setOffset(4, 10); //player collision shape
 
+        this.clouds = this.add.tileSprite(0,0, game.config.width, game.config.height/1.405, 'clouds').setOrigin(0,0).setScale(2); //1.42
+        this.clouds2 = this.add.tileSprite(0,0, game.config.width, game.config.height/1.405, 'clouds2').setOrigin(0,0).setScale(2); //1.42
+
         
         //variables for door interaction
         //enables collision with player
@@ -206,7 +209,7 @@ class Overworld extends Phaser.Scene {
         this.physics.world.enable(this.shop4_dialog, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.boss_dialog, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.cow_interact, Phaser.Physics.Arcade.STATIC_BODY);
-/*
+
         if(tutorial1 == false) {
             this.overworld_dialog(this.tutorial, "Looks like Feline Fragrances is right next door!");
             tutorial1 = true;
@@ -220,7 +223,7 @@ class Overworld extends Phaser.Scene {
             this.overworld_dialog(this.tutorial3, "Press [R] to open and close ITEM CHECKLIST & view current SHILLINGS(money).");
             tutorial3 = true;
         }
-*/
+
 
         endingTotal = rosemaryOilBought + jasmineOilBought + firewoodBought + flaskBought + cauldronBought;
 
@@ -313,6 +316,9 @@ class Overworld extends Phaser.Scene {
                 }
             }
         }
+
+        this.clouds.tilePositionX += 0.01;
+        this.clouds2.tilePositionX += 0.017;
 
         this.cow.anims.play('cow', true);
         this.item_interact('MILK ACQUIRED!', 'milk');

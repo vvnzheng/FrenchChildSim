@@ -81,6 +81,8 @@ class Load extends Phaser.Scene {
         this.load.spritesheet('enter', "images/enterAnimation.png", {frameWidth: 32, frameHeight: 24, startFrame:0, endFrame: 5});
         this.load.spritesheet("cow", "images/cow.png", {frameWidth: 43, frameHeight: 31, startFrame:0, endFrame: 9});
         this.load.image("milk", "images/milk.png");
+        this.load.image("clouds", "images/clouds.png");
+        this.load.image("clouds2", "images/clouds2.png");
 
         //tutorial
         this.load.spritesheet('tutorial_WASD', "images/tutorial_WASD.png", {frameWidth: 160, frameHeight: 99, startFrame:0, endFrame: 4});
