@@ -71,6 +71,39 @@ class Overworld extends Phaser.Scene {
         this.cow = this.physics.add.sprite(350, 700, "cow").setScale(1.5);
         this.cow.body.immovable = true;
         this.cow.body.setSize(42,26).setOffset(0, 0); 
+        
+        this.cow1 = this.physics.add.sprite(200, 590, "cow").setScale(1.5);
+        this.cow1.body.immovable = true;
+        this.cow1.body.setSize(42,26).setOffset(0, 0); 
+        
+        this.cow2 = this.physics.add.sprite(500, 550, "cow").setScale(1.5);
+        this.cow2.body.immovable = true;
+        this.cow2.body.setSize(42,26).setOffset(0, 0); 
+
+
+        this.bunny = this.physics.add.sprite(400, 700, "bunbun").setScale(1.5);
+        this.bunny.body.immovable = true;
+
+        this.bunny1 = this.physics.add.sprite(325, 720, "bunbun").setScale(1.5);
+        this.bunny1.body.immovable = true;
+
+        this.bunny2 = this.physics.add.sprite(450, 680, "bunbun");
+        this.bunny2.body.immovable = true;
+
+        this.bunny3 = this.physics.add.sprite(650, 550, "bunbun");
+        this.bunny3.body.immovable = true;
+
+        this.bunny4 = this.physics.add.sprite(390, 525, "bunbun").setScale(1.5);
+        this.bunny4.body.immovable = true;
+        
+        this.bunny5 = this.physics.add.sprite(800, 400, "bunbun");
+        this.bunny5.body.immovable = true;
+
+        this.bunny6 = this.physics.add.sprite(850, 450, "bunbun");
+        this.bunny6.body.immovable = true;
+        
+        this.bunny7 = this.physics.add.sprite(1350, 300, "bunbun").setScale(1.5);
+        this.bunny7.body.immovable = true;
 
         //add playyer sprite
         player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
@@ -84,6 +117,15 @@ class Overworld extends Phaser.Scene {
         this.physics.add.collider(player, worldLayer2);
         this.physics.add.collider(player, worldLayer3);
         this.physics.add.collider(player, this.cow);
+        this.physics.add.collider(player, this.cow1);
+        this.physics.add.collider(player, this.cow2);
+        this.physics.add.collider(player, this.bunny);
+        this.physics.add.collider(player, this.bunny1);
+        this.physics.add.collider(player, this.bunny2);
+        this.physics.add.collider(player, this.bunny3);
+        this.physics.add.collider(player, this.bunny4);
+        this.physics.add.collider(player, this.bunny5);
+        this.physics.add.collider(player, this.bunny6);
 
 
         //player animations create
@@ -209,7 +251,9 @@ class Overworld extends Phaser.Scene {
         }   
 
         if(numOfShopsVisited > 0) {
-            if(shop3_visited == true) {
+            if(shop3_visited == true && milk_acquired) {
+                this.scene_change(this.shop3milk_dialog, 'shop3');
+            } else if(shop3_visited == true){
                 this.overworld_dialog(this.shop3_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.", true, 'NPC_reentry_SFX');
             } else if(shop3_visited == false) {
                 this.scene_change(this.shop3_dialog, 'shop3');
@@ -242,7 +286,7 @@ class Overworld extends Phaser.Scene {
         //item interaction
         this.textUI = false;
 
-        if(milk_acquired == false) {
+        if(milk_acquired == false && milk_route) {
             this.text_UI(this.cow.x, this.cow.y, this.cow_interact, "[F] to milk");
         }
 

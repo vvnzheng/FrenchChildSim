@@ -194,10 +194,36 @@
 	{
 		"name": "12.2",
 		"cName" : "Phillippe",
-		"text" : "I can't possibly go that low. 4 shillings is my final offer.",
+		"text" : "I can't possibly go that low. 4 shillings is my final offer... However...",
 		"events": {
 			"Sold. (Purchase CAULDRON for 4 shillings)" : "PURCHASE CAULDRON",
-			"No thanks. (Leave shop)" : "12.2"
+			"No thanks. (Leave shop)" : "12.2",
+			"However what?" : "milk"
+		}
+	},
+	{
+		"name": "milk",
+		"cName" : "Phillippe",
+		"text" : "I have been craving some fresh milk... Not from the grocery store, straight from the teet! But that infernal heffer won't give me any and I can't milk her...",
+		"events": {
+			"So... you're saying you'll give me the cauldron if I get you some milk?" : "milk1"
+		}
+	},
+	{
+		"name": "milk1",
+		"cName" : "Phillippe",
+		"text" : "Well of course I won't give it to you for free!",
+		"events": {
+			"Deal!" : "exit",
+			"No Deal!" : "milk2"
+		}
+	},
+	{
+		"name": "milk2",
+		"cName" : "Phillippe",
+		"text" : "WAIT!! Fine! I'll give it to you for free... Phillippe the wise lion loves him some milk...",
+		"events": {
+			"Ew... But I guess whatever it takes to get something for free" : "exit"
 		}
 	},
 
