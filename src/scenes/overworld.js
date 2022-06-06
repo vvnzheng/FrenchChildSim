@@ -106,8 +106,8 @@ class Overworld extends Phaser.Scene {
         this.bunny7.body.immovable = true;
 
         //add playyer sprite
-        //player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
-        player = this.physics.add.sprite(400, 750, "player"); //quick overworld testing
+        player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
+        //player = this.physics.add.sprite(400, 750, "player"); //quick overworld testing
         player.body.setSize(20,22).setOffset(4, 10); //player collision shape
 
         
@@ -217,9 +217,6 @@ class Overworld extends Phaser.Scene {
         this.shop4_dialog = map.createFromObjects("Dialog", {name: "shop4visited"});
         this.boss_dialog = map.createFromObjects("Dialog", {name: "bossvisited"});
         this.cow_interact = map.createFromObjects("Dialog", {name: "cow"});
-        this.good_dialog = map.createFromObjects("Dialog", {name: "good"});
-        this.bad_dialog = map.createFromObjects("Dialog", {name: "bad"});
-        this.meh_dialog = map.createFromObjects("Dialog", {name: "meh"});
 
         this.physics.world.enable(this.tutorial, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.tutorial3, Phaser.Physics.Arcade.STATIC_BODY);
@@ -231,10 +228,6 @@ class Overworld extends Phaser.Scene {
         this.physics.world.enable(this.boss_dialog, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.cow_interact, Phaser.Physics.Arcade.STATIC_BODY);
 /*
-        this.physics.world.enable(this.good_dialog, Phaser.Physics.Arcade.STATIC_BODY);
-        this.physics.world.enable(this.bad_dialog, Phaser.Physics.Arcade.STATIC_BODY);
-        this.physics.world.enable(this.meh_dialog, Phaser.Physics.Arcade.STATIC_BODY);
-
         if(tutorial1 == false) {
             this.overworld_dialog(this.tutorial, "Looks like Feline Fragrances is right next door!");
             tutorial1 = true;
@@ -249,6 +242,14 @@ class Overworld extends Phaser.Scene {
             tutorial3 = true;
         }
 */
+
+        endingTotal = rosemaryOilBought + jasmineOilBought + firewoodBought + flaskBought + cauldronBought;
+
+        if(shop1_visited == true && shop2_visited == true && shop3_visited == true && shop4_visited == true || shillings <= 0 || endGame == true) {
+            console.log(endingTotal);
+            this.scene_change(this.boss_dialog, 'boss');
+        }   
+
         if(numOfShopsVisited > 0) {
             if(shop3_visited == true && milk_acquired) {
                 this.scene_change(this.shop3milk_dialog, 'shop3');
@@ -274,22 +275,13 @@ class Overworld extends Phaser.Scene {
             }  
             if(boss_visited == true) {
                 this.overworld_dialog(this.boss_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.", true, 'NPC_reentry_SFX');  
-            }     
+            } 
         }
-        if(shop1_visited == true && shop2_visited == true && shop3_visited == true && shop4_visited == true) {
+        if(shop1_visited == true && shop2_visited == true && shop3_visited == true && shop4_visited == true || shillings <= 0) {
             this.typeText('Okay, I just visited every shop time to head back to the BOSS.');
-            this.total = rosemaryOilBought + jasmineOilBought + firewoodBought + flaskBought + cauldronBought;
-            console.log(this.total);
-            if(!this.dialogTyping){
-                if(this.total == 5){
-                    this.scene_change(this.good_dialog, 'endingGood');
-                } else if(this.total < 5 && this.total >= 3 ){
-                    this.scene_change(this.meh_dialog, 'endingMeh');
-                } else if(this.total < 3) {
-                    this.scene_change(this.bad_dialog, 'endingBad');
-                }
-            }
+            endGame = true;
         }
+              
 
         //item interaction
         this.textUI = false;

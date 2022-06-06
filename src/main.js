@@ -23,7 +23,7 @@ const config = {
     //Ooze -> opening scene
     //Overworld -> map scene
     //BrazenBazaar -> dialogue scene
-    scene: [Load, Menu, OpeningScene, Overworld, Boss, Shop1, Shop2, Shop3, Shop4]
+    scene: [Load, Menu, Overworld, Boss, Shop1, Shop2, Shop3, Shop4, Ending]
 };
 
 // define game
@@ -45,7 +45,7 @@ let shop1_visited = false;
 let shop2_visited = false;
 let shop3_visited = false;
 let shop4_visited = false;
-let boss_visited = true;
+let boss_visited = false;
 let LETTER_TIMER = 15;	// # ms each letter takes to "type" onscreen //default = 20 or 10
 let keyR; // opens item inventory in the overworld
 let keyQ; //shows how much money you have left
@@ -58,4 +58,5 @@ let jasmineOilBought = 0;
 let tutorial = false;
 let shillings = 20;
 let milk_acquired = false;
+let endingTotal = 0;
 let milk_route = false;
