@@ -65,10 +65,11 @@ class Load extends Phaser.Scene {
         this.load.audio('NPC_reentry_SFX', 'audio/NPC_reentry_SFX.mp3');
         this.load.audio('door_closeSFX', 'audio/door_closeSFX.mp3');
         this.load.audio('door_openSFX', 'audio/door_openSFX.mp3');
+        this.load.audio('ending1', 'audio/ending1.mp3');
         
         //menu screen
         //this.load.image('titleScreen', 'images/title_screen2.png'); //old
-        this.load.spritesheet('menuscreen', "images/menuscreen.png", {frameWidth: 1024, frameHeight: 576, startFrame:0, endFrame: 14}); //new
+        this.load.spritesheet('menuscreen', "images/menuscreen.png", {frameWidth: 1024, frameHeight: 576, startFrame:0, endFrame: 14});
         this.load.spritesheet('smokeFX', "images/smokeFX.png", {frameWidth: 80, frameHeight: 114, startFrame:0, endFrame: 4});
         this.load.image('menuscreen_title', 'images/menuscreen_title.png');
         this.load.image('menuscreen_press', 'images/menuscreen_press.png');
@@ -114,12 +115,18 @@ class Load extends Phaser.Scene {
         //bossman
         this.load.spritesheet('boss', 'images/boss.png',{frameWidth: 225, frameHeight: 225, startFrame:0, endFrame: 11});
         this.load.json('boss_dialog', 'dialog/boss_dialog.json');
-        //good ending
+        
+        //END CREDITS
+        this.load.spritesheet('endingscreen', "images/endingscreen.png", {frameWidth: 1024, frameHeight: 576, startFrame:0, endFrame: 14});
+        this.load.image('theend', "images/theend.png");
+
+        //ENDINGS JSON FILE
         this.load.json('endingGood', 'dialog/goodEnding_dialog.json');
         //bad ending
         this.load.json('endingBad', 'dialog/badEnding_dialog.json');
         //meh ending
         this.load.json('endingMeh', 'dialog/mehEnding_dialog.json');
+        
         //items
         this.load.image('cauldron_item1', 'images/cauldron.png');
         this.load.image('jasmineOil_item2', 'images/jasmine_oil.png');
@@ -140,6 +147,6 @@ class Load extends Phaser.Scene {
 
     create() {
         // ...and pass to the next Scene
-        this.scene.start('overworldScene');
+        this.scene.start('boss');
     }
 }

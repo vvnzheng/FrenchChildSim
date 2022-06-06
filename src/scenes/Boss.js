@@ -95,7 +95,16 @@ class Boss extends Phaser.Scene {
         this.tutorial_text.visible = false;
 
         //init json file
-        this.dialog = this.cache.json.get('boss_dialog');
+        if(endingTotal >= 5){
+            this.dialog = this.cache.json.get('endingGood');
+        } else if(endingTotal < 5 && endingTotal >= 3 ){
+            this.dialog = this.cache.json.get('endingMeh');
+        } else if(endingTotal < 3 && endingTotal > 0) {
+            this.time.delayedCall(1000, () => {this.sound.play("ending1", {volume: .3});});
+            this.dialog = this.cache.json.get('endingBad');
+        } else {
+            this.dialog = this.cache.json.get('boss_dialog');
+        }
      
         this.textDisplay();
     }
@@ -211,7 +220,15 @@ class Boss extends Phaser.Scene {
 
     syncDisplayInfo() {
         console.log(this.prop.tempFSM.currentState.name);
-        if(this.prop.tempFSM.currentState.name == 'exit'){
+        if(this.prop.tempFSM.currentState.name == 'ending'){
+            this.cameras.main.fadeOut(cameraFadeTime);
+            this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+                this.time.delayedCall(500, () => {
+                this.scene.start('ending');
+                });
+            }); 
+        }
+        else if(this.prop.tempFSM.currentState.name == 'exit'){
             this.sound.play('door_closeSFX',{loop:false, volume: 1});
             lastShopVisited = 'BOSS';
             this.cameras.main.fadeOut(cameraFadeTime);

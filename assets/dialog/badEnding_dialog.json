@@ -1,6 +1,6 @@
 [
     {
-        "name": "Start",
+        "name": "1",
         "cName": "Boss",
         "text": "Grenouille! What took you so long?!",
         "initial": 	true,
@@ -21,43 +21,43 @@
         "cName": "Boss",
         "text" : "Well?? Hand them over!",
         "events": {
-            "But sir!" : "exit opening scene"
+            "But sir!" : "4"
         }
     },
     {
-        "name" : "exit opening scene",
+        "name" : "4",
         "cName": "Boss",
         "text" : "What?? You mean to tell me you spent all that time outside and didn't get anything??",
         "events": {
-            "...Yes" : "Close ingredients"
+            "...Yes" : "5"
         }
     },
     {
-        "name": "Close ingredients",
+        "name": "5",
         "cName": "Boss",
         "text" : "You!! What am I going to do with you?!",
         "events": {
-            "Sir! Sir calm down!" : "Open newspaper"
+            "Sir! Sir calm down!" : "6"
         }
     },
     {
-        "name": "Open newspaper",
+        "name": "6",
         "cName": "Boss",
         "text" : "No! No! I have had quite enough of you and your mess ups! YOU'RE FIRED!!",
         "events": {
-            "No! Please sir! I have an ill mother to take care of and two younger siblings!" : "Close newspaper"
+            "No! Please sir! I have an ill mother to take care of and two younger siblings!" : "7"
         }
     },
     {
-        "name": "Close newspaper",
+        "name": "7",
         "cName": "Boss",
         "text" : "You don't think I have my own family to take care of?? Get out of my sight!",
         "events" : {
-            "Alright..." : "exit"
+            "Alright..." : "ending"
         }
     },
 	{
-		"name": "exit",
+		"name": "ending",
 		"text" : "EXITING",
 		"events": {
         }
