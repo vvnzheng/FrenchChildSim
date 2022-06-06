@@ -244,11 +244,6 @@ class Shop3 extends Phaser.Scene {
             this.sixPerhaps = false;
             this.eightPerhaps = false;
         }
-        if(this.prop.tempFSM.currentState.name == 'exit'){
-            this.fourPerhaps = false;
-            this.sixPerhaps = false;
-            this.eightPerhaps = false;
-        }
 
         if(this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON' && this.eightPerhaps){
             this.price += 8;

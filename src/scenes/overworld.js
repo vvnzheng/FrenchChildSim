@@ -250,7 +250,9 @@ class Overworld extends Phaser.Scene {
         }
 */
         if(numOfShopsVisited > 0) {
-            if(shop3_visited == true) {
+            if(shop3_visited == true && milk_acquired) {
+                this.scene_change(this.shop3milk_dialog, 'shop3');
+            } else if(shop3_visited == true){
                 this.overworld_dialog(this.shop3_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.", true, 'NPC_reentry_SFX');
             } else if(shop3_visited == false) {
                 this.scene_change(this.shop3_dialog, 'shop3');
@@ -292,9 +294,8 @@ class Overworld extends Phaser.Scene {
         //item interaction
         this.textUI = false;
 
-        if(milk_acquired == false) {
+        if(milk_acquired == false && milk_route) {
             this.text_UI(this.cow.x, this.cow.y, this.cow_interact, "[F] to milk");
-            
         }
 
 

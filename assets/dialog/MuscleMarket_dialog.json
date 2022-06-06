@@ -262,14 +262,20 @@
 	{
 		"name": "what?10",
 		"cName" : "Pierre",
-		"text" : "That don't mean it is funny puny human. Now get out.",
+		"text" : "That don't mean it is funny puny human. Now get out. You're banned.",
 		"events": {
-			"All that dialogue for nothing..." : "exit"
+			"All that dialogue for nothing..." : "banned"
 		}
 	},
 	
 	{
 		"name": "exit",
+		"text" : "",
+		"events": {
+        }
+	},
+	{
+		"name": "banned",
 		"text" : "",
 		"events": {
         }

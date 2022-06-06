@@ -58,3 +58,4 @@ let jasmineOilBought = 0;
 let tutorial = false;
 let shillings = 20;
 let milk_acquired = false;
+let milk_route = false;
