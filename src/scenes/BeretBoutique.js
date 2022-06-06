@@ -27,7 +27,7 @@ class Shop1 extends Phaser.Scene {
         //this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
         this.NPC_soundtrack.play();
 
-        //cursors = this.input.keyboard.createCursorKeys();
+        cursors = this.input.keyboard.createCursorKeys();
 
         this.cameras.main.fadeIn(cameraFadeTime);
         this.cameras.main.setBackgroundColor(0x222034);
@@ -131,6 +131,10 @@ class Shop1 extends Phaser.Scene {
         if(!this.dialogTyping){
             // ignore non-numeric keys
             if(isNaN(event.key)) {
+                return;
+            }
+
+            if(Phaser.Input.Keyboard.JustDown(cursors.space)) {
                 return;
             }
 
