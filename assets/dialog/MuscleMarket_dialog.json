@@ -71,7 +71,200 @@
 		"text" : "I feel great today, so I decided to lower the price for my customer ",
 		"events": {
 			"Thank you so much sir, I'll buy it(PURCHASE FIREWOOD) " : "PURCHASE FIREWOOD",
+			"Really? That's it? No funny dialogue or anything??" : "question",
 			"Guess I'll buy it next time" : "exit"
+		}
+	},
+	{
+		"name": "question",
+		"cName" : "Pierre",
+		"text" : "Mmmm... nope",
+		"events": {
+			"Thank you so much sir, I'll buy it(PURCHASE FIREWOOD) " : "PURCHASE FIREWOOD",
+			"You're SERIOUSLY not going to ask me for anything?? Not even gonna crack a joke?" : "question1"
+		}
+	},
+	{
+		"name": "question1",
+		"cName" : "Pierre",
+		"text" : "Mmmm... nope",
+		"events": {
+			"Wow... okay... Guess I'll buy it. Thanks(PURCHASE FIREWOOD) " : "PURCHASE FIREWOOD",
+			"You're SERIOUSLY not going to ask me for anything?? Not even gonna crack a joke?" : "question2"
+		}
+	},
+	{
+		"name": "question2",
+		"cName" : "Pierre",
+		"text" : "Mmmm... nope",
+		"events": {
+			"Like... really really?? o_O" : "question3"
+		}
+	},
+	{
+		"name": "question3",
+		"cName" : "Pierre",
+		"text" : "Look man you going to buy or not? You annoying Pierre!",
+		"events": {
+			"Yes! I'll buy it!" : "PURCHASE FIREWOOD",
+			"I'm sorry! I just want to make sure you're really sure I mean everyone else has put me through a lot today." : "question4"
+		}
+	},
+	{
+		"name": "question4",
+		"cName" : "Pierre",
+		"text" : "Okay look puny person, you think you can annoy me?! Now it is 20 shillings! How you like them apples?!",
+		"events": {
+			"Whew looks like someone's got some anger issues!" : "question5",
+			"Okay I'm sorry, I'll make it up to you!... With a joke!" : "joke"
+		}
+	},
+	{
+		"name": "joke",
+		"cName" : "Pierre",
+		"text" : "It better be funny, Gremlin.",
+		"events": {
+			"It's Grenouille... Whatever... Guess what a teacher's favorite dance is!" : "teacher",
+			"Guess what?" : "what?"
+		}
+	},
+	{
+		"name": "teacher",
+		"cName" : "Pierre",
+		"text" : "What?",
+		"events": {
+			"Square dancing! Get it? Because math? Haha" : "teacher1"
+		}
+	},
+	{
+		"name": "teacher1",
+		"cName" : "Pierre",
+		"text" : "...Are you?... making fun of my wife?",
+		"events": {
+			"No no... That's not what I meant!" : "teacher2"
+		}
+	},
+	{
+		"name": "teacher2",
+		"cName" : "Pierre",
+		"text" : "*Tears up* She is an honorable teacher! The kids love her! Who cares if she dance no good?!",
+		"events": {
+			"No no... It was just a joke! About teachers in general! Not about your wife!" : "teacher3"
+		}
+	},
+	{
+		"name": "teacher3",
+		"cName" : "Pierre",
+		"text" : "OH! So you say Pierre not funny?! Pierre do not get joke?! I get it... YOU SAY PIERRE IDIOT!",
+		"events": {
+			"This really escalated..." : "teacher4"
+		}
+	},
+	{
+		"name": "teacher4",
+		"cName" : "Pierre",
+		"text" : "GET OUT! I WILL NEVER SELL TO YOU AGAIN! OR YOUR MOTHER! OR YOUR MOTHER'S MOTHER! OR YOUR MOTHER'S MOTHER'S MOTHER!!!",
+		"events": {
+			"Alright alright, I get it. Never tell a man a joke I guess" : "exit"
+		}
+	},
+
+
+	{
+		"name": "question5",
+		"cName" : "Pierre",
+		"text" : "...Get out before Pierre beat puny person to pulp",
+		"events": {
+			"Geez... sorry :/" : "exit"
+		}
+	},
+	
+	{
+		"name": "what?",
+		"cName" : "Pierre",
+		"text" : "...What?",
+		"events": {
+			"..." : "what?1"
+		}
+	},
+	
+	{
+		"name": "what?1",
+		"cName" : "Pierre",
+		"text" : "...",
+		"events": {
+			"..." : "what?2"
+		}
+	},
+
+	{
+		"name": "what?2",
+		"cName" : "Pierre",
+		"text" : "...",
+		"events": {
+			"..." : "what?3"
+		}
+	},
+
+	{
+		"name": "what?3",
+		"cName" : "Pierre",
+		"text" : "...",
+		"events": {
+			"..." : "what?4"
+		}
+	},
+
+	{
+		"name": "what?4",
+		"cName" : "Pierre",
+		"text" : "TELL PIERRE WHAT PUNY HUMAN!!!",
+		"events": {
+			"..." : "what?5"
+		}
+	},
+
+	{
+		"name": "what?5",
+		"cName" : "Grenouille",
+		"text" : "chicken butt",
+		"events": {
+			"..." : "what?6"
+		}
+	},
+
+	{
+		"name": "what?6",
+		"cName" : "Pierre",
+		"text" : "Oh... Oh ho ho... OH OH HO HO! OHOHOHOHOHOHOHOHOHOHOHOHOHOHOOHOHOHOHOHOHOHOHO!",
+		"events": {
+			"You... you thought that was funny?" : "what?7"
+		}
+	},
+
+	{
+		"name": "what?7",
+		"cName" : "Pierre",
+		"text" : "The? HAHA The chi-haah chicken butt?",
+		"events": {
+			"Um... yeah haha?" : "what?8"
+		}
+	},
+	
+	{
+		"name": "what?8",
+		"cName" : "Pierre",
+		"text" : "Whewww... ah haha... chicken butt... Mmmm... no.",
+		"events": {
+			"Wha- but, but you laughed so hard!!" : "what?9"
+		}
+	},
+	{
+		"name": "what?10",
+		"cName" : "Pierre",
+		"text" : "That don't mean it is funny puny human. Now get out.",
+		"events": {
+			"All that dialogue for nothing..." : "exit"
 		}
 	},
 	
@@ -85,6 +278,7 @@
 		"name": "PURCHASE FIREWOOD",
 		"cName" : "Pierre",
 		"image" : "firewood",
+		"image2" : "firewood_item5",
 		"sound" : true,
 		"text" : "I've just acquired FIREWOOD!",
 		"events": {
