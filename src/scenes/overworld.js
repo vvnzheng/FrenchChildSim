@@ -110,6 +110,9 @@ class Overworld extends Phaser.Scene {
         //player = this.physics.add.sprite(400, 750, "player"); //quick overworld testing
         player.body.setSize(20,22).setOffset(4, 10); //player collision shape
 
+        this.clouds = this.add.tileSprite(0,0, game.config.width, game.config.height/1.405, 'clouds').setOrigin(0,0).setScale(2); //1.42
+        this.clouds2 = this.add.tileSprite(0,0, game.config.width, game.config.height/1.405, 'clouds2').setOrigin(0,0).setScale(2); //1.42
+
         
         //variables for door interaction
         //enables collision with player
@@ -335,6 +338,9 @@ class Overworld extends Phaser.Scene {
                 }
             }
         }
+
+        this.clouds.tilePositionX += 0.01;
+        this.clouds2.tilePositionX += 0.017;
 
         this.cow.anims.play('cow', true);
         this.item_interact('MILK ACQUIRED!', 'milk');
