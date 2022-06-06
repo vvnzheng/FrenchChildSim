@@ -99,11 +99,11 @@ class Overworld extends Phaser.Scene {
 
         //add playyer sprite
         player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
-        //player = this.physics.add.sprite(400, 750, "player"); //quick overworld testing
+        //player = this.physics.add.sprite(1200, 450, "player"); //quick overworld testing
         player.body.setSize(25,22).setOffset(0, 10); //player collision shape
 
-        this.clouds = this.add.tileSprite(0,0, game.config.width, game.config.height/1.405, 'clouds').setOrigin(0,0).setScale(2).setDepth(2);
-        this.clouds2 = this.add.tileSprite(0,0, game.config.width, game.config.height/1.405, 'clouds2').setOrigin(0,0).setScale(2).setDepth(2); 
+        this.clouds = this.add.tileSprite(0,0, 832, game.config.height/1.405, 'clouds').setOrigin(0,0).setScale(2).setDepth(2);
+        this.clouds2 = this.add.tileSprite(0,0, 832, game.config.height/1.405, 'clouds2').setOrigin(0,0).setScale(2).setDepth(2); 
 
         
         //variables for door interaction
@@ -331,8 +331,8 @@ class Overworld extends Phaser.Scene {
             }
         }
 
-        this.clouds.tilePositionX += 0.01;
-        this.clouds2.tilePositionX += 0.017;
+        this.clouds.tilePositionX += 0.03;
+        this.clouds2.tilePositionX += 0.037;
 
         this.cow.anims.play('cow', true);
         this.item_interact('MILK ACQUIRED!', 'milk');
