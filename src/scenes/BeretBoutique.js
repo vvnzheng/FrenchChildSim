@@ -176,7 +176,10 @@ class Shop1 extends Phaser.Scene {
 
     syncDisplayInfo() {
         console.log(this.prop.tempFSM.currentState.name);
-        if(this.prop.tempFSM.currentState.name == 'exit'){
+        if(this.prop.tempFSM.currentState.name == 'exit' || this.prop.tempFSM.currentState.name == 'banned'){
+            if(this.prop.tempFSM.currentState.name == 'banned'){
+                banned_beret = true;
+            }
             lastShopVisited = 'SHOP1';
             shop1_visited = true;
             numOfShopsVisited -= 1;
@@ -209,19 +212,29 @@ class Shop1 extends Phaser.Scene {
 
         //discount rosemary oil & firewood or pay 8 for just rosemary oil
         if(this.prop.tempFSM.currentState.name == 'a14.1' || this.prop.tempFSM.currentState.name == 'a7.3'){
-            this.price += 8;
+            if(shillings < 8){
+                this.prop.tempFSM.transition("poor");
+                rosemaryOilBought = 0;
+                firewoodBought = 0;
+            } else {
+                this.price += 8;
+                this.eightPerhaps = false;
+                this.sixPerhaps = false;
+            }
         }
 
         if(this.prop.tempFSM.currentState.name == 'PURCHASE ROSEMARY OIL'){
             if(this.sixPerhaps){
                 if(shillings < 6){
                     this.prop.tempFSM.transition("poor");
+                    rosemaryOilBought -= 1;
                 } else {
                     this.price += 6;
                 }
             } else if(this.eightPerhaps){
                 if(shillings < 8){
                     this.prop.tempFSM.transition("poor");
+                    rosemaryOilBought -= 1;
                 } else {
                     this.price += 8;
                 }
@@ -229,6 +242,7 @@ class Shop1 extends Phaser.Scene {
         }
 
         //Firewood
+        
         
         if(this.prop.tempFSM.currentState.name == 'b1'){
             this.sixPerhaps = true;
@@ -259,11 +273,26 @@ class Shop1 extends Phaser.Scene {
         
         if(this.prop.tempFSM.currentState.name == 'PURCHASE FIREWOOD'){
             if(this.sixPerhaps){
-                this.price += 6;
+                if(shillings < 6){
+                    this.prop.tempFSM.currentState.name == 'poor';
+                    firewoodBought -=1;
+                } else {
+                    this.price += 6;
+                }
             } else if(this.eightPerhaps){
-                this.price += 8;
+                if(shillings < 8){
+                    this.prop.tempFSM.currentState.name == 'poor';
+                    firewoodBought -=1;
+                } else {
+                    this.price += 8;
+                }
             } else if(this.fivePerhaps){
-                this.price += 5;
+                if(shillings < 5){
+                    this.prop.tempFSM.currentState.name == 'poor';
+                    firewoodBought -=1;
+                } else {
+                    this.price += 5;
+                }
             }
         }
 

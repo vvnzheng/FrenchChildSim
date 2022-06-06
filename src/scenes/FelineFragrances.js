@@ -186,12 +186,15 @@ class Shop3 extends Phaser.Scene {
     }
 
     syncDisplayInfo() {
-        if(this.prop.tempFSM.currentState.name == 'exit'){
+        if(this.prop.tempFSM.currentState.name == 'exit' || this.prop.tempFSM.currentState.name == 'banned'){
             shop3_visited = true;
             lastShopVisited = 'SHOP3';
             numOfShopsVisited -= 1;
             this.sound.play('door_closeSFX',{loop:false, volume: 1});
             this.cameras.main.fadeOut(cameraFadeTime);
+            if(this.prop.tempFSM.currentState.name == 'banned'){
+                banned_feline = true;
+            }
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
                 tutorial = true;
@@ -213,10 +216,19 @@ class Shop3 extends Phaser.Scene {
         //check price of flask
         if(this.prop.tempFSM.currentState.name == '7'){
             this.price += 2;
+            this.sixPerhaps = false;
+            this.fourPerhaps = false;
+            this.eightPerhaps = false;
         } else if(this.prop.tempFSM.currentState.name == '8'){
             this.price += 3;
+            this.sixPerhaps = false;
+            this.fourPerhaps = false;
+            this.eightPerhaps = false;
         } else if(this.prop.tempFSM.currentState.name == '5'){
             this.price += 6;
+            this.sixPerhaps = false;
+            this.fourPerhaps = false;
+            this.eightPerhaps = false;
         }
         //check price of cauldron
         if(this.prop.tempFSM.currentState.name == '10.1'){
@@ -244,6 +256,11 @@ class Shop3 extends Phaser.Scene {
             this.sixPerhaps = false;
             this.eightPerhaps = false;
         }
+        if(this.prop.tempFSM.currentState.name == 'hasmilk1'){
+            this.fourPerhaps = false;
+            this.sixPerhaps = false;
+            this.eightPerhaps = false;
+        }
 
         if(this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON' && this.eightPerhaps){
             this.price += 8;
@@ -257,9 +274,14 @@ class Shop3 extends Phaser.Scene {
             this.price += 4;
         }
         
-        if(this.prop.tempFSM.currentState.name == 'milk'){
-            milk_route = true;
+        if(this.prop.tempFSM.currentState.name == 'milk4'){
+            if(milk_acquired){
+                this.prop.tempFSM.transition("hasmilk");
+            } else {
+                this.prop.tempFSM.transition("nomilk");
+            }
         }
+        
         this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
         this.prop2.setTexture(this.prop.tempFSM.currentState.image2);

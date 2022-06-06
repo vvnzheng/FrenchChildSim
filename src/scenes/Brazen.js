@@ -175,7 +175,10 @@ class Shop4 extends Phaser.Scene {
 
     syncDisplayInfo() {
         console.log(this.prop.tempFSM.currentState.name);
-        if(this.prop.tempFSM.currentState.name == 'exit'){
+        if(this.prop.tempFSM.currentState.name == 'exit' || this.prop.tempFSM.currentState.name == 'banned'){
+            if(this.prop.tempFSM.currentState.name == 'banned'){
+                banned_brazen = true;
+            }
             lastShopVisited = 'SHOP4';
             shop4_visited = true;
             numOfShopsVisited -= 1;
@@ -211,24 +214,35 @@ class Shop4 extends Phaser.Scene {
             this.sixPerhaps = false;
         }  
         if(this.prop.tempFSM.currentState.name == 'positive5'){
-            this.price += 3;
+            if(shillings < 3){
+                this.prop.tempFSM.transition("poor2");
+                jasmineOilBought = 0;
+            } else {
+                this.price += 3;
+                this.eightPerhaps = false;
+                this.twoPerhaps = false;
+                this.sixPerhaps = false;
+            }
         }
         if (this.prop.tempFSM.currentState.name == 'PURCHASE JASMINE OIL'){
             if(this.eightPerhaps){
                 if(shillings < 8){
                     this.prop.tempFSM.transition("poor8");
+                    jasmineOilBought -=1;
                 } else {
                     this.price +=8;
                 }
             } else if(this.sixPerhaps){
                 if(shillings < 6){
                     this.prop.tempFSM.transition("poor6");
+                    jasmineOilBought -=1;
                 } else {
                     this.price +=6;
                 }
             } else if(this.twoPerhaps){
                 if(shillings < 2){
                     this.prop.tempFSM.transition("poor2");
+                    jasmineOilBought -=1;
                 } else {
                     this.price +=2;
                 }

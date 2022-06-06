@@ -95,11 +95,11 @@ class Boss extends Phaser.Scene {
         this.tutorial_text.visible = false;
 
         //init json file
-        if(endingTotal >= 5){
+        if(endingTotal >= 5 && endGame){
             this.dialog = this.cache.json.get('endingGood');
-        } else if(endingTotal < 5 && endingTotal >= 3 ){
+        } else if(endingTotal < 5 && endingTotal >= 3 && endGame){
             this.dialog = this.cache.json.get('endingMeh');
-        } else if(endingTotal < 3 && endingTotal > 0) {
+        } else if(endingTotal < 3 && endingTotal > 0 && endGame) {
             this.time.delayedCall(1000, () => {this.sound.play("ending1", {volume: .3});});
             this.dialog = this.cache.json.get('endingBad');
         } else {

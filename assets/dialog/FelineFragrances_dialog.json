@@ -114,7 +114,7 @@
 		"events": {
 			"Wow! How beautiful!" : "10",
 			"Looks the same as any other cauldron in town." : "12",
-			"Not Interested, Ciao!" : "confirm exit"
+			"Not Interested, Ciao!" : "exit"
 		}
 	},
 	{
@@ -214,7 +214,6 @@
 		"cName" : "Phillippe",
 		"text" : "Well of course I won't give it to you for free!",
 		"events": {
-			"Deal!" : "exit",
 			"No Deal!" : "milk2"
 		}
 	},
@@ -223,7 +222,46 @@
 		"cName" : "Phillippe",
 		"text" : "WAIT!! Fine! I'll give it to you for free... Phillippe the wise lion loves him some milk...",
 		"events": {
-			"Ew... But I guess whatever it takes to get something for free" : "exit"
+			"I have some right here!" : "milk3"
+		}
+	},
+	{
+		"name": "milk3",
+		"cName" : "Phillippe",
+		"text" : "Really?? OH gimme gimme!",
+		"events": {
+			"Here you go!" : "milk4"
+		}
+	},
+	{
+		"name": "milk4",
+		"cName" : "Phillippe",
+		"text" : "",
+		"events": {
+		}
+	},
+	{
+		"name": "hasmilk",
+		"cName" : "Phillippe",
+		"text" : "YES! ",
+		"events": {
+			"Now about our deal?" : "hasmilk1"
+		}
+	},
+	{
+		"name": "hasmilk1",
+		"cName" : "Phillippe",
+		"text" : "Oh, ahem. Yes, here's your free cauldron now move along nothing to see here! Oh ho ho... finally my sweet <3",
+		"events": {
+			"I better go before I witness something I don't want to" : "PURCHASE CAULDRON"
+		}
+	},
+	{
+		"name": "nomilk",
+		"cName" : "Phillippe",
+		"text" : "You dare lie to me about my sweet milk?! After all I've done for you?! Get out! You are banned!!!",
+		"events": {
+			"It's not my fault! The programmers didn't give me any other choice..." : "banned"
 		}
 	},
 
@@ -272,6 +310,12 @@
 	},
 	{
 		"name": "exit",
+		"text" : "",
+		"events": {
+        }
+	},
+	{
+		"name": "banned",
 		"text" : "",
 		"events": {
         }

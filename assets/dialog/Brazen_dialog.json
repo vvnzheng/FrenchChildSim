@@ -30,7 +30,7 @@
 	{
 		"name": "audacity",
 		"cName": "Marie",
-		"text" : "Excuse me?? Well... I'll tell yo mama!",
+		"text" : "Excuse me?? Well... I'm banning you AND I'll tell yo mama!",
 		"events" : {
 			"...Really? My mama??":"audacity2"
 		}
@@ -40,11 +40,16 @@
 		"cName": "Marie",
 		"text" : "Yeah! Yo mama! And she's gonna pass away with the shock that her little boy is a wrongful little snot!",
 		"events" : {
-			"...You play a mean game woman... Fine! I'll leave. What a hag...":"exit"
+			"...You play a mean game woman... Fine! I'll leave. What a hag...":"banned"
 		}
 	},
 	{
 		"name": "exit",
+		"text" : "",
+		"events": {}
+	},
+	{
+		"name": "banned",
 		"text" : "",
 		"events": {}
 	},
@@ -172,8 +177,7 @@
 		"cName" : "Marie",
 		"text" : "HAH! You're poor! Get out!",
 		"events": {
-			"Okay, I get it." : "exit",
-			"Please, could you spare me some slack?" : "maybe"
+			"Okay, I get it." : "exit"
 		}
 	},
 	{
@@ -181,16 +185,7 @@
 		"cName" : "Marie",
 		"text" : "So.. you can't afford anything... Get out.",
 		"events": {
-			"Okay, I get it." : "exit",
-			"Please, could you spare me some slack?" : "maybe"
-		}
-	},
-	{
-		"name": "maybe",
-		"cName" : "Marie",
-		"text" : "Well... There is one thing I would like... I've been wanting a ",
-		"events": {
-			"I'll get it!" : "exit"
+			"Okay, I get it." : "exit"
 		}
 	},
 	{

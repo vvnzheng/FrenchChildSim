@@ -246,9 +246,9 @@
 	{
 		"name": "b6.1",
 		"cName":"JEAN",
-		"text" : "8 shillings for the FIREWOOD or you could look elsewhere little garcon.",
+		"text" : "Never have I been faced with such disrespect... 8 shillings for the FIREWOOD or I ban you.",
 		"events": {
-			"Leave shop." : "exit",
+			"Leave shop." : "banned",
 			"Purchase FIREWOOD for 8 shillings." : "PURCHASE FIREWOOD"
         }
 	},
@@ -316,7 +316,13 @@
 		"name": "exit",
 		"text" : "",
 		"events": {}
-	}
+	},
+
+	{
+		"name": "banned",
+		"text" : "",
+		"events": {}
+	},
 
 	{
 		"name": "poor",

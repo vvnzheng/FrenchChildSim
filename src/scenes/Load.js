@@ -97,6 +97,7 @@ class Load extends Phaser.Scene {
         //BACKGROUND
         this.load.spritesheet('shopbg', 'images/shopbganimated.png',{frameWidth: 800, frameHeight: 600, startFrame:0, endFrame: 4});
         this.load.image('shopbg2', 'images/shopbg.png');
+        this.load.image('ban', 'images/banned.png');
         //trader NPC
         this.load.spritesheet('shopkeep1', 'images/shopkeep1.png',{frameWidth: 75, frameHeight: 100, startFrame:0, endFrame: 18});
         this.load.json('BeretBoutique_dialog', 'dialog/BeretBoutique_dialog.json');

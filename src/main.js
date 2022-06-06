@@ -1,6 +1,6 @@
 // Vivian Zheng, Charles Qi, Noah Kirsch, Allan Moua
-// Perfume game
-// Updated: 5/11/2022
+// L'apprenti
+// Updated: 06/05/2022
 
 // Debugging
 'use strict';
@@ -59,4 +59,7 @@ let tutorial = false;
 let shillings = 20;
 let milk_acquired = false;
 let endingTotal = 0;
-let milk_route = false;
+let banned_feline = false;
+let banned_brazen = false;
+let banned_beret = false;
+let banned_muscle = false;

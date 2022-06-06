@@ -173,7 +173,10 @@ class Shop2 extends Phaser.Scene {
     }
 
     syncDisplayInfo() {
-        if(this.prop.tempFSM.currentState.name == 'exit'){
+        if(this.prop.tempFSM.currentState.name == 'exit' || this.prop.tempFSM.currentState.name == 'banned'){
+            if(this.prop.tempFSM.currentState.name == 'banned'){
+                banned_muscle = true;
+            }
             lastShopVisited = 'SHOP2';
             shop2_visited = true;
             numOfShopsVisited -= 1;
@@ -206,14 +209,20 @@ class Shop2 extends Phaser.Scene {
             if(this.fourPerhaps){
                 if(shillings < 4){
                     this.prop.tempFSM.transition("poor");
+                    firewoodBought -= 1;
                 } else {
                     this.price += 4;
+                    this.fourPerhaps = false;
+                    this.twoPerhaps = false;
                 }
             } else if(this.twoPerhaps){
                 if(shillings < 2){
                     this.prop.tempFSM.transition("poor");
+                    firewoodBought -= 1;
                 } else {
                     this.price += 2;
+                    this.fourPerhaps = false;
+                    this.twoPerhaps = false;
                 }
             }
         } 
