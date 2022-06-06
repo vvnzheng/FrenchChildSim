@@ -211,7 +211,7 @@ class Shop2 extends Phaser.Scene {
         } 
         this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
-        this.prop.setTexture(this.prop.tempFSM.currentState.image2);
+        this.prop2.setTexture(this.prop.tempFSM.currentState.image2);
         let options = Object.keys(this.prop.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`); //`(${i+1}) ${k}\n`);
         this.typeText(this.transitionText.text = `${options.join('')}`);
     }
