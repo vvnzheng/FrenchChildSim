@@ -230,7 +230,7 @@ class Overworld extends Phaser.Scene {
         this.physics.world.enable(this.shop4_dialog, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.boss_dialog, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.cow_interact, Phaser.Physics.Arcade.STATIC_BODY);
-/*
+
         if(tutorial1 == false) {
             this.overworld_dialog(this.tutorial, "Looks like Feline Fragrances is right next door!");
             tutorial1 = true;
@@ -244,7 +244,7 @@ class Overworld extends Phaser.Scene {
             this.overworld_dialog(this.tutorial3, "Press [R] to open and close ITEM CHECKLIST & view current SHILLINGS(money).");
             tutorial3 = true;
         }
-*/
+
 
         endingTotal = rosemaryOilBought + jasmineOilBought + firewoodBought + flaskBought + cauldronBought;
 
