@@ -108,7 +108,7 @@ class Load extends Phaser.Scene {
         //cat
         this.load.image('catbg', 'images/catbg.png');
         this.load.image('cauldron', 'images/cauldron.png');
-        this.load.image('flask', 'images/flask.png');
+        this.load.image('flask', 'images/flask2.png');
         this.load.spritesheet('shopkeep3', 'images/cat.png',{frameWidth: 117, frameHeight: 186, startFrame:0, endFrame: 41});
         this.load.json('FelineFragrances_dialog', 'dialog/FelineFragrances_dialog.json');
         //bunny

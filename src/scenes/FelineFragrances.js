@@ -41,7 +41,7 @@ class Shop3 extends Phaser.Scene {
             loop: -1
         });*/
         this.shopbg = this.add.sprite(game.config.width/8, 0,'catbg').setOrigin(0).setScale(1.2);
-        this.flask = this.add.sprite(game.config.width-225, game.config.height/5,'flask').setOrigin(0).setScale(1.2);
+        this.flask = this.add.sprite(game.config.width-200, (game.config.height/5)-120,'flask').setOrigin(0).setScale(1.5);
         this.cauldron = this.add.sprite(game.config.width - 380, game.config.height/2.75,'cauldron').setOrigin(0).setScale(1.2);
         this.price = 0;
         this.eightPerhaps = false;
@@ -256,7 +256,10 @@ class Shop3 extends Phaser.Scene {
         if(this.prop.tempFSM.currentState.name == 'PURCHASE CAULDRON' && this.fourPerhaps){
             this.price += 4;
         }
-        this.eightPerhaps = false;
+        
+        if(this.prop.tempFSM.currentState.name == 'milk'){
+            milk_route = true;
+        }
         this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
         this.prop2.setTexture(this.prop.tempFSM.currentState.image2);

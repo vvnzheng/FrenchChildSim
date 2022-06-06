@@ -215,11 +215,23 @@ class Shop4 extends Phaser.Scene {
         }
         if (this.prop.tempFSM.currentState.name == 'PURCHASE JASMINE OIL'){
             if(this.eightPerhaps){
-                this.price +=8;
+                if(shillings < 8){
+                    this.prop.tempFSM.transition("poor8");
+                } else {
+                    this.price +=8;
+                }
             } else if(this.sixPerhaps){
-                this.price +=6;
+                if(shillings < 6){
+                    this.prop.tempFSM.transition("poor6");
+                } else {
+                    this.price +=6;
+                }
             } else if(this.twoPerhaps){
-                this.price +=2;
+                if(shillings < 2){
+                    this.prop.tempFSM.transition("poor2");
+                } else {
+                    this.price +=2;
+                }
             }
         }  
         this.soundFX();

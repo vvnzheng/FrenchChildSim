@@ -204,9 +204,17 @@ class Shop2 extends Phaser.Scene {
         
         if (this.prop.tempFSM.currentState.name == 'PURCHASE FIREWOOD'){
             if(this.fourPerhaps){
-                this.price += 4;
+                if(shillings < 4){
+                    this.prop.tempFSM.transition("poor");
+                } else {
+                    this.price += 4;
+                }
             } else if(this.twoPerhaps){
-                this.price += 2;
+                if(shillings < 2){
+                    this.prop.tempFSM.transition("poor");
+                } else {
+                    this.price += 2;
+                }
             }
         } 
         this.soundFX();
