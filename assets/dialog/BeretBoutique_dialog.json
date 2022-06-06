@@ -316,7 +316,7 @@
 		"name": "exit",
 		"text" : "",
 		"events": {}
-	}
+	},
 
 	{
 		"name": "poor",
