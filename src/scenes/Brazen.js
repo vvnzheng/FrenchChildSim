@@ -53,6 +53,12 @@ class Shop4 extends Phaser.Scene {
         this.prop = this.add.sprite(game.config.width/2, game.config.height/2, 'propsetup');
         this.prop2 = this.add.sprite(game.config.width/2, game.config.height/3, 'propsetup');
 
+        //shillings
+        this.price = 0;
+        this.twoPerhaps = false;
+        this.sixPerhaps = false;
+        this.eightPerhaps = false;
+
         //dbox
         this.dialogbox = this.add.sprite(this.DBOX_X, this.DBOX_Y, 'dbox2').setOrigin(0).setScale(1.2);
 
@@ -172,12 +178,45 @@ class Shop4 extends Phaser.Scene {
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
+                    shillings -= this.price;
                 this.scene.start('overworldScene');
                 })
             })
         } else if (this.prop.tempFSM.currentState.name == 'PURCHASE JASMINE OIL'){
             //this.cauldron.visible = false;
             jasmineOilBought += 1;
+        }  
+        if (this.prop.tempFSM.currentState.name == 'positive1'){
+            this.sixPerhaps = true;
+            this.twoPerhaps = false;
+            this.eightPerhaps = false;
+        }  
+        if (this.prop.tempFSM.currentState.name == 'positive3'){
+            this.twoPerhaps = true;
+            this.sixPerhaps = false;
+            this.eightPerhaps = false;
+        }  
+        if (this.prop.tempFSM.currentState.name == 'negative4'){
+            this.twoPerhaps = false;
+            this.sixPerhaps = false;
+            this.eightPerhaps = false;
+        }  
+        if (this.prop.tempFSM.currentState.name == 'negative1' ||this.prop.tempFSM.currentState.name == 'negative5' ){
+            this.eightPerhaps = true;
+            this.twoPerhaps = false;
+            this.sixPerhaps = false;
+        }  
+        if(this.prop.tempFSM.currentState.name == 'positive5'){
+            this.price += 3;
+        }
+        if (this.prop.tempFSM.currentState.name == 'PURCHASE JASMINE OIL'){
+            if(this.eightPerhaps){
+                this.price +=8;
+            } else if(this.sixPerhaps){
+                this.price +=6;
+            } else if(this.twoPerhaps){
+                this.price +=2;
+            }
         }  
         this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
