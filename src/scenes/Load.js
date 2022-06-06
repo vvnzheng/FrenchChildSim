@@ -78,6 +78,8 @@ class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("map", "overworld.json"); 
         this.load.atlas("player", "images/grenouille_walk_anim.png", "images/grenouille_walk_anim.json");
         this.load.spritesheet('enter', "images/enterAnimation.png", {frameWidth: 32, frameHeight: 24, startFrame:0, endFrame: 5});
+        this.load.spritesheet("cow", "images/cow.png", {frameWidth: 43, frameHeight: 31, startFrame:0, endFrame: 9});
+        this.load.image("milk", "images/milk.png");
 
         //tutorial
         this.load.spritesheet('tutorial_WASD', "images/tutorial_WASD.png", {frameWidth: 160, frameHeight: 99, startFrame:0, endFrame: 4});
@@ -131,6 +133,6 @@ class Load extends Phaser.Scene {
 
     create() {
         // ...and pass to the next Scene
-        this.scene.start('menu');
+        this.scene.start('overworldScene');
     }
 }

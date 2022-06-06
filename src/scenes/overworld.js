@@ -23,7 +23,7 @@ class Overworld extends Phaser.Scene {
         //sound
         this.game.sound.stopAll();
         this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: true, volume: .3});
-        this.overworld_soundtrack.play();
+        this.time.delayedCall(3000, () => {this.overworld_soundtrack.play();});
         this.sound.play("windSFX", {loop:true, volume: .2});  
         this.runningFX = this.sound.add('runningFX',{loop: false, volume: .2});
         this.dialogFX = this.sound.add('dialogFX',{loop: true, volume: .3});
@@ -44,22 +44,11 @@ class Overworld extends Phaser.Scene {
         const worldLayer3 = map.createLayer("World Top Layer", tileset, 0, 0);
         const aboveLayer = map.createLayer("Above Top Layer", tileset, 0, 0);
 
-        //DOOR layers
-        const doorToNPC1 = map.createLayer("Door To NPC 1", tileset, 0, 0);
-        const doorToNPC2 = map.createLayer("Door To NPC 2", tileset, 0, 0);
-        const doorToNPC3 = map.createLayer("Door To NPC 3", tileset, 0, 0);
-        const doorToNPC4 = map.createLayer("Door To NPC 4", tileset, 0, 0);
-        const doorToNPC5 = map.createLayer("Door To NPC 5", tileset, 0, 0);
 
         //setup collision with structures and objects created from TILED
         worldLayer.setCollisionByProperty({ collides: true });
         worldLayer2.setCollisionByProperty({ collides: true });
         worldLayer3.setCollisionByProperty({ collides: true });
-        doorToNPC1.setCollisionByProperty({collides: true}, true, true);
-        doorToNPC2.setCollisionByProperty({collides: true});
-        doorToNPC3.setCollisionByProperty({collides: true});
-        doorToNPC4.setCollisionByProperty({collides: true});
-        doorToNPC5.setCollisionByProperty({collides: true});
 
         //puts certain layers above player
         aboveLayer.setDepth(1);
@@ -78,20 +67,24 @@ class Overworld extends Phaser.Scene {
             spawnPoint = map.findObject("SpawnPoints", obj => obj.name === "SHOP4");
         }
 
+
+        this.cow = this.physics.add.sprite(350, 700, "cow").setScale(1.5);
+        this.cow.body.immovable = true;
+        this.cow.body.setSize(42,26).setOffset(0, 0); 
+
         //add playyer sprite
         //player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
-        player = this.physics.add.sprite(400, 350, "player"); //quick overworld testing
+        player = this.physics.add.sprite(400, 850, "player"); //quick overworld testing
+        player.body.setSize(20,22).setOffset(4, 10); //player collision shape
 
+        
         //variables for door interaction
         //enables collision with player
         this.physics.add.collider(player, worldLayer);
         this.physics.add.collider(player, worldLayer2);
         this.physics.add.collider(player, worldLayer3);
-        this.physics.add.collider(player, this.doorToNPC1);
-        this.physics.add.collider(player, doorToNPC2);
-        this.physics.add.collider(player, doorToNPC3);
-        this.physics.add.collider(player, doorToNPC4);
-        this.physics.add.collider(player, doorToNPC5);
+        this.physics.add.collider(player, this.cow);
+
 
         //player animations create
         const anims = this.anims;
@@ -119,6 +112,13 @@ class Overworld extends Phaser.Scene {
             key: 'enterAnim',
             frames: anims.generateFrameNumbers('enter', {start: 0, end: 5, first: 0}),
             frameRate: 5
+        });
+        //cow
+        this.anims.create({
+            key: 'cow',
+            frames:this.anims.generateFrameNumbers('cow',{start: 0, end: 9, first: 0}),
+            frameRate: 3,
+            loop: -1
         });
 
         //dbox SETUP
@@ -174,6 +174,7 @@ class Overworld extends Phaser.Scene {
         this.shop3_dialog = map.createFromObjects("Dialog", {name: "shop3visited"});
         this.shop4_dialog = map.createFromObjects("Dialog", {name: "shop4visited"});
         this.boss_dialog = map.createFromObjects("Dialog", {name: "bossvisited"});
+        this.cow_interact = map.createFromObjects("Dialog", {name: "cow"});
 
         this.physics.world.enable(this.tutorial, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.tutorial3, Phaser.Physics.Arcade.STATIC_BODY);
@@ -183,7 +184,8 @@ class Overworld extends Phaser.Scene {
         this.physics.world.enable(this.shop3_dialog, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.shop4_dialog, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.boss_dialog, Phaser.Physics.Arcade.STATIC_BODY);
-
+        this.physics.world.enable(this.cow_interact, Phaser.Physics.Arcade.STATIC_BODY);
+/*
         if(tutorial1 == false) {
             this.overworld_dialog(this.tutorial, "Looks like Feline Fragrances is right next door!");
             tutorial1 = true;
@@ -197,7 +199,7 @@ class Overworld extends Phaser.Scene {
             this.overworld_dialog(this.tutorial3, "Press [R] to open and close ITEM CHECKLIST & view current SHILLINGS(money).");
             tutorial3 = true;
         }
-
+*/
         if(numOfShopsVisited > 0) {
             if(shop3_visited == true) {
                 this.overworld_dialog(this.shop3_dialog, "I'm on a tight schedule. Boss needs these items before the day ends. I still have " + numOfShopsVisited + " more shops to visit.", true, 'NPC_reentry_SFX');
@@ -228,7 +230,13 @@ class Overworld extends Phaser.Scene {
             endGame = true;
         }
 
-        
+        //item interaction
+        this.textUI = false;
+
+        if(milk_acquired == false) {
+            this.text_UI(this.cow.x, this.cow.y, this.cow_interact, "[F] to milk");
+            
+        }
 
 
         //keyboard inputs
@@ -275,6 +283,9 @@ class Overworld extends Phaser.Scene {
                 }
             }
         }
+
+        this.cow.anims.play('cow', true);
+        this.item_interact('MILK ACQUIRED!', 'milk');
 
         this.item_checklist(player.x, player.y);
         
@@ -407,7 +418,9 @@ class Overworld extends Phaser.Scene {
                 //this.cameras.main.pan(player.x, player.y - 100);
                 this.scene_transition = true;
                 this.sound.play('door_openSFX',{loop:false, volume: 1});
-                this.overworld_soundtrack.stop();
+                if(this.overworld_soundtrack.isPlaying){
+                    this.overworld_soundtrack.stop();
+                }
                 this.scene.start(scene);
             });
         }
@@ -415,7 +428,7 @@ class Overworld extends Phaser.Scene {
         //checklist for game progression
         item_checklist(playerX, playerY) {
             if(this.item_checklist_Visible == false) {
-                if(Phaser.Input.Keyboard.JustDown(keyR) && tutorial3) {
+                if(Phaser.Input.Keyboard.JustDown(keyR)) {
                     if (!this.checklist_open_SFX.isPlaying) {
                         this.checklist_open_SFX.play();
                     }
@@ -472,11 +485,11 @@ class Overworld extends Phaser.Scene {
                     this.firewood.setPosition(playerX + 100, playerY - 100);
                     this.rosemaryOil.setPosition(playerX + 200, playerY - 30);
                     this.newspaper.setPosition(playerX -5, playerY - 30);
-                    this.wallet.setPosition(player.x + 190, player.y + 150);
+                    this.wallet.setPosition(player.x + 190, player.y + 150);                   
                     this.item_checklist_Visible = true;
                 }
             } else if (this.item_checklist_Visible == true) {
-                if(Phaser.Input.Keyboard.JustDown(keyR) && tutorial3) {
+                if(Phaser.Input.Keyboard.JustDown(keyR)) {
                     if (!this.checklist_close_SFX.isPlaying) {
                         this.checklist_close_SFX.play();
                     }
@@ -499,6 +512,32 @@ class Overworld extends Phaser.Scene {
                     this.wallet.visible = false;
                     this.item_checklist_Visible = false;
                 }
+            }
+        }
+
+        text_UI(objectX, objectY, obj, text) {
+            this.physics.add.overlap(player, obj, (obj1, obj2) => {
+                this.textUI_text = this.add.bitmapText(objectX - 35, objectY - 40, this.DBOX_FONT, text, this.TEXT_SIZE).setScale(.5).setDepth(5);
+                this.textUI = true;
+                obj2.destroy();
+            });   
+        }
+
+        item_interact(text, item_image) {
+            if(this.textUI == true && Phaser.Input.Keyboard.JustDown(keyF)) {
+                this.item = this.add.image(player.x, player. y - 50, item_image);
+                this.textUI_text.setPosition(player.x - 40, player.y - 85);
+                this.textUI_text.text = text;
+                this.tweens.add({targets: [this.item], scale: {from: 2, to: 4}, duration: 500, ease: 'Sine.easeOut',});
+                this.sound.play("itemAquiredSFX", {volume: 0.3});
+                this.textUI = false;
+                if(item_image == 'milk') {
+                    milk_acquired = true;
+                }
+                this.time.delayedCall(2000, () => {
+                    this.textUI_text.destroy();
+                    this.tweens.add({targets: [this.item],alpha: {from: 1, to: 0}, duration: 500})
+                });
             }
         }
 }

@@ -170,6 +170,10 @@ class Boss extends Phaser.Scene {
                 return;
             }
 
+            if(Phaser.Input.Keyboard.JustDown(cursors.space)) {
+                return;
+            }
+
             // which event are they trying to enact?
             let index = Number.parseInt(event.key) - 1; // start at 1
             let availableEvents = Object.keys(this.prop.tempFSM.currentState.events);
