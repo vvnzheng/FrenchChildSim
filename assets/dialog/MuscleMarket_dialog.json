@@ -16,14 +16,14 @@
 		"text" : "perhaps ",
 		"events": {
 			"Alright, show me what you got" : "n2",
-			"Sorry sir, my boss is urging me hard here, could you please check if you have any firewood carefully" : "p1",
+			"Sorry sir, my boss is urging me very hard here, could you please double check if you have any firewood" : "p1",
 			"What do you mean by PERHAPS? I am done doing bussiness with you.(leave shop)" : "exit"
 		}
 	},
 	{
 		"name": "n2",
 		"cName" : "Pierre",
-		"text" : "Here(Throw the firewood onto the table)",
+		"text" : "Here(Throws the firewood onto the table)",
 		"events": {
 			"How much are those?" : "n3",
 			"Yo, what's with that attitude? I am leaving!(leave shop)" : "exit"
@@ -34,7 +34,7 @@
 		"cName" : "Pierre",
 		"text" : "4 shilling",
 		"events": {
-			"Wait, last time I check on the newspaper, this amount only costs 2 shilling and 5 pence" : "n4",
+			"Wait, last time I checked, this amount only costs 2 shillings!" : "n4",
 			"Fine(Purchase Firewood)" : "PURCHASE FIREWOOD"
 		}
 	},
@@ -61,7 +61,7 @@
 		"cName" : "Pierre",
 		"text" : "2 shilling",
 		"events": {
-			"Oh my, it's even lower than the market price that I saw on newspaper this morning!" : "p4",
+			"Oh my, it's even lower than the market price that I saw on newspaper this morning!" : "p3",
 			"Nah, that's still too expensive for me(leave shop)" : "exit"
 		}
 	},
@@ -84,10 +84,9 @@
 	{
 		"name": "PURCHASE FIREWOOD",
 		"cName" : "Pierre",
-		"image" : "shopkeep2",
-		"image2" : "firewood",
+		"image" : "firewood",
 		"sound" : true,
-		"text" : "I've just acquired a FIREWOOD!",
+		"text" : "I've just acquired FIREWOOD!",
 		"events": {
 			"That's everything I need here (leave shop)." : "exit"
 		}

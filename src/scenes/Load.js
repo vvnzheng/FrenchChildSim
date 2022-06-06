@@ -114,6 +114,12 @@ class Load extends Phaser.Scene {
         //bossman
         this.load.spritesheet('boss', 'images/boss.png',{frameWidth: 225, frameHeight: 225, startFrame:0, endFrame: 11});
         this.load.json('boss_dialog', 'dialog/boss_dialog.json');
+        //good ending
+        this.load.json('endingGood', 'dialog/goodEnding_dialog.json');
+        //bad ending
+        this.load.json('endingBad', 'dialog/badEnding_dialog.json');
+        //meh ending
+        this.load.json('endingMeh', 'dialog/mehEnding_dialog.json');
         //items
         this.load.image('cauldron_item1', 'images/cauldron.png');
         this.load.image('jasmineOil_item2', 'images/jasmine_oil.png');
@@ -127,6 +133,7 @@ class Load extends Phaser.Scene {
         this.load.image('star', 'images/star.png');
         this.load.image('shillings', 'images/shillings.png');
         this.load.image('alonebg', 'images/alonetime.png');
+        this.load.image('firewood', 'images/firewood.png');
         this.load.image('propsetup', 'images/propsetup.png');
 
     }

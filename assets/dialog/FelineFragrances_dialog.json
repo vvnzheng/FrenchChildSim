@@ -11,16 +11,33 @@
 	{
 		"name": "1",
 		"cName" : "Phillippe",
-		"text" : "It's ruthless out there kid, everyone wants to make a quick buck.",
+		"text": "I!!!... am Phillippe the WISE LIONNN... I know all and I am full~ of wisdommmmm",
 		"events": {
-			"Cats should not be able to talk." : "2",
-			"Au revoir (leave shop)":"exit"
+			"...More like white liar - o - ...": "1.1"
+		}
+	},
+	{
+		"name": "1.1",
+		"cName" : "Phillippe",
+		"text" : "I have been entrusted to guide you on your journey... It's ruthless out there kid, everyone wants to make a quick buck.",
+		"events": {
+			"Cats should not be able to talk. And they sure shouldn't be allowed to decorate! This is atrocious..." : "2",
+			"Look cat! I've already gone through this tutorial once.": "confirm exit" 
 		}
 	},
 	{
 		"name": "2",
 		"cName" : "Phillippe",
-		"text" : "See that flask up their on the counter? I know you need it, but the price is 10 shillings...",
+		"text" : "...That was very hurtful... I'm just trying to be a good intro character and help you!",
+		"events": {
+			"...I'm...sorry?" : "2.1",
+			"Well I don't need it man! I'm a busy french child... Creepy cat... Aren't all the other shops drawn really nice?? Sheesh! (Leave)":"exit"
+		}
+	},
+	{
+		"name": "2.1",
+		"cName" : "Phillippe",
+		"text" : "It's fine. It's what I get for being nice. Now, see that flask up there on the counter? I know you need it, but the price is 10 shillings...",
 		"events": {
 			"Sounds good to me!" : "3",
 			"10 shillings???":"4"
@@ -212,11 +229,19 @@
 	},
 	{
 		"name": "confirm exit",
+		"cName": "Phillippe",
+		"text": "You sure you want to leave?? If you do, you will not be able to return! And I know you need some of my very nice, expensive wares ;)",
+		"events":{
+			"Mmmm....":"confirm exit2"
+		}
+	},
+	{
+		"name": "confirm exit2",
 		"cName": "Grenouille",
 		"text" : "Do I really want to leave without the item? I can try and get it somewhere else but I cannot come back once I leave.",
 		"events": {
-			"Yes, I'm leaving." : "exit",
-			"Return to shopkeeper." : "PART 2"
+			"Yes, I'm leaving. Au revoir cat!" : "exit",
+			"Return to shopkeeper." : "2"
 		}
 	},
 	{

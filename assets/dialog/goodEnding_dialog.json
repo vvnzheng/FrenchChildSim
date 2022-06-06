@@ -1,0 +1,57 @@
+[
+    {
+        "name": "Start",
+        "cName": "Boss",
+        "text": "Grenouille! What took you so long?!",
+        "initial": 	true,
+        "events": {
+            "Sir, I was running around town all day trying to get your ingredients!": "2"
+        }
+    },
+    {
+        "name": "2",
+        "cName": "Boss",
+        "text": "Really? Then I suppose you have all of them?",
+        "events": {
+            "Yes sir!": "3"
+        }
+    },
+    {
+        "name": "3",
+        "cName": "Boss",
+        "text" : "Well?? Hand them over!",
+        "events": {
+            "Here you go!" : "exit opening scene"
+        }
+    },
+    {
+        "name" : "exit opening scene",
+        "cName": "Boss",
+        "text" : "Thank you Grenoille, that was a big task. To be honest, I didn't think you'd succeed but you saved my shop for another day!",
+        "events": {
+            "Of course! Anything for you sir!" : "Close ingredients"
+        }
+    },
+    {
+        "name": "Close ingredients",
+        "cName": "Boss",
+        "text" : "...It's Boss",
+        "events": {
+            "Sorry boss sir... Boss?" : "Open newspaper"
+        }
+    },
+    {
+        "name": "Open newspaper",
+        "cName": "Boss",
+        "text" : "*Sigh* Good enough boy. Here's some extra money from today's earnings, get your ill mother some nice medicine",
+        "events": {
+            "Bless your soul sir! I could never thank you enough" : "exit"
+        }
+    },
+	{
+		"name": "exit",
+		"text" : "EXITING",
+		"events": {
+        }
+	}
+]

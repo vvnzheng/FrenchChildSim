@@ -1,0 +1,65 @@
+[
+    {
+        "name": "Start",
+        "cName": "Boss",
+        "text": "Grenouille! What took you so long?!",
+        "initial": 	true,
+        "events": {
+            "Sir, I was running around town all day trying to get your ingredients!": "2"
+        }
+    },
+    {
+        "name": "2",
+        "cName": "Boss",
+        "text": "Really? Then I suppose you have all of them?",
+        "events": {
+            "uh...": "3"
+        }
+    },
+    {
+        "name": "3",
+        "cName": "Boss",
+        "text" : "Well?? Hand them over!",
+        "events": {
+            "But sir!" : "exit opening scene"
+        }
+    },
+    {
+        "name" : "exit opening scene",
+        "cName": "Boss",
+        "text" : "What?? You mean to tell me you spent all that time outside and didn't get anything??",
+        "events": {
+            "...Yes" : "Close ingredients"
+        }
+    },
+    {
+        "name": "Close ingredients",
+        "cName": "Boss",
+        "text" : "You!! What am I going to do with you?!",
+        "events": {
+            "Sir! Sir calm down!" : "Open newspaper"
+        }
+    },
+    {
+        "name": "Open newspaper",
+        "cName": "Boss",
+        "text" : "No! No! I have had quite enough of you and your mess ups! YOU'RE FIRED!!",
+        "events": {
+            "No! Please sir! I have an ill mother to take care of and two younger siblings!" : "Close newspaper"
+        }
+    },
+    {
+        "name": "Close newspaper",
+        "cName": "Boss",
+        "text" : "You don't think I have my own family to take care of?? Get out of my sight!",
+        "events" : {
+            "Alright..." : "exit"
+        }
+    },
+	{
+		"name": "exit",
+		"text" : "EXITING",
+		"events": {
+        }
+	}
+]

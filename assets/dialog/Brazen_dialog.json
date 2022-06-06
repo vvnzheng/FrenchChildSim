@@ -2,21 +2,21 @@
 	{
 		"name": "Start",
 		"cName": "Marie",
-		"text": "Hello dear customer! How may I help you today?",
+		"text": "Hello dear customer! Welcome to the Brazen Bazaar! How may I help you today?",
 		"initial": 	true,
 		"events": {
-			"Good morning! I would like to buy some JASMINE OIL from you today, do you have any in stock?": "positive1",
+			"Good morning Marie! Where's the boss? I want to buy some JASMINE OIL today, do you have any in stock?": "positive1",
 			"Hey, I'm in a rush. Ya think I could grab some JASMINE OIL from you?":"negative1"
 		}
 	},
 	{
 		"name": "positive1",
 		"cName": "Marie",
-		"text" : "Oh of course my dear! I would be glad to assist you, that would be 6 shilling.",
+		"text" : "The boss is out today! But she's entrusted me with the shop today! WHOOPS!... Ignore that... hehe But I would be glad to assist you, that would be 6 shillings.",
 		"events": {
 			"Great, thank you ma'am!" : "PURCHASE JASMINE OIL",
 			"What a ripoff!" : "negative2",
-			"I'm sorry maam, it seems like I don't have enough. Do you think you could lower the price?":"positive2"
+			"6?? That's a little high... Are you sure you work here??":"positive2"
 		}
 	},
 	{
@@ -24,15 +24,23 @@
 		"cName": "Marie",
 		"text" : "Well, have I never! If you are so upset feel free to shop elsewhere. You are officially banned from this establishment! Get out of my shop!",
 		"events": {
-			"I should leave" : "exit"
+			"You don't have banning rights!" : "audacity"
 		}
 	},
 	{
-		"name": "banned",
+		"name": "audacity",
 		"cName": "Marie",
-		"text" : "Guess that did not go too well...",
-		"events": {
-			"leave" : "exit"
+		"text" : "Excuse me?? Well... I'll tell yo mama!",
+		"events" : {
+			"...Really? My mama??":"audacity2"
+		}
+	},
+	{
+		"name": "audacity2",
+		"cName": "Marie",
+		"text" : "Yeah! Yo mama! And she's gonna pass away with the shock that her little boy is a wrongful little snot!",
+		"events" : {
+			"...You play a mean game woman... Fine! I'll leave. What a hag...":"exit"
 		}
 	},
 	{
@@ -43,36 +51,84 @@
 	{
 		"name": "positive2",
 		"cName": "Marie",
-		"text" : "Poor sweet child! Is there a reason why you are unable to afford such pleasures?",
+		"text" : "Uh... uh...",
 		"events" : {
-			"Because you're a scammer, that's why!" : "negative2",
-			"My allowance is only so little and my chore list is so long. If you could spare some change for me, that would be great." : "positive3"
+			"Look! You even made a mess of that potion! I'm leaving a terrible review on Welp!" : "negative3",
+			"It's okay... I won't tell your boss... If you charge me the right amount, 2 shillings!" : "positive3"
 		}
 	},
 	{
 		"name": "positive3",
 		"cName": "Marie",
-		"text" : "Well, you seem like an honest person… I guess I shall allow it for 6 pence this time. But be sure not to spend your money all in one place! Money is hard to come by.",
+		"text" : "Well, you seem like an honest person… 2 shillings does sound right... DEAL!",
 		"events" : {
 			"Thank you maam!":"PURCHASE JASMINE OIL"
 		}
 	},
 	{
+		"name": "negative3",
+		"cName": "Marie",
+		"text" : "No! No! Please! Not Welp!!",
+		"events" : {
+			"Yeah... That's right! I'll even leave a terrible review on SyncedIn!":"negative4"
+		}
+	},
+	{
+		"name": "negative4",
+		"cName": "Marie",
+		"text" : "NO! I have a 5.0 star rating there! Take it! Just take it and go! *Sob* What did I ever do to deserve this??!",
+		"events" : {
+			"Pleasure doing business... muahaha... >:)":"PURCHASE JASMINE OIL"
+		}
+	},
+	{
 		"name": "negative1",
 		"cName": "Marie",
-		"text": "Well dear me! If you're in a rush, I can bag this up for you for 1 shilling and 6 pence.",
+		"text": "Well dear me! If you're in a rush you little brat, I can bag this up for you for 8 shillings.",
 		"events" : {
-			"Excuse me? The price was 1 shilling in today's newspaper!" : "negative3",
+			"Excuse me? The price was 3 shilling in today's newspaper!" : "negative5",
 			"I'm sorry maam, it seems like I don't have enough. Do you think you could lower the price?" : "positive4"
 		}
 	},
 	{
-		"name": "negative3",
+		"name": "negative5",
 		"cName": "Marie",
-		"text": "Well, the price has just gone up to a shilling and 6 pence. If you have an issue with that, you may shop elsewhere.",
+		"text": "Well, the price has just gone up to 8 shillings. If you have an issue with that, you may shop elsewhere.",
 		"events": {
 			"Fine, here you go":"PURCHASE JASMINE OIL",
-			"I refuse, I will head elsewhere thank you very much!": "exit"
+			"...*Push potion over*... Whoops!": "negative6"
+		}
+	},
+	{
+		"name": "negative6",
+		"cName": "Marie",
+		"text" : "*Gasp* What are you doing??!",
+		"events" : {
+			"Nothing! Just... being a little brat! >:)":"negative7"
+		}
+	},
+	{
+		"name": "negative7",
+		"cName": "Marie",
+		"text" : "It's my word against yours!",
+		"events" : {
+			"Yeah? And this shop is under your surveillance! I bet Madam Brazen won't appreciate this...":"negative8"
+		}
+	},
+	{
+		"name": "negative8",
+		"cName": "Marie",
+		"text" : "You... You buckethead! Toad kisser! Muffin eating little two timing sheep lover! I'LL KILL YOU!!!",
+		"events" : {
+			"Uhoh! Better run!!!":"negative8"
+		}
+	},
+	{
+		"name": "negative8",
+		"cName": "Marie",
+		"text" : "COME BACK HERE YOU SMELLY BOOGER EATING BUTTHEAD!!!",
+		"events" : {
+			":| Forgive me oh great witch! Oh save me blessed lords of the potion!":"exit"
 		}
 	},
 	{
@@ -80,14 +136,22 @@
 		"cName": "Marie",
 		"text" : "Well? What is wrong child? Spit it out!",
 		"events" : {
-			"You're a scammer, that's what is wrong!" : "negative2",
+			"You're a scammer, that's what is wrong!" : "negative9",
 			"My allowance is only so little and my chore list is so long. If you could spare some change for me, that would be great." : "positive5"
+		}
+	},
+	{
+		"name": "negative9",
+		"cName": "Marie",
+		"text" : "...Get out Grenouille. -_-'",
+		"events" : {
+			"Witch! Soul Eater! Temptress! Dream Killer! I will remember this!!!":"exit"
 		}
 	},
 	{
 		"name": "positive5",
 		"cName": "Marie",
-		"text" : "I guess I shall allow it for 1 shilling this time. But you better learn some manners next time you come around.",
+		"text" : "I guess I shall allow it for 3 shillings this time. But you better learn some manners next time you come around.",
 		"events" : {
 			"Thank you maam!":"PURCHASE JASMINE OIL"
 		}

@@ -1,0 +1,57 @@
+[
+    {
+        "name": "Start",
+        "cName": "Boss",
+        "text": "Grenouille! Where have you been all day?! We've been insanely busy!",
+        "initial": 	true,
+        "events": {
+            "Sir! I've been trying to gather-": "2"
+        }
+    },
+    {
+        "name": "2",
+        "cName": "Boss",
+        "text": "Gather what? The courage??? Come here! And hurry! Fill all these orders or you don't get pay",
+        "events": {
+            "Sir, don't you want the ingredients you sent me for?": "3"
+        }
+    },
+    {
+        "name": "3",
+        "cName": "Boss",
+        "text" : "Huh? What are you- ... Oh, yes. Thank you boy. Toss in whatever you got",
+        "events": {
+            "*Toss*." : "exit opening scene"
+        }
+    },
+    {
+        "name" : "exit opening scene",
+        "cName": "Boss",
+        "text" : "Boy! You idiot! I didn't mean LITERALLY toss them! These are precious materials!",
+        "events": {
+            "Oh. Sorry boss!" : "Close ingredients"
+        }
+    },
+    {
+        "name": "Close ingredients",
+        "cName": "Boss",
+        "text" : "Wait a minute... You only got a few of the things I sent you for!",
+        "events": {
+            "...uh... I can explain" : "Open newspaper"
+        }
+    },
+    {
+        "name": "Open newspaper",
+        "cName": "Grenouille",
+        "text" : "I'm sure you can! You'll be working overtime today until you get all these orders done",
+        "events": {
+            "Yes boss..." : "exit"
+        }
+    },
+	{
+		"name": "exit",
+		"text" : "EXITING",
+		"events": {
+        }
+	}
+]
