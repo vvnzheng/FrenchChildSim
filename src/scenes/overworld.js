@@ -478,6 +478,9 @@ class Overworld extends Phaser.Scene {
                     this.jasmineOil_text = this.add.bitmapText(playerX - 35, playerY + 100, this.DBOX_FONT, 'JASMINE OIL', this.TEXT_SIZE).setScale(.5).setDepth(5);
                     this.firewood_text = this.add.bitmapText(playerX + 75, playerY + 100, this.DBOX_FONT, 'FIREWOOD', this.TEXT_SIZE).setScale(.5).setDepth(5);
                     this.rosemaryOil_text = this.add.bitmapText(playerX + 165, playerY + 100, this.DBOX_FONT, 'ROSEMARY OIL', this.TEXT_SIZE).setScale(.5).setDepth(5);
+                    if(shillings < 0){
+                        shillings = 0;
+                    }
                     this.wallet_title_text = this.add.bitmapText(player.x + 220, player.y + 145, this.DBOX_FONT, shillings + " SHILLINGS", 10).setDepth(5);
                     
                     //item start positioning for tween
