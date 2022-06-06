@@ -214,9 +214,17 @@ class Shop1 extends Phaser.Scene {
 
         if(this.prop.tempFSM.currentState.name == 'PURCHASE ROSEMARY OIL'){
             if(this.sixPerhaps){
-                this.price += 6;
+                if(shillings < 6){
+                    this.prop.tempFSM.transition("poor");
+                } else {
+                    this.price += 6;
+                }
             } else if(this.eightPerhaps){
-                this.price += 8;
+                if(shillings < 8){
+                    this.prop.tempFSM.transition("poor");
+                } else {
+                    this.price += 8;
+                }
             }
         }
 

@@ -282,13 +282,20 @@
 	},
 	{
 		"name": "PURCHASE FIREWOOD",
-		"cName" : "Pierre",
-		"image" : "firewood",
+		"cName" : "Grenouille",
+		"image" : "alonebg",
 		"image2" : "firewood_item5",
 		"sound" : true,
 		"text" : "I've just acquired FIREWOOD!",
 		"events": {
 			"That's everything I need here (leave shop)." : "exit"
 		}
+	},
+	{
+		"name": "poor",
+		"text" : "Haha! Poor puny human doesn't have enough money... Leave! You're wasting my time.",
+		"events": {
+			"Sorry... Sheesh!" : "exit"
+        }
 	}
 ]

@@ -166,5 +166,39 @@
 		"events": {
 			"That's everything I need here (leave shop)." : "exit"
 		}
+	},
+	{
+		"name": "poor8",
+		"cName" : "Marie",
+		"text" : "HAH! You're poor! Get out!",
+		"events": {
+			"Okay, I get it." : "exit",
+			"Please, could you spare me some slack?" : "maybe"
+		}
+	},
+	{
+		"name": "poor6",
+		"cName" : "Marie",
+		"text" : "So.. you can't afford anything... Get out.",
+		"events": {
+			"Okay, I get it." : "exit",
+			"Please, could you spare me some slack?" : "maybe"
+		}
+	},
+	{
+		"name": "maybe",
+		"cName" : "Marie",
+		"text" : "Well... There is one thing I would like... I've been wanting a ",
+		"events": {
+			"I'll get it!" : "exit"
+		}
+	},
+	{
+		"name": "poor2",
+		"cName" : "Marie",
+		"text" : "HAH! You're poor! Get out!",
+		"events": {
+			":(" : "exit"
+		}
 	}
 ]

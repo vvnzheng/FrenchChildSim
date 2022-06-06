@@ -318,4 +318,13 @@
 		"events": {}
 	}
 
+	{
+		"name": "poor",
+		"cName":"JEAN",
+		"text" : "Well... I can't do anything for you if you do not have the money. Get out! I only serve customers with money, I have a trip to plan for!",
+		"events": {
+			"Fine..." : "exit"
+		}
+	}
+
 ]

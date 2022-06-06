@@ -132,7 +132,7 @@
 		"cName" : "Phillippe",
 		"text" : "Sold! Heheheh…",
 		"events": {
-			"Adieu." : "exit"
+			"Adieu." : "PURCHASE CAULDRON"
 		}
 	},
 	{
@@ -149,7 +149,7 @@
 		"cName" : "Phillippe",
 		"text" : "Here you go mon ami!",
 		"events": {
-			"Merci Monsieur Chat! (Leave shop)" : "exit"
+			"Merci Monsieur Cat! (Leave shop)" : "exit"
 		}
 	},
 	{
