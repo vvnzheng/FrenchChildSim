@@ -68,7 +68,6 @@ class Load extends Phaser.Scene {
         this.load.audio('ending1', 'audio/ending1.mp3');
         
         //menu screen
-        //this.load.image('titleScreen', 'images/title_screen2.png'); //old
         this.load.spritesheet('menuscreen', "images/menuscreen.png", {frameWidth: 1024, frameHeight: 576, startFrame:0, endFrame: 14});
         this.load.spritesheet('smokeFX', "images/smokeFX.png", {frameWidth: 80, frameHeight: 114, startFrame:0, endFrame: 4});
         this.load.image('menuscreen_title', 'images/menuscreen_title.png');

@@ -8,23 +8,16 @@ class Shop1 extends Phaser.Scene {
         this.DBOX_FONT = 'font';
         this.TEXT_SIZE = 20;
         this.TEXT_MAX_WIDTH = 700;
-        //delete maybe
-        this.NEXT_TEXT = '[SPACE]';	// text to display for next prompt
-        this.NEXT_X = 1000;			// next text prompt x-position
-        this.NEXT_Y = 650;			// next text prompt y-position
 
         // dialog variables
         this.dialogTyping = false;		// flag to lock player input while text is "typing"
         this.dialogText = null;			// the actual dialog text
-        this.nextText = null;			// player prompt text to continue typing
-        this.choice = 0;
     }
 
     create() {
         //audio
-        //this.game.sound.stopAll();
         this.NPC_soundtrack = this.sound.add('npcMusic', {loop: true, volume: .2});
-        //this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
+        this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
         this.NPC_soundtrack.play();
 
         cursors = this.input.keyboard.createCursorKeys();
@@ -75,7 +68,6 @@ class Shop1 extends Phaser.Scene {
 
         //init text
         this.dialogText = this.add.bitmapText(this.TEXT_X, this.TEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
-        this.nextText = this.add.bitmapText(this.NEXT_X, this.NEXT_Y, this.DBOX_FONT, '', this.TEXT_SIZE);
 
         //init json file
         this.dialog = this.cache.json.get('BeretBoutique_dialog');
@@ -113,7 +105,6 @@ class Shop1 extends Phaser.Scene {
         this.transitioning = false;
 
         // display info text
-        //this.statusText = this.add.bitmapText(this.TEXT_X-100, this.TEXT_Y-100, this.DBOX_FONT,`${this.temp.tempFSM.getState().text}`,this.TEXT_SIZE);
         this.transitionText = this.add.bitmapText(this.TEXT_X,  this.TEXT_Y + 110, this.DBOX_FONT, ``, this.TEXT_SIZE - 4);
         this.transitionText.setTint(0xe8c170);
 
@@ -267,7 +258,7 @@ class Shop1 extends Phaser.Scene {
             }
         }
 
-        this.soundFX('itemAquiredSFX');
+        this.soundFX();
         this.prop.setTexture(this.prop.tempFSM.currentState.image);
         this.prop2.setTexture(this.prop.tempFSM.currentState.image2);
         let options = Object.keys(this.prop.tempFSM.currentState.events).map((k,i) => `(${i+1}) ${k}\n`); //`(${i+1}) ${k}\n`);
@@ -280,7 +271,6 @@ class Shop1 extends Phaser.Scene {
 
         // clears text for the next dialog
         this.dialogText.text = '';
-        this.nextText.text = '';
         
         // build dialog (concatenate speaker + line of text)
         if(`${this.prop.tempFSM.getState().cName}` == 'undefined') {
@@ -290,10 +280,8 @@ class Shop1 extends Phaser.Scene {
         } else {
             this.dialogbox.visible = true;
             this.player_icon.visible = true;
-            text = this.prop.tempFSM.currentState.cName + ': ' + this.prop.tempFSM.currentState.text; //new
-            //text = `${this.prop.tempFSM.getState().cName}` + ': ' + `${this.prop.tempFSM.getState().text}`; //old
+            text = this.prop.tempFSM.currentState.cName + ': ' + this.prop.tempFSM.currentState.text;
         }
-
         // create a timer to iterate through each letter in the dialog text
         
         let currentChar = 0; 
@@ -308,8 +296,6 @@ class Shop1 extends Phaser.Scene {
                 // check if timer has exhausted its repeats 
                 // (necessary since Phaser 3 no longer seems to have an onComplete event)
                 if(this.textTimer.getRepeatCount() == 0) {
-                    // show prompt for more text
-                    //this.nextText = this.add.bitmapText(this.NEXT_X, this.NEXT_Y, this.DBOX_FONT, this.NEXT_TEXT, this.TEXT_SIZE).setOrigin(1);
                     // un-lock input
                     this.dialogTyping = false;
                     // destroy timer
@@ -330,9 +316,14 @@ class Shop1 extends Phaser.Scene {
     }
 
     //plays sound when acquiring item
-    soundFX(sound_name) {
-        if(this.prop.tempFSM.currentState.sound == sound_name) {
-            this.sound.play(sound_name, {loop: false, volume: 0.3});
+    soundFX() {
+        if(this.prop.tempFSM.currentState.sound == true) {
+            if(!this.itemAquiredSFX.play()){
+                this.itemAquiredSFX.play();
+            }
+        }
+        else {
+            this.itemAquiredSFX.stop();
         }
     }
 }

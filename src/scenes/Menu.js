@@ -16,15 +16,6 @@ class Menu extends Phaser.Scene {
         this.titleScreen2 = this.add.image(game.config.width/2, game.config.height/3.5, 'menuscreen_title');
         this.titleScreen3 = this.add.image(game.config.width/2, game.config.height/1.53, 'menuscreen_press');
         
-        /*
-        this.cat = this.add.sprite(game.config.width/1.35, 400,'shopkeep3').setOrigin(0).setScale(.3);
-        this.anims.create({
-            key: 'shopkeep3',
-            frames:this.anims.generateFrameNumbers('shopkeep3',{start: 0, end: 41, first: 0}),
-            frameRate: 10,
-            loop: -1
-        });
-*/
         this.anims.create({
             key: 'menuscreen',
             frames:this.anims.generateFrameNumbers('menuscreen',{start: 0, end: 14, first: 0}),
@@ -51,7 +42,6 @@ class Menu extends Phaser.Scene {
 
         this.titleScreen2.setDepth(1);
         this.titleScreen3.setDepth(1);
-        //this.cat.setDepth(1);
 
         this.cameras.main.fadeIn(2000);
 
@@ -75,6 +65,5 @@ class Menu extends Phaser.Scene {
         //animations
         this.titleScreen.anims.play('menuscreen', true);
         this.smokeFX.anims.play('smokeFX', true);
-        //this.cat.anims.play('shopkeep3', true);
     }
 }
