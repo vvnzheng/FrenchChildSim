@@ -66,6 +66,7 @@ class Load extends Phaser.Scene {
         this.load.audio('door_closeSFX', 'audio/door_closeSFX.mp3');
         this.load.audio('door_openSFX', 'audio/door_openSFX.mp3');
         this.load.audio('ending1', 'audio/ending1.mp3');
+        this.load.audio('ending2', 'audio/ending2.mp3');
         
         //menu screen
         this.load.spritesheet('menuscreen', "images/menuscreen.png", {frameWidth: 1024, frameHeight: 576, startFrame:0, endFrame: 14});

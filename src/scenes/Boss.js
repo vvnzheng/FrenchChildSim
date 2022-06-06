@@ -88,8 +88,10 @@ class Boss extends Phaser.Scene {
 
         //init json file
         if(endingTotal >= 5){
+            this.time.delayedCall(1000, () => {this.sound.play("ending2", {volume: .3});});
             this.dialog = this.cache.json.get('endingGood');
         } else if(endingTotal < 5 && endingTotal >= 3 ){
+            this.time.delayedCall(1000, () => {this.sound.play("ending1", {volume: .3});});
             this.dialog = this.cache.json.get('endingMeh');
         } else if(endingTotal < 3 && endingTotal > 0) {
             this.time.delayedCall(1000, () => {this.sound.play("ending1", {volume: .3});});
