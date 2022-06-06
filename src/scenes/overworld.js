@@ -1,22 +1,17 @@
 class Overworld extends Phaser.Scene {
     constructor() {
         super('overworldScene');
-        this.DBOX_X = 169;	        // dialog box x-position
-        this.DBOX_Y = 460;
         this.TEXT_X = 380;	        // text w/in dialog box x-position
         this.TEXT_Y = 490;	        // text w/in dialog box y-position
         this.DBOX_FONT = 'font';
         this.TEXT_SIZE = 20;
         this.TEXT_MAX_WIDTH = 235;
-        //delete maybe
         this.NEXT_TEXT = '[F]';	// text to display for next prompt
 
         // dialog variables
-        //this.dialogConvo = 0;			// current "conversation"
         this.dialogTyping = false;		// flag to lock player input while text is "typing"
         this.dialogText = null;			// the actual dialog text
         this.nextText = null;			// player prompt text to continue typing
-        //this.dialogLine = 0;	
     }
 
     create(){
@@ -31,10 +26,8 @@ class Overworld extends Phaser.Scene {
         this.checklist_close_SFX = this.sound.add('checklist_close', {loop: false, volume: .7});
 
         //tilemap stuff
-        const map = this.make.tilemap({ key: "map"}); //new
-        //const map = this.make.tilemap({ key: "map"});
-        const tileset = map.addTilesetImage("tileset", "tiles"); //new
-        //const tileset = map.addTilesetImage("tileset", "tiles");
+        const map = this.make.tilemap({ key: "map"});
+        const tileset = map.addTilesetImage("tileset", "tiles");
 
         //TILED layers
         const belowLayer = map.createLayer("Below Bot Layer", tileset, 0, 0);
@@ -43,7 +36,6 @@ class Overworld extends Phaser.Scene {
         const worldLayer2 = map.createLayer("World Mid", tileset, 0, 0);
         const worldLayer3 = map.createLayer("World Top Layer", tileset, 0, 0);
         const aboveLayer = map.createLayer("Above Top Layer", tileset, 0, 0);
-
 
         //setup collision with structures and objects created from TILED
         worldLayer.setCollisionByProperty({ collides: true });
@@ -93,11 +85,11 @@ class Overworld extends Phaser.Scene {
         }
         //add playyer sprite
         player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
-        //player = this.physics.add.sprite(400, 750, "player"); //quick overworld testing
-        player.body.setSize(20,22).setOffset(4, 10); //player collision shape
+        //player = this.physics.add.sprite(1200, 450, "player"); //quick overworld testing
+        player.body.setSize(25,22).setOffset(0, 10); //player collision shape
 
-        this.clouds = this.add.tileSprite(0,0, game.config.width, game.config.height/1.405, 'clouds').setOrigin(0,0).setScale(2); //1.42
-        this.clouds2 = this.add.tileSprite(0,0, game.config.width, game.config.height/1.405, 'clouds2').setOrigin(0,0).setScale(2); //1.42
+        this.clouds = this.add.tileSprite(0,0, 832, game.config.height/1.405, 'clouds').setOrigin(0,0).setScale(2).setDepth(2);
+        this.clouds2 = this.add.tileSprite(0,0, 832, game.config.height/1.405, 'clouds2').setOrigin(0,0).setScale(2).setDepth(2); 
 
         
         //variables for door interaction
@@ -317,8 +309,8 @@ class Overworld extends Phaser.Scene {
             }
         }
 
-        this.clouds.tilePositionX += 0.01;
-        this.clouds2.tilePositionX += 0.017;
+        this.clouds.tilePositionX += 0.03;
+        this.clouds2.tilePositionX += 0.037;
 
         this.cow.anims.play('cow', true);
         this.item_interact('MILK ACQUIRED!', 'milk');
@@ -451,9 +443,7 @@ class Overworld extends Phaser.Scene {
 
         scene_change(obj, scene) {
             this.physics.add.overlap(player, obj, (obj1) => {
-                //this.cameras.main.pan(player.x, player.y - 100);
                 this.scene_transition = true;
-                this.sound.play('door_openSFX',{loop:false, volume: 1});
                 if(this.overworld_soundtrack.isPlaying){
                     this.overworld_soundtrack.stop();
                 }

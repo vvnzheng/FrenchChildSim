@@ -6,24 +6,22 @@
 		"initial": 	true,
 		"events": {
 			"Big guy, Do you have any of those items?": "n1",
-			"Good morning sir, do you have any firewood in hand" : "p1",
-			"Just looking around(leave shop)":"exit"
+			"Good morning sir, do you have any firewood in hand." : "p1"
 		}
 	},
 	{
 		"name": "n1",
 		"cName" : "Pierre",
-		"text" : "perhaps ",
+		"text" : "Perhaps... ",
 		"events": {
-			"Alright, show me what you got" : "n2",
-			"Sorry sir, my boss is urging me very hard here, could you please double check if you have any firewood" : "p1",
-			"What do you mean by PERHAPS? I am done doing bussiness with you.(leave shop)" : "exit"
+			"Alright, show me what you got." : "n2",
+			"Sorry sir, my boss is urging me very hard here, could you please double check if you have any firewood." : "p1"
 		}
 	},
 	{
 		"name": "n2",
 		"cName" : "Pierre",
-		"text" : "Here(Throws the firewood onto the table)",
+		"text" : "Here (throws the firewood onto the table).",
 		"events": {
 			"How much are those?" : "n3",
 			"Yo, what's with that attitude? I am leaving!(leave shop)" : "exit"
@@ -32,10 +30,10 @@
 	{
 		"name": "n3",
 		"cName" : "Pierre",
-		"text" : "4 shilling",
+		"text" : "4 shilling...",
 		"events": {
 			"Wait, last time I checked, this amount only costs 2 shillings!" : "n4",
-			"Fine(Purchase Firewood)" : "PURCHASE FIREWOOD"
+			"Fine (Purchase Firewood)." : "PURCHASE FIREWOOD"
 		}
 	},
 	{
@@ -43,14 +41,14 @@
 		"cName" : "Pierre",
 		"text" : "True, but the price changes all the time. ",
 		"events": {
-			"Guess I am not doing bussiness with you then(exit shop)" : "exit",
-			"Fine(Purchase Firewood)" : "PURCHASE FIREWOOD"
+			"Guess I am not doing bussiness with you then (exit shop)." : "exit",
+			"Fine (Purchase Firewood)." : "PURCHASE FIREWOOD"
 		}
 	},
 	{
 		"name": "p1",
 		"cName" : "Pierre",
-		"text" : "Let's me check...Yes, I do have it in my inventory kid",
+		"text" : "Let's me check...Yes, I do have it in my inventory kid.",
 		"events": {
 			"How much would it be?" : "p2",
 			"You better give me a low price." : "n3"
@@ -62,32 +60,31 @@
 		"text" : "2 shilling",
 		"events": {
 			"Oh my, it's even lower than the market price that I saw on newspaper this morning!" : "p3",
-			"Nah, that's still too expensive for me(leave shop)" : "exit"
+			"Nah, that's still too expensive for me (leave shop)." : "exit"
 		}
 	},
 	{
 		"name": "p3",
 		"cName" : "Pierre",
-		"text" : "I feel great today, so I decided to lower the price for my customer ",
+		"text" : "I feel great today, so I decided to lower the price for my customer.",
 		"events": {
-			"Thank you so much sir, I'll buy it(PURCHASE FIREWOOD) " : "PURCHASE FIREWOOD",
-			"Really? That's it? No funny dialogue or anything??" : "question",
-			"Guess I'll buy it next time" : "exit"
+			"Thank you so much sir, I'll buy it(PURCHASE FIREWOOD)." : "PURCHASE FIREWOOD",
+			"Really? That's it? No funny dialogue or anything??" : "question"
 		}
 	},
 	{
 		"name": "question",
 		"cName" : "Pierre",
-		"text" : "Mmmm... nope",
+		"text" : "Mmmm... nope.",
 		"events": {
-			"Thank you so much sir, I'll buy it(PURCHASE FIREWOOD) " : "PURCHASE FIREWOOD",
+			"Thank you so much sir, I'll buy it (PURCHASE FIREWOOD). " : "PURCHASE FIREWOOD",
 			"You're SERIOUSLY not going to ask me for anything?? Not even gonna crack a joke?" : "question1"
 		}
 	},
 	{
 		"name": "question1",
 		"cName" : "Pierre",
-		"text" : "Mmmm... nope",
+		"text" : "Mmmm... ",
 		"events": {
 			"Wow... okay... Guess I'll buy it. Thanks(PURCHASE FIREWOOD) " : "PURCHASE FIREWOOD",
 			"Seriously?" : "question2"
@@ -96,7 +93,7 @@
 	{
 		"name": "question2",
 		"cName" : "Pierre",
-		"text" : "Mmmm... nope",
+		"text" : "......",
 		"events": {
 			"Like... really really?? o_O" : "question3"
 		}
@@ -165,7 +162,7 @@
 		"cName" : "Pierre",
 		"text" : "GET OUT! I WILL NEVER SELL TO YOU AGAIN! OR YOUR MOTHER! OR YOUR MOTHER'S MOTHER! OR YOUR MOTHER'S MOTHER'S MOTHER!!!",
 		"events": {
-			"Alright alright, I get it. Never tell a man a joke I guess" : "exit"
+			"Alright alright, I get it. Never tell a man a joke I guess." : "exit"
 		}
 	},
 
@@ -173,7 +170,7 @@
 	{
 		"name": "question5",
 		"cName" : "Pierre",
-		"text" : "...Get out before Pierre beat puny person to pulp",
+		"text" : "...Get out before Pierre beat puny person to pulp.",
 		"events": {
 			"Geez... sorry :/" : "exit"
 		}

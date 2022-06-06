@@ -1,6 +1,12 @@
 // Vivian Zheng, Charles Qi, Noah Kirsch, Allan Moua
-// L'apprenti
-// Updated: 06/05/2022
+// Perfume game
+// Updated: 6/06/2022
+// some code taken and modified from:
+/*
+https://medium.com/@michaelwesthadley/modular-game-worlds-in-phaser-3-tilemaps-1-958fc7e6bbd6
+https://github.com/nathanaltice/SecretoftheOoze
+https://github.com/nathanaltice/Dialogging/
+*/
 
 // Debugging
 'use strict';
@@ -20,9 +26,7 @@ const config = {
         height: 720, //720
     },    
     pixelArt: true, //makes pixel art cooler
-    //Ooze -> opening scene
-    //Overworld -> map scene
-    //BrazenBazaar -> dialogue scene
+
     scene: [Load, Menu, Overworld, Boss, Shop1, Shop2, Shop3, Shop4, Ending]
 };
 
