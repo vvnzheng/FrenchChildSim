@@ -466,7 +466,6 @@ class Overworld extends Phaser.Scene {
         scene_change(obj, scene) {
             this.physics.add.overlap(player, obj, (obj1) => {
                 this.scene_transition = true;
-                this.sound.play('door_openSFX',{loop:false, volume: 1});
                 if(this.overworld_soundtrack.isPlaying){
                     this.overworld_soundtrack.stop();
                 }

@@ -15,7 +15,8 @@ class Shop2 extends Phaser.Scene {
     }
 
     create() {
-        //this.game.sound.stopAll();
+        this.game.sound.stopAll();
+        this.sound.play('door_openSFX',{loop:false, volume: 0.8});
         this.NPC_soundtrack = this.sound.add('npcMusic', {loop: true, volume: .2});
         this.itemAquiredSFX = this.sound.add('itemAquiredSFX', {loop: false, volume: .3})
         this.NPC_soundtrack.play();
@@ -168,7 +169,7 @@ class Shop2 extends Phaser.Scene {
             lastShopVisited = 'SHOP2';
             shop2_visited = true;
             numOfShopsVisited -= 1;
-            this.sound.play('door_closeSFX',{loop:false, volume: 1});
+            this.sound.play('door_closeSFX',{loop:false, volume: 0.8});
             this.cameras.main.fadeOut(cameraFadeTime);
             this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
                 this.time.delayedCall(500, () => {
