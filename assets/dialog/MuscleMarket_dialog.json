@@ -282,7 +282,7 @@
 		"cName":"GRENOUILLE",
 		"image" : "alonebg",
 		"image2" : "firewood_item5",
-		"sound": "itemAquiredSFX",
+		"sound": true,
 		"text" : "I've just acquired FIREWOOD!",
 		"events": {
 			"That's everything I need here (leave shop)." : "exit"

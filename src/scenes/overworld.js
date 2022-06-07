@@ -20,10 +20,10 @@ class Overworld extends Phaser.Scene {
         this.overworld_soundtrack = this.sound.add('overworldMusic', {loop: true, volume: .3});
         this.time.delayedCall(3000, () => {this.overworld_soundtrack.play();});
         this.sound.play("windSFX", {loop:true, volume: .2});  
-        this.runningFX = this.sound.add('runningFX',{loop: false, volume: .2});
+        this.runningFX = this.sound.add('runningFX',{loop: false, volume: .17});
         this.dialogFX = this.sound.add('dialogFX',{loop: true, volume: .3});
-        this.checklist_open_SFX = this.sound.add('checklist_open', {loop: false, volume: .7});
-        this.checklist_close_SFX = this.sound.add('checklist_close', {loop: false, volume: .7});
+        this.checklist_open_SFX = this.sound.add('checklist_open', {loop: false, volume: .5});
+        this.checklist_close_SFX = this.sound.add('checklist_close', {loop: false, volume: .5});
 
         //tilemap stuff
         const map = this.make.tilemap({ key: "map"});
@@ -133,6 +133,18 @@ class Overworld extends Phaser.Scene {
         this.anims.create({
             key: 'cow',
             frames:this.anims.generateFrameNumbers('cow',{start: 0, end: 9, first: 0}),
+            frameRate: 3,
+            loop: -1
+        });
+        this.anims.create({
+            key: 'cow1',
+            frames:this.anims.generateFrameNumbers('cow',{start: 7, end: 9, first: 0}),
+            frameRate: 3,
+            loop: -1
+        });
+        this.anims.create({
+            key: 'cow2',
+            frames:this.anims.generateFrameNumbers('cow',{start: 2, end: 9, first: 0}),
             frameRate: 3,
             loop: -1
         });
@@ -258,12 +270,12 @@ class Overworld extends Phaser.Scene {
               
 
         //item interaction
-        this.textUI = false;
-
+        //this.textUI = false;
+/*
         if(milk_acquired == false) {
             this.text_UI(this.cow.x, this.cow.y, this.cow_interact, "[F] to milk");
         }
-
+*/
 
         //keyboard inputs
         cursors = this.input.keyboard.createCursorKeys();
@@ -313,7 +325,10 @@ class Overworld extends Phaser.Scene {
         this.clouds2.tilePositionX += 0.037;
 
         this.cow.anims.play('cow', true);
-        this.item_interact('MILK ACQUIRED!', 'milk');
+        this.cow1.anims.play('cow1', true);
+        this.cow2.anims.play('cow2', true);
+
+        //this.item_interact('MILK ACQUIRED!', 'milk');
 
         this.item_checklist(player.x, player.y);
         
